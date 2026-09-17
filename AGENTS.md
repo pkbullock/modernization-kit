@@ -28,14 +28,18 @@ The lifecycle describes the human process. An implementation may support one sta
 
 ## Repository Organization
 
-Keep the repository readable and use clear, purpose-based folders. Prefer an organization similar to the following when new areas are introduced:
+Keep the repository readable and use the established folders for their intended purpose:
 
-* `scripts/` for PnP PowerShell and supporting automation
-* `spfx/` for SharePoint Framework solutions, web parts, application customizers, and Copilot components
-* `mappings/` for XML page layout mapping files
-* `tests/` for reusable test assets and fixtures
-* `docs/` for implementation and operational documentation
-* `samples/` for safe, non-production examples
+* `site/` is the Astro site that hosts and publishes the project content
+* `kit/` contains tools and custom solutions, such as SPFx components and scripts
+* `docs/` contains the Markdown content that the site ingests and publishes
+
+Within the `kit/` folder, prefer an organization similar to the following when new areas are introduced:
+
+* `kit/scripts/` for PnP PowerShell and supporting automation
+* `kit/spfx/` for SharePoint Framework solutions, web parts, application customizers, and Copilot components
+* `kit/mappings/` for XML page layout mapping files
+* `kit/tools/` for custom tools built to support modernisation
 
 Preserve an existing folder convention when one has already been established. Do not reorganize unrelated files as part of a focused change.
 
