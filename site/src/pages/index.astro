@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { processSteps, repoUrl } from '../data/process.js';
+import { withBasePath } from '../utils/withBasePath';
 
 const kitResources = [
   { title: 'PowerShell scripts', path: 'scripts', label: 'Automation', description: 'PnP PowerShell and supporting automation for repeatable modernisation tasks.' },
@@ -24,7 +25,7 @@ const communityResources = [
         <p class="intro-summary">The Modernisation Kit turns deprecation pressure into a managed delivery path.</p>
         <p class="intro-description">Use community guidance, tools, and repeatable project patterns to identify the classic pages affected, plan their target experience, convert them to modern pages, and manage review through publication.</p>
         <div class="intro-actions">
-          <a class="button button-primary" href="/identify/">Start with discovery <Icon name="heroicons:arrow-right" aria-hidden="true" /></a>
+          <a class="button button-primary" href={withBasePath('/identify/')}>Start with discovery <Icon name="heroicons:arrow-right" aria-hidden="true" /></a>
         </div>
       </div>
       <aside class="timeline-card" aria-labelledby="timeline-title">
@@ -48,7 +49,7 @@ const communityResources = [
     <ol class="workflow-grid">
       {processSteps.map((step, index) => (
         <li>
-          <a class="stage-link" href={`/${step.slug}/`}>
+          <a class="stage-link" href={withBasePath(`/${step.slug}/`)}>
             <span class="stage-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
             <h3>{step.title}</h3>
             <p>{step.summary}</p>

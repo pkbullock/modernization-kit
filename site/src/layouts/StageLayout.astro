@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
 import { processSteps, repoUrl } from '../data/process.js';
+import { withBasePath } from '../utils/withBasePath';
 
 const { frontmatter } = Astro.props;
 const currentStep = processSteps.find((step) => step.slug === frontmatter.slug);
@@ -13,14 +14,14 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
 ---
 <BaseLayout title={`${title} | Modernisation Kit`} description={summary}>
   <div class="container stage-page">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Modernisation Kit</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBasePath('/')}>Modernisation Kit</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
     <div class="reading-layout">
       <aside>
         <p class="eyebrow">PAGE MODERNISATION WORKFLOW</p>
         <nav aria-label="Page Modernisation workflow stages">
           <ol>
             {processSteps.map((item, position) => (
-              <li><a href={`/${item.slug}/`} aria-current={item.slug === frontmatter.slug ? 'page' : undefined}><span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>{item.title}</a></li>
+              <li><a href={withBasePath(`/${item.slug}/`)} aria-current={item.slug === frontmatter.slug ? 'page' : undefined}><span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>{item.title}</a></li>
             ))}
           </ol>
         </nav>
@@ -36,8 +37,8 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
         </div>
         <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations">SharePoint Page Modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
         <nav class="stage-pagination" aria-label="Previous and next stages">
-          <a href={previous ? `/${previous.slug}/` : '/'}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
-          <a class="next" href={next ? `/${next.slug}/` : '/#kit'}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>
+          <a href={previous ? withBasePath(`/${previous.slug}/`) : withBasePath('/')}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
+          <a class="next" href={next ? withBasePath(`/${next.slug}/`) : withBasePath('/#kit')}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>
         </nav>
       </article>
     </div>

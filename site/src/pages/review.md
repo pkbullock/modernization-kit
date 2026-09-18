@@ -17,7 +17,7 @@ layout: ../layouts/StageLayout.astro
 
 ## Stage pages
 
-* [Review placeholder page](/review/placeholder/)
+* [Review placeholder page](./placeholder/)
 
 ## Before moving on
 
