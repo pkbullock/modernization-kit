@@ -1,0 +1,27 @@
+---
+title: Review placeholder
+description: Placeholder content for future Review guidance in the Page Modernisation workflow.
+summary: Placeholder content for future Review guidance in the Page Modernisation workflow.
+slug: review
+author: Project maintainers
+ms.date: 2026-09-18
+ms.topic: overview
+layout: ../../layouts/StageLayout.astro
+---
+
+## Placeholder guidance
+
+This page is reserved for future Review-stage guidance, examples, and tools for
+the Page Modernisation workflow.
+
+## Planned content
+
+* Page owner review checklist
+* Accessibility and mobile review prompts
+* Issue logging and triage templates
+* Approval capture and sign-off examples
+
+## Current status
+
+Detailed content is in development. Use the main Review stage page for the
+current workflow overview.

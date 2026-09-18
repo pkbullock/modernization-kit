@@ -1,0 +1,27 @@
+---
+title: Modernise placeholder
+description: Placeholder content for future Modernise guidance in the Page Modernisation workflow.
+summary: Placeholder content for future Modernise guidance in the Page Modernisation workflow.
+slug: modernise
+author: Project maintainers
+ms.date: 2026-09-18
+ms.topic: overview
+layout: ../../layouts/StageLayout.astro
+---
+
+## Placeholder guidance
+
+This page is reserved for future Modernise-stage guidance, examples, and tools
+for the Page Modernisation workflow.
+
+## Planned content
+
+* Conversion preparation checklist
+* Mapping validation and test-run guidance
+* Conversion logging and issue capture examples
+* Notes for unsupported content and manual rebuild scenarios
+
+## Current status
+
+Detailed content is in development. Use the main Modernise stage page for the
+current workflow overview.

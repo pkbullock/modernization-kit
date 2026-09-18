@@ -1,0 +1,17 @@
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Microsoft-Copilot
+Allow: /
+
+User-agent: *
+Disallow: /

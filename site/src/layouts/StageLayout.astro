@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from './BaseLayout.astro';
+import { processSteps, repoUrl } from '../data/process.js';
+
+const { frontmatter } = Astro.props;
+const currentStep = processSteps.find((step) => step.slug === frontmatter.slug);
+const index = currentStep ? processSteps.indexOf(currentStep) : 0;
+const previous = processSteps[index - 1];
+const next = processSteps[index + 1];
+const title = frontmatter.title ?? currentStep?.title ?? 'Page Modernisation';
+const summary = frontmatter.summary ?? currentStep?.summary ?? '';
+---
+<BaseLayout title={`${title} | Modernisation Kit`} description={summary}>
+  <div class="container stage-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Modernisation Kit</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+    <div class="reading-layout">
+      <aside>
+        <p class="eyebrow">PAGE MODERNISATION WORKFLOW</p>
+        <nav aria-label="Page Modernisation workflow stages">
+          <ol>
+            {processSteps.map((item, position) => (
+              <li><a href={`/${item.slug}/`} aria-current={item.slug === frontmatter.slug ? 'page' : undefined}><span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>{item.title}</a></li>
+            ))}
+          </ol>
+        </nav>
+        <a class="contribute" href={`${repoUrl}/tree/main/docs`}>Contribute guidance <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+      </aside>
+      <article>
+        <p class="eyebrow">STAGE {index + 1} OF {processSteps.length}</p>
+        <h1>{title}</h1>
+        <p class="summary">{summary}</p>
+        <div class="status-note"><strong>Guidance in development</strong><p>Detailed guidance and kit assets for this stage are being developed. Contributions and practical examples are welcome.</p></div>
+        <div class="stage-content">
+          <slot />
+        </div>
+        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations">SharePoint Page Modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
+        <nav class="stage-pagination" aria-label="Previous and next stages">
+          <a href={previous ? `/${previous.slug}/` : '/'}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
+          <a class="next" href={next ? `/${next.slug}/` : '/#kit'}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @import '../styles/stage.css';
+</style>

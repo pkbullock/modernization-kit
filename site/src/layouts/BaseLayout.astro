@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+import { processSteps, repoUrl } from '../data/process.js';
+
+const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', description = 'Community guidance and resources for planning, delivering, and reviewing SharePoint page modernisation.' } = Astro.props;
+const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+const headerLinks = [
+  { label: 'Getting started', href: '/identify/' },
+  { label: 'Resources', href: '/resources/' },
+  { label: 'Contributing', href: repoUrl }
+];
+---
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const param = new URLSearchParams(window.location.search).get('scoutTheme');
+        let saved;
+        try { saved = localStorage.getItem('modernization-kit-theme'); } catch {}
+        const theme = [param, saved].find((value) => value === 'light' || value === 'dark') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand-link" href="/" aria-label="Modernisation Kit home">
+          <span class="brand-logo">
+            <img src="/SharePoint_512_logo.png" alt="" aria-hidden="true" width="64" height="64" />
+          </span>
+          <span class="brand-title">
+            Modernization <span>Kit</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          {headerLinks.map((link) => (
+            <a
+              href={link.href}
+              class={`site-nav-link ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'is-active' : ''}`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="header-actions">
+          <a class="github-link" href={repoUrl}>
+            GitHub <Icon name="heroicons:arrow-top-right-on-square" class="ml-1 h-4 w-4" aria-hidden="true" />
+          </a>
+          <label class="theme-toggle" title="Toggle dark and light theme" aria-label="Toggle dark and light theme">
+            <input type="checkbox" role="switch" id="theme-toggle" class="sr-only" />
+            <span class="theme-toggle-track">
+              <span class="theme-toggle-icon sun"><Icon name="heroicons:sun" aria-hidden="true" /></span>
+              <span class="theme-toggle-thumb"></span>
+              <span class="theme-toggle-icon moon"><Icon name="heroicons:moon" aria-hidden="true" /></span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-nav-shell">
+      <nav class="mobile-nav" aria-label="Primary mobile navigation">
+        {headerLinks.map((link) => (
+          <a href={link.href} class="site-nav-link">{link.label}</a>
+        ))}
+      </nav>
+    </div>
+    <main id="main-content" tabindex="-1"><slot /></main>
+    <footer>
+      <div class="container footer-inner">
+        <div><strong>Sharing is caring.</strong><p>A community-led SharePoint modernisation project.</p></div>
+        <nav aria-label="Community links">
+          <a href="https://pnp.github.io/">Microsoft 365 &amp; Power Platform Community <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+          <a href={repoUrl}>Contribute on GitHub <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLInputElement>('#theme-toggle');
+      if (toggle) {
+        const preferredTheme = (() => {
+          try {
+            const saved = localStorage.getItem('modernization-kit-theme');
+            if (saved === 'light' || saved === 'dark') return saved;
+          } catch {}
+          return 'light';
+        })();
+
+        document.documentElement.dataset.theme = preferredTheme;
+        toggle.checked = preferredTheme === 'dark';
+        toggle.setAttribute('aria-checked', String(toggle.checked));
+        toggle.addEventListener('change', () => {
+          const theme = toggle.checked ? 'dark' : 'light';
+          document.documentElement.dataset.theme = theme;
+          toggle.setAttribute('aria-checked', String(toggle.checked));
+          try { localStorage.setItem('modernization-kit-theme', theme); } catch {}
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

@@ -2,7 +2,7 @@
 title: Copilot Coding Instructions
 description: Coding and validation rules for the PnP Modernization and Page Transformation Toolkit
 author: Project maintainers
-ms.date: 2026-09-14
+ms.date: 2026-09-18
 ms.topic: reference
 ---
 
@@ -49,6 +49,7 @@ Run the narrowest relevant checks first, then the broader project checks when av
 
 * Run PSScriptAnalyzer for changed PowerShell files.
 * Use Pester or another documented test strategy for logic that can be isolated from a tenant.
+* For the Astro site, use Node.js 24 through `nvm` before running npm validation commands. Example: `cd site && nvm use 24 && npm run build`.
 * Run the SPFx test, build, and packaging checks for changed SPFx projects.
 * Validate changed XML files for well-formedness and, when available, against the project schema or mapping fixtures.
 * For tenant-dependent scripts, separate offline validation from tenant-connected validation and document the required account, permissions, tenant, and cleanup expectations.

@@ -1,0 +1,24 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter } = Astro.props;
+---
+<BaseLayout title={`${frontmatter.title} | Modernisation Kit`} description={frontmatter.description}>
+  <section class="container resources-page" aria-labelledby="resources-title">
+    <p class="eyebrow">{frontmatter.eyebrow}</p>
+    <h1 id="resources-title">{frontmatter.title}</h1>
+    <p class="summary">{frontmatter.summary}</p>
+
+    <div class="placeholder-panel">
+      <Icon name="heroicons:archive-box" aria-hidden="true" />
+      <div class="resource-markdown">
+        <slot />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @import '../styles/resources.css';
+</style>
