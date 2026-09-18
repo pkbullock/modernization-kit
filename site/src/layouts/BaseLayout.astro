@@ -23,38 +23,37 @@ const headerLinks = [
         const param = new URLSearchParams(window.location.search).get('scoutTheme');
         let saved;
         try { saved = localStorage.getItem('modernization-kit-theme'); } catch {}
-        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        const theme = [param, saved].find((value) => value === 'light' || value === 'dark') || preferred;
+        const theme = [param, saved].find((value) => value === 'light' || value === 'dark') || 'light';
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
   </head>
-  <body class="min-h-screen bg-[#f8f4f1] text-stone-900 antialiased">
+  <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="border-b border-[#ead9de] bg-[#fbf5f2] shadow-[inset_0_-1px_0_rgba(177,31,75,0.06)]">
-      <div class="mx-auto flex max-w-[1800px] items-center justify-between gap-5 px-5 py-4 lg:px-8">
-        <a class="flex items-center gap-3 text-stone-900 no-underline hover:no-underline" href="/" aria-label="Modernisation Kit home">
-          <span class="flex h-16 w-16 items-center justify-center">
-            <img class="h-16 w-16 object-contain" src="/SharePoint_512_logo.png" alt="" aria-hidden="true" width="64" height="64" />
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand-link" href="/" aria-label="Modernisation Kit home">
+          <span class="brand-logo">
+            <img src="/SharePoint_512_logo.png" alt="" aria-hidden="true" width="64" height="64" />
           </span>
-          <span class="text-3xl font-black tracking-[-0.03em] text-[#2a2023] lg:text-[2.2rem]">
-            Modernization <span class="text-[#b11f4b]">Kit</span>
+          <span class="brand-title">
+            Modernization <span>Kit</span>
           </span>
         </a>
 
-        <nav class="hidden items-center gap-3 text-[1.05rem] font-semibold text-stone-700 lg:flex" aria-label="Primary navigation">
+        <nav class="site-nav" aria-label="Primary navigation">
           {headerLinks.map((link) => (
             <a
               href={link.href}
-              class={`rounded-md px-4 py-2 no-underline transition-colors hover:bg-[#b11f4b]/10 hover:text-[#8f183a] hover:no-underline ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'bg-[#b11f4b]/10 text-[#8f183a]' : 'text-stone-700'}`}
+              class={`site-nav-link ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'is-active' : ''}`}
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div class="flex items-center gap-3">
-          <a class="inline-flex items-center justify-center rounded-full border border-[#e0c8cf] bg-white/70 px-4 py-2 text-sm font-semibold text-stone-700 no-underline shadow-sm transition hover:border-[#b11f4b]/40 hover:text-[#8f183a] hover:no-underline" href={repoUrl}>
+        <div class="header-actions">
+          <a class="github-link" href={repoUrl}>
             GitHub <Icon name="heroicons:arrow-top-right-on-square" class="ml-1 h-4 w-4" aria-hidden="true" />
           </a>
           <label class="theme-toggle" title="Toggle dark and light theme" aria-label="Toggle dark and light theme">
@@ -69,10 +68,10 @@ const headerLinks = [
       </div>
     </header>
 
-    <div class="border-b border-[#ead9de] bg-[#fbf5f2]">
-      <nav class="mx-auto flex max-w-[1800px] gap-3 overflow-x-auto px-5 py-3 text-[1.05rem] font-semibold text-stone-700 lg:hidden" aria-label="Primary mobile navigation">
+    <div class="mobile-nav-shell">
+      <nav class="mobile-nav" aria-label="Primary mobile navigation">
         {headerLinks.map((link) => (
-          <a href={link.href} class="shrink-0 whitespace-nowrap rounded-md px-3 py-2 no-underline transition hover:bg-[#b11f4b]/10 hover:text-[#8f183a] hover:no-underline">{link.label}</a>
+          <a href={link.href} class="site-nav-link">{link.label}</a>
         ))}
       </nav>
     </div>
@@ -122,12 +121,12 @@ const headerLinks = [
 
   :root {
     color-scheme: light;
-    --cp-bg: #f7f4ef;
-    --cp-bg-elevated: #fcfbf8;
+    --cp-bg: #f8f4f1;
+    --cp-bg-elevated: #fbf5f2;
     --cp-surface: #ffffff;
     --cp-surface-soft: #f5f5f5;
-    --cp-border: #dedede;
-    --cp-border-strong: #919191;
+    --cp-border: #ead9de;
+    --cp-border-strong: #9b6f7c;
     --cp-text: #242424;
     --cp-text-muted: #5c5c5c;
     --cp-text-soft: #6f6f6f;
@@ -141,19 +140,19 @@ const headerLinks = [
     --cp-link: #8f183a;
     --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
     --cp-overlay: rgba(255, 255, 255, 0.8);
-    --cp-panel: rgba(255, 255, 255, 0.86);
-    --cp-panel-strong: rgba(255, 255, 255, 0.96);
+    --cp-panel: rgba(255, 255, 255, 0.9);
+    --cp-panel-strong: #ffffff;
     --cp-sheen: rgba(255, 255, 255, 0.55);
     --cp-highlight: rgba(177, 31, 75, 0.12);
   }
   html[data-theme='dark'] {
     color-scheme: dark;
-    --cp-bg: #21191c;
-    --cp-bg-elevated: #2a2023;
-    --cp-surface: #1f1b1c;
-    --cp-surface-soft: #2d2427;
-    --cp-border: #5a4149;
-    --cp-border-strong: #8b6671;
+    --cp-bg: #20181b;
+    --cp-bg-elevated: #2b2024;
+    --cp-surface: #201a1c;
+    --cp-surface-soft: #2d2327;
+    --cp-border: #60464f;
+    --cp-border-strong: #b68493;
     --cp-text: #f5eeee;
     --cp-text-muted: #d7c5ca;
     --cp-text-soft: #c6aeb6;
@@ -167,8 +166,8 @@ const headerLinks = [
     --cp-link: #ff9fba;
     --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
     --cp-overlay: rgba(41, 41, 41, 0.88);
-    --cp-panel: rgba(41, 41, 41, 0.72);
-    --cp-panel-strong: rgba(41, 41, 41, 0.96);
+    --cp-panel: rgba(45, 35, 39, 0.84);
+    --cp-panel-strong: #2d2327;
     --cp-sheen: rgba(255, 255, 255, 0.04);
     --cp-highlight: rgba(253, 142, 161, 0.12);
   }
@@ -195,6 +194,22 @@ const headerLinks = [
   .skip-link { position: absolute; left: 1rem; top: -6rem; z-index: 20; padding: 0.75rem; background: var(--cp-surface); }
   .skip-link:focus { top: 1rem; }
   header { background: var(--cp-surface); }
+  .site-header { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); box-shadow: inset 0 -1px 0 var(--cp-accent-soft); }
+  .site-header-inner { width: min(1800px, 100%); margin-inline: auto; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; }
+  .brand-link { display: flex; align-items: center; gap: 0.75rem; color: var(--cp-text); text-decoration: none; }
+  .brand-link:hover { text-decoration: none; }
+  .brand-logo { display: flex; width: 4rem; height: 4rem; align-items: center; justify-content: center; flex-shrink: 0; }
+  .brand-logo img { width: 4rem; height: 4rem; object-fit: contain; }
+  .brand-title { display: block; color: var(--cp-text); font-size: 1.875rem; line-height: 1.2; font-weight: 900; letter-spacing: -0.03em; }
+  .brand-title span { color: var(--cp-accent); }
+  .site-nav { display: none; align-items: center; gap: 0.75rem; color: var(--cp-text-muted); font-size: 1.05rem; font-weight: 600; }
+  .site-nav-link { display: inline-flex; align-items: center; border-radius: 6px; padding: 0.5rem 1rem; color: var(--cp-text-muted); text-decoration: none; transition: background-color 150ms ease, color 150ms ease; }
+  .site-nav-link:hover, .site-nav-link.is-active { background: var(--cp-accent-soft); color: var(--cp-link); text-decoration: none; }
+  .github-link { display: inline-flex; align-items: center; justify-content: center; gap: 0.25rem; min-height: 38px; padding: 0.5rem 1rem; border: 1px solid var(--cp-border-strong); border-radius: 9999px; background: var(--cp-panel-strong); color: var(--cp-text); font-size: 0.875rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease; }
+  .github-link:hover { border-color: var(--cp-accent); background: var(--cp-surface); color: var(--cp-link); text-decoration: none; }
+  .github-link svg { width: 1rem; height: 1rem; }
+  .mobile-nav-shell { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+  .mobile-nav { width: min(1800px, 100%); margin-inline: auto; display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.75rem 1.25rem; color: var(--cp-text-muted); font-size: 1.05rem; font-weight: 600; }
   .masthead { min-height: 94px; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding-block: 1rem; }
   .brand { display: flex; align-items: center; gap: 0.85rem; color: var(--cp-text); text-decoration: none; }
   .brand:hover { text-decoration: none; }
@@ -218,9 +233,9 @@ const headerLinks = [
     height: 2.1rem;
     padding: 0.25rem 0.45rem;
     border-radius: 9999px;
-    border: 1px solid rgba(15, 23, 42, 0.12);
-    background: #dfe9ea;
-    box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.06);
+    border: 1px solid var(--cp-border-strong);
+    background: var(--cp-surface-soft);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
     transition: background 180ms ease;
   }
   .theme-toggle-thumb {
@@ -230,7 +245,7 @@ const headerLinks = [
     width: 1.6rem;
     height: 1.6rem;
     border-radius: 9999px;
-    background: #ffffff;
+    background: var(--cp-panel-strong);
     box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
     transform: translateY(-50%);
     transition: transform 180ms ease;
@@ -244,13 +259,14 @@ const headerLinks = [
     width: 1rem;
     height: 1rem;
     font-size: 0.75rem;
+    color: var(--cp-text-muted);
     opacity: 0.8;
   }
   .theme-toggle-icon svg { width: 1rem; height: 1rem; }
   .theme-toggle-icon.sun { margin-left: 0.1rem; }
   .theme-toggle-icon.moon { margin-right: 0.15rem; }
   #theme-toggle:checked + .theme-toggle-track {
-    background: #dfe9ea;
+    background: var(--cp-surface-soft);
   }
   #theme-toggle:checked + .theme-toggle-track .theme-toggle-thumb {
     transform: translate(2.35rem, -50%);
@@ -272,6 +288,7 @@ const headerLinks = [
   .footer-inner nav { display: grid; gap: 0.5rem; }
   .footer-inner a { display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none; }
   .footer-inner a svg { width: 1rem; height: 1rem; }
+  @media (min-width: 1024px) { .site-nav { display: flex; } .mobile-nav-shell { display: none; } .site-header-inner { padding-inline: 2rem; } .brand-title { font-size: 2.2rem; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   @media (max-width: 700px) {
     .container { width: calc(100% - 2.5rem); }
