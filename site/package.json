@@ -14,8 +14,10 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
+    "astro-icon": "^1.1.5",
     "tailwindcss": "^4.3.3"
   },
   "private": true

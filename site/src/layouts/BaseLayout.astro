@@ -1,10 +1,12 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { processSteps, repoUrl } from '../data/process.js';
 
 const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', description = 'Community guidance and resources for planning, delivering, and reviewing SharePoint page modernisation.' } = Astro.props;
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const headerLinks = [
   { label: 'Getting started', href: '/identify/' },
+  { label: 'Resources', href: '/resources/' },
   { label: 'Contributing', href: repoUrl }
 ];
 ---
@@ -52,14 +54,14 @@ const headerLinks = [
 
         <div class="flex items-center gap-3">
           <a class="inline-flex items-center justify-center rounded-full border border-[#e0c8cf] bg-white/70 px-4 py-2 text-sm font-semibold text-stone-700 no-underline shadow-sm transition hover:border-[#b11f4b]/40 hover:text-[#8f183a] hover:no-underline" href={repoUrl}>
-            GitHub <span aria-hidden="true">&#8599;</span>
+            GitHub <Icon name="heroicons:arrow-top-right-on-square" class="ml-1 h-4 w-4" aria-hidden="true" />
           </a>
           <label class="theme-toggle" title="Toggle dark and light theme" aria-label="Toggle dark and light theme">
             <input type="checkbox" role="switch" id="theme-toggle" class="sr-only" />
             <span class="theme-toggle-track">
-              <span class="theme-toggle-icon sun">☀️</span>
+              <span class="theme-toggle-icon sun"><Icon name="heroicons:sun" aria-hidden="true" /></span>
               <span class="theme-toggle-thumb"></span>
-              <span class="theme-toggle-icon moon">☾</span>
+              <span class="theme-toggle-icon moon"><Icon name="heroicons:moon" aria-hidden="true" /></span>
             </span>
           </label>
         </div>
@@ -78,8 +80,8 @@ const headerLinks = [
       <div class="container footer-inner">
         <div><strong>Sharing is caring.</strong><p>A community-led SharePoint modernisation project.</p></div>
         <nav aria-label="Community links">
-          <a href="https://pnp.github.io/">Microsoft 365 &amp; Power Platform Community <span aria-hidden="true">&#8599;</span></a>
-          <a href={repoUrl}>Contribute on GitHub <span aria-hidden="true">&#8599;</span></a>
+          <a href="https://pnp.github.io/">Microsoft 365 &amp; Power Platform Community <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+          <a href={repoUrl}>Contribute on GitHub <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
         </nav>
       </div>
     </footer>
@@ -110,6 +112,12 @@ const headerLinks = [
 
 <style is:global>
   @import 'tailwindcss';
+
+  @theme {
+    --font-sans: Aptos, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    --font-display: Aptos, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Cascadia Code", Consolas, ui-monospace, SFMono-Regular, monospace;
+  }
 
   :root {
     color-scheme: light;
@@ -165,7 +173,7 @@ const headerLinks = [
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
-  body { margin: 0; background: var(--cp-surface); color: var(--cp-text); font-family: 'Segoe UI', Aptos, Calibri, sans-serif; line-height: 1.6; letter-spacing: 0; min-height: 100vh; display: flex; flex-direction: column; }
+  body { margin: 0; background: var(--cp-surface); color: var(--cp-text); font-family: var(--font-sans); line-height: 1.6; letter-spacing: 0; min-height: 100vh; display: flex; flex-direction: column; }
   main { flex: 1; }
   a { color: var(--cp-link); text-underline-offset: 4px; }
   a:hover { text-decoration: underline; }
@@ -173,7 +181,7 @@ const headerLinks = [
   :focus-visible { outline: 3px solid var(--cp-link); outline-offset: 5px; }
   .container { width: min(1160px, calc(100% - 4rem)); margin-inline: auto; }
   h1, h2, h3, p { margin-top: 0; }
-  h1, h2, h3 { line-height: 1.2; font-weight: 650; text-wrap: balance; }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; font-weight: 650; text-wrap: balance; }
   h1 { font-size: 3.5rem; margin-bottom: 1.25rem; }
   h2 { font-size: 2rem; margin-bottom: 1rem; }
   h3 { font-size: 1.25rem; }
@@ -237,6 +245,7 @@ const headerLinks = [
     font-size: 0.75rem;
     opacity: 0.8;
   }
+  .theme-toggle-icon svg { width: 1rem; height: 1rem; }
   .theme-toggle-icon.sun { margin-left: 0.1rem; }
   .theme-toggle-icon.moon { margin-right: 0.15rem; }
   #theme-toggle:checked + .theme-toggle-track {
@@ -260,7 +269,8 @@ const headerLinks = [
   .footer-inner { display: flex; justify-content: space-between; gap: 2rem; font-size: 0.875rem; }
   .footer-inner p { margin: 0.5rem 0 0; color: var(--cp-text-muted); }
   .footer-inner nav { display: grid; gap: 0.5rem; }
-  .footer-inner a { text-decoration: none; }
+  .footer-inner a { display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none; }
+  .footer-inner a svg { width: 1rem; height: 1rem; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   @media (max-width: 700px) {
     .container { width: calc(100% - 2.5rem); }

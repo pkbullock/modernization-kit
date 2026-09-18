@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { processSteps, repoUrl } from '../data/process.js';
 
@@ -28,7 +29,7 @@ const next = processSteps[index + 1];
             ))}
           </ol>
         </nav>
-        <a class="contribute" href={`${repoUrl}/tree/main/docs`}>Contribute guidance <span aria-hidden="true">&#8599;</span></a>
+        <a class="contribute" href={`${repoUrl}/tree/main/docs`}>Contribute guidance <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
       </aside>
       <article>
         <p class="eyebrow">STAGE {index + 1} OF {processSteps.length}</p>
@@ -39,10 +40,10 @@ const next = processSteps[index + 1];
         <ul class="checklist">{step.tasks.map((task: string) => <li>{task}</li>)}</ul>
         <h2>Before moving on</h2>
         <p class="muted">{step.outcome}</p>
-        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations">SharePoint modernisation guidance on Microsoft Learn <span aria-hidden="true">&#8599;</span></a></div>
+        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations">SharePoint modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
         <nav class="stage-pagination" aria-label="Previous and next stages">
-          <a href={previous ? `/${previous.slug}/` : '/'}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong>&#8592; {previous?.title ?? 'Overview'}</strong></a>
-          <a class="next" href={next ? `/${next.slug}/` : '/#kit'}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} &#8594;</strong></a>
+          <a href={previous ? `/${previous.slug}/` : '/'}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
+          <a class="next" href={next ? `/${next.slug}/` : '/#kit'}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>
         </nav>
       </article>
     </div>
@@ -61,7 +62,8 @@ const next = processSteps[index + 1];
   aside nav a[aria-current='page'] { background: var(--cp-accent-soft); color: var(--cp-accent); border-left-color: var(--cp-accent); font-weight: 600; }
   aside nav a:hover { background: var(--cp-surface-soft); }
   aside nav a span { font-size: 0.8rem; }
-  .contribute { font-size: 0.8rem; text-decoration: none; }
+  .contribute { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; text-decoration: none; }
+  .contribute svg { width: 1rem; height: 1rem; }
   article { max-width: 760px; min-width: 0; }
   .summary { color: var(--cp-text-muted); font-size: 1.2rem; max-width: 650px; }
   .status-note { padding: 1rem 1.25rem; border-left: 3px solid var(--cp-accent); background: var(--cp-accent-soft); margin-block: 2rem; font-size: 0.9rem; }
@@ -71,10 +73,14 @@ const next = processSteps[index + 1];
   .checklist li { padding-left: 0.35rem; margin-bottom: 0.8rem; }
   .checklist li::marker { color: var(--cp-accent); }
   .reference { margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid var(--cp-border); font-size: 0.9rem; }
+  .reference a { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .reference a svg { width: 1rem; height: 1rem; }
   .stage-pagination { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .stage-pagination a { text-decoration: none; padding-block: 0.75rem; }
   .stage-pagination span { display: block; color: var(--cp-text-muted); font-size: 0.8rem; margin-bottom: 0.35rem; }
-  .stage-pagination strong { font-size: 0.95rem; }
+  .stage-pagination strong { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; }
+  .stage-pagination strong svg { width: 1rem; height: 1rem; }
+  .stage-pagination .next strong { justify-content: flex-end; }
   .stage-pagination .next { text-align: right; }
   @media (max-width: 800px) { .reading-layout { grid-template-columns: 1fr; gap: 1.5rem; } aside { display: none; } }
 </style>
