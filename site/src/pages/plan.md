@@ -17,7 +17,7 @@ layout: ../layouts/StageLayout.astro
 
 ## Stage pages
 
-* [Plan placeholder page](/plan/placeholder/)
+* [Plan placeholder page](./placeholder/)
 
 ## Before moving on
 

@@ -17,7 +17,7 @@ layout: ../layouts/StageLayout.astro
 
 ## Stage pages
 
-* [Modernise placeholder page](/modernise/placeholder/)
+* [Modernise placeholder page](./placeholder/)
 
 ## Before moving on
 

@@ -1,13 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { processSteps, repoUrl } from '../data/process.js';
+import { withBasePath } from '../utils/withBasePath';
 
 const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', description = 'Community guidance and resources for planning, delivering, and reviewing SharePoint page modernisation.' } = Astro.props;
 const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
 const currentPath = normalizePath(Astro.url.pathname);
 const headerLinks = [
-  { label: 'Getting started', href: '/identify/' },
-  { label: 'Resources', href: '/resources/' },
+  { label: 'Getting started', href: withBasePath('/identify/') },
+  { label: 'Resources', href: withBasePath('/resources/') },
   { label: 'Contributing', href: repoUrl }
 ];
 ---
@@ -32,9 +33,9 @@ const headerLinks = [
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="site-header-inner">
-        <a class="brand-link" href="/" aria-label="Modernisation Kit home">
+        <a class="brand-link" href={withBasePath('/')} aria-label="Modernisation Kit home">
           <span class="brand-logo">
-            <img src="/SharePoint_512_logo.png" alt="" aria-hidden="true" width="64" height="64" />
+            <img src={withBasePath('/SharePoint_512_logo.png')} alt="" aria-hidden="true" width="64" height="64" />
           </span>
           <span class="brand-title">
             Modernization <span>Kit</span>
