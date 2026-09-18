@@ -11,7 +11,7 @@ The kit is in development. The site labels unfinished guidance and assets accord
 
 ## Local Development
 
-Use Node.js 22.12 or later within a supported Astro LTS release. Node.js 20 is not supported by the installed Astro version.
+Use Node.js 24 within a supported Astro LTS release. Node.js 20 is not supported by the installed Astro version.
 
 Run these commands from the repository root:
 
@@ -28,6 +28,8 @@ Open the local URL printed by Astro. No tenant account or credentials are requir
 Run from the `site/` folder:
 
 ```bash
+nvm use 24
+npm ci
 npm run build
 npm run preview
 ```
@@ -55,4 +57,21 @@ Community resource images are served from the [PnP community site](https://pnp.g
 
 ## Deployment
 
-Deploy the generated `dist/` output through the repository's chosen static hosting workflow. This change does not provision hosting or publish the site. Routes currently assume hosting at the domain root; configure and verify Astro's base path and links before publishing under a repository subpath.
+This repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that builds the Astro site from `site/` and deploys the generated `dist/` output to GitHub Pages by using the official GitHub Pages artifact upload and deployment actions.
+
+Expected published URL:
+
+* `https://pkbullock.github.io/modernization-kit/`
+
+Trigger conditions:
+
+* Pushes to `main` when files under `site/` change
+* Pushes to `main` when `.github/workflows/deploy-pages.yml` changes
+* Manual runs through **Actions** → **Deploy Astro site to GitHub Pages** via `workflow_dispatch`
+
+One-time repository configuration:
+
+1. Open **Settings** → **Pages**
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**
+
+This documentation does not assume GitHub Pages is already enabled. After Pages is configured, successful workflow runs should publish the site to the URL above. No tenant-connected behavior is exercised by this deployment workflow.
