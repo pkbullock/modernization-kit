@@ -1,183 +1,174 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { processSteps, repoUrl } from '../data/process.js';
+
+const kitResources = [
+  { title: 'PowerShell scripts', path: 'scripts', label: 'Automation', description: 'PnP PowerShell and supporting automation for repeatable modernisation tasks.' },
+  { title: 'SPFx solutions', path: 'spfx', label: 'Components', description: 'SharePoint Framework web parts, extensions, and Copilot components.' },
+  { title: 'Page layout mappings', path: 'mappings', label: 'Transformation', description: 'XML mappings that connect classic publishing layouts to modern pages.' },
+  { title: 'Custom tools', path: 'tools', label: 'Utilities', description: 'Supporting tools for discovery, conversion, and project delivery.' }
+];
+const communityResources = [
+  { title: 'SharePoint modernisation', description: 'Microsoft guidance on moving from classic to modern experiences.', href: 'https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations', image: 'guidance-background-modernize.webp' },
+  { title: 'Community guidance', description: 'Practical knowledge shared by Microsoft 365 practitioners.', href: 'https://pnp.github.io/community-docs/', image: 'guidance-background-m365-community-content.webp' },
+  { title: 'Sharing is Caring', description: 'Learn how to contribute with help from the PnP community.', href: 'https://pnp.github.io/sharing-is-caring/', image: 'guidance-background-sic.webp' }
+];
 ---
 <BaseLayout>
-  <section class="hero container">
-    <div class="hero-copy surface-panel">
-      <p class="eyebrow">SHAREPOINT MODERNIZATION KIT</p>
-      <h1>SharePoint Modernisation</h1>
-      <p class="lead">
-        Bring guidance, scripts, SPFx assets, mappings, and community references into one Astro-based home.
-      </p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="/identify/">Start the process</a>
-        <a class="button button-secondary" href={repoUrl} target="_blank" rel="noreferrer">Open GitHub repo</a>
-      </div>
-    </div>
-    <aside class="hero-card surface-panel" aria-label="Process summary">
-      <span class="hero-number">5</span>
+  <section class="intro-band" aria-labelledby="intro-title">
+    <div class="container intro grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:gap-12">
       <div>
-        <strong>process stages</strong>
-        <p>Identify, plan, modernise, review, and publish content with linked placeholder pages.</p>
+        <p class="eyebrow">MICROSOFT 365 PATTERNS &amp; PRACTICES COMMUNITY</p>
+        <h1 id="intro-title">Modernisation Kit</h1>
+        <p class="intro-summary">A practical path from classic to modern SharePoint.</p>
+        <div class="intro-actions">
+          <a class="button button-primary" href="/identify/">Start with discovery <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </div>
-    </aside>
-  </section>
-
-  <section class="feature-band">
-    <div class="container feature-grid">
-      <div>
-        <p class="eyebrow">PLACEHOLDER CONTENT</p>
-        <h2>Build out the kit over time</h2>
-        <p>
-          This starter site mirrors the intended modernization lifecycle and leaves room for future documentation,
-          tools, and community resources.
-        </p>
-      </div>
-      <a class="feature-link" href="/plan/">Review the planning stage</a>
+      <aside class="timeline-card" aria-labelledby="timeline-title">
+        <p class="timeline-label">Classic SharePoint retirement</p>
+        <h2 id="timeline-title">Upcoming deprecation timeline</h2>
+        <ol class="timeline-list">
+          <li><time datetime="2026-08-31">Aug 31, 2026</time><span>Microsoft published the classic experiences change announcement.</span></li>
+          <li><time datetime="2027-03-01">Mar 1, 2027</time><span>New classic publishing sites and feature activation are disabled for all tenants.</span></li>
+          <li><time datetime="2028-10-01">Oct 1, 2028</time><span>Classic user-created pages become read-only across all tenants.</span></li>
+        </ol>
+        <a class="timeline-link" href="https://techcommunity.microsoft.com/blog/spblog/upcoming-changes-to-classic-experiences-in-sharepoint-online/4549091" target="_blank" rel="noopener noreferrer">Read the Microsoft announcement <span aria-hidden="true">&#8599;</span></a>
+      </aside>
     </div>
   </section>
 
-  <section class="container cards">
+  <section class="container workflow section" aria-labelledby="workflow-title">
     <div class="section-heading">
-      <p class="eyebrow">PROCESS</p>
-      <h2>Modernization workflow</h2>
-      <p>Each stage has a dedicated placeholder page ready for future content.</p>
+      <div><p class="eyebrow">THE APPROACH</p><h2 id="workflow-title">Five stages. One considered rollout.</h2></div>
+      <p>From the first inventory to the final approval.</p>
     </div>
-    <div class="card-grid">
-      {processSteps.map((step) => (
-        <article class="card surface-panel">
-          <p class="eyebrow">{step.eyebrow}</p>
-          <h3>{step.title}</h3>
-          <p>{step.summary}</p>
-          <a href={`/${step.slug}/`}>Open placeholder page →</a>
-        </article>
+    <ol class="workflow-grid">
+      {processSteps.map((step, index) => (
+        <li>
+          <a class="stage-link" href={`/${step.slug}/`}>
+            <span class="stage-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.summary}</p>
+            <span class="stage-action">Explore stage <span aria-hidden="true">&#8594;</span></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="kit-band" id="kit" aria-labelledby="kit-title">
+    <div class="container section kit-layout">
+      <div class="kit-intro">
+        <p class="eyebrow">THE TOOLKIT</p>
+        <h2 id="kit-title">Resources for the work ahead.</h2>
+        <p class="muted">Guidance, automation, and reusable solutions, organised around your modernisation project.</p>
+        <p class="development-note"><strong>In development</strong><br />The kit is taking shape. These folders are the starting point for community contributions.</p>
+        <a class="text-link" href={repoUrl}>Browse the repository <span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <div class="kit-grid">
+        {kitResources.map((resource) => (
+          <a class="kit-resource" href={`${repoUrl}/tree/main/kit/${resource.path}`}>
+            <span class="resource-type">{resource.label}</span>
+            <h3>{resource.title} <span aria-hidden="true">&#8599;</span></h3>
+            <p>{resource.description}</p>
+            <span class="resource-path">kit/{resource.path}/</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container section" id="community" aria-labelledby="community-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">BETTER TOGETHER</p><h2 id="community-title">Built on community knowledge.</h2></div>
+      <a class="text-link" href="https://pnp.github.io/">Meet the community <span aria-hidden="true">&#8599;</span></a>
+    </div>
+    <div class="community-grid">
+      {communityResources.map((resource) => (
+        <a class="community-resource" href={resource.href}>
+          <img src={`https://pnp.github.io/images/${resource.image}`} alt="" width="640" height="320" loading="lazy" decoding="async" />
+          <div><h3>{resource.title} <span aria-hidden="true">&#8599;</span></h3><p>{resource.description}</p></div>
+        </a>
       ))}
     </div>
   </section>
-
-  <style>
-    .surface-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 1.75rem;
-      box-shadow: var(--shadow);
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.75fr);
-      gap: 1.5rem;
-      align-items: stretch;
-      margin-top: 0.5rem;
-    }
-    .hero-copy {
-      padding: 3rem;
-      min-height: 25rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .hero-copy h1 {
-      font-size: clamp(3rem, 8vw, 5rem);
-      line-height: 0.95;
-      margin: 0;
-      max-width: 11ch;
-    }
-    .lead {
-      font-size: clamp(1.125rem, 2vw, 1.55rem);
-      line-height: 1.5;
-      color: var(--text-soft);
-      max-width: 34rem;
-      margin: 1.5rem 0 0;
-    }
-    .eyebrow {
-      margin: 0 0 1rem;
-      font-size: 0.92rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      color: var(--brand);
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .button {
-      border-radius: 1rem;
-      padding: 0.95rem 1.35rem;
-      font-weight: 800;
-      text-decoration: none;
-      border: 1px solid var(--border);
-    }
-    .button-primary {
-      background: var(--brand);
-      color: white;
-      border-color: transparent;
-    }
-    .button-secondary {
-      background: transparent;
-      color: var(--text);
-    }
-    .hero-card {
-      padding: 2rem;
-      align-self: center;
-      display: grid;
-      gap: 1rem;
-    }
-    .hero-number {
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      font-weight: 900;
-      color: var(--brand);
-      line-height: 1;
-    }
-    .hero-card p,
-    .card p,
-    .section-heading p,
-    .feature-grid p {
-      color: var(--text-soft);
-      line-height: 1.6;
-    }
-    .feature-band {
-      margin: 2rem 0;
-      background: var(--hero);
-      color: white;
-      border-block: 1px solid var(--border);
-    }
-    .feature-grid {
-      display: flex;
-      justify-content: space-between;
-      gap: 1.5rem;
-      align-items: center;
-      padding: 2.25rem 0;
-    }
-    .feature-grid .eyebrow,
-    .feature-grid p,
-    .feature-link {
-      color: rgba(255, 255, 255, 0.92);
-    }
-    .feature-grid h2 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.25rem); }
-    .feature-link { font-weight: 800; }
-    .cards { margin-top: 3rem; }
-    .section-heading { max-width: 42rem; margin-bottom: 1.5rem; }
-    .section-heading h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0; }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-    .card {
-      padding: 1.75rem;
-    }
-    .card h3 { margin: 0; font-size: 1.5rem; }
-    .card a { color: var(--brand); font-weight: 800; text-decoration: none; }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .feature-grid { flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 720px) {
-      .hero-copy { padding: 2rem; min-height: auto; }
-      .card-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 </BaseLayout>
+
+<style>
+  .intro-band { background: var(--cp-surface-soft); border-bottom: 1px solid var(--cp-border); }
+  .intro { padding-block: 3.5rem; border-left: 3px solid var(--cp-accent); padding-left: 2rem; margin-block: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 420px); gap: 3rem; align-items: center; }
+  .intro-summary { font-size: 1.5rem; line-height: 1.4; margin-bottom: 0.75rem; }
+  .intro-description { max-width: 650px; color: var(--cp-text-muted); font-size: 1.05rem; }
+  .intro-actions { display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap; margin-top: 1.75rem; }
+  .timeline-card { padding: 1.5rem; border: 1px solid var(--cp-border); border-top: 4px solid var(--cp-accent); border-radius: 8px; background: var(--cp-panel-strong); box-shadow: 0 18px 40px rgba(177, 31, 75, 0.08); }
+  .timeline-label { color: var(--cp-accent); font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; }
+  .timeline-card h2 { font-size: 1.35rem; margin-bottom: 1.1rem; }
+  .timeline-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .timeline-list li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--cp-border); }
+  .timeline-list li:first-child { padding-top: 0; border-top: 0; }
+  .timeline-list time { color: var(--cp-accent); font-size: 0.85rem; font-weight: 700; line-height: 1.35; }
+  .timeline-list span { color: var(--cp-text-muted); font-size: 0.9rem; line-height: 1.45; }
+  .timeline-link { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1.25rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; }
+  .timeline-link:hover { text-decoration: underline; }
+  .text-link { font-size: 0.9rem; font-weight: 600; text-decoration: none; }
+  .section { padding-block: 3.5rem; }
+  .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1.75rem; }
+  .section-heading h2 { margin-bottom: 0; }
+  .section-heading > p { font-size: 0.9rem; color: var(--cp-text-muted); margin: 0; max-width: 240px; }
+  .workflow-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
+  .workflow-grid li { min-width: 0; }
+  .stage-link { height: 100%; display: flex; flex-direction: column; padding: 1.4rem 1rem 1rem; border: 1px solid var(--cp-border); border-top: 3px solid var(--cp-accent); border-radius: 4px; color: var(--cp-text); text-decoration: none; transition: background 150ms; }
+  .stage-link:hover { background: var(--cp-accent-soft); text-decoration: none; }
+  .stage-number { font-size: 0.85rem; color: var(--cp-accent); font-weight: 700; margin-bottom: 1.25rem; }
+  .stage-link h3 { margin-bottom: 0.75rem; }
+  .stage-link p { font-size: 0.875rem; color: var(--cp-text-muted); }
+  .stage-action { margin-top: auto; padding-top: 1rem; font-size: 0.8rem; font-weight: 600; color: var(--cp-link); display: flex; justify-content: space-between; }
+  .kit-band { background: var(--cp-surface-soft); border-block: 1px solid var(--cp-border); scroll-margin-top: 1rem; }
+  .kit-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+  .kit-intro h2 { max-width: 300px; }
+  .development-note { padding-left: 1rem; border-left: 2px solid var(--cp-border-strong); font-size: 0.85rem; color: var(--cp-text-muted); margin-block: 1.5rem; }
+  .development-note strong { color: var(--cp-text); }
+  .kit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+  .kit-resource { padding-block: 1.25rem; border-top: 1px solid var(--cp-border); text-decoration: none; color: var(--cp-text); }
+  .kit-resource:hover h3 { color: var(--cp-link); text-decoration: underline; }
+  .kit-resource:hover { text-decoration: none; }
+  .resource-type { color: var(--cp-text-muted); font-size: 0.75rem; }
+  .kit-resource h3 { margin-block: 0.5rem 0.75rem; font-size: 1.1rem; display: flex; justify-content: space-between; gap: 0.5rem; }
+  .kit-resource p { font-size: 0.875rem; color: var(--cp-text-muted); }
+  .resource-path { font-family: Consolas, 'Courier New', monospace; font-size: 0.75rem; color: var(--cp-text-muted); }
+  .community-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .community-resource { border: 1px solid var(--cp-border); border-radius: 4px; overflow: hidden; text-decoration: none; color: var(--cp-text); }
+  .community-resource:hover { text-decoration: none; border-color: var(--cp-border-strong); }
+  .community-resource:hover h3 { color: var(--cp-link); text-decoration: underline; }
+  .community-resource img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: contain; background: var(--cp-surface-soft); }
+  .community-resource > div { padding: 1.25rem; }
+  .community-resource h3 { font-size: 1.1rem; }
+  .community-resource p { font-size: 0.875rem; color: var(--cp-text-muted); margin-bottom: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .intro { animation: reveal 350ms ease-out both; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+  @media (max-width: 1000px) {
+    .workflow-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .intro { grid-template-columns: 1fr; gap: 2rem; }
+    .kit-layout { gap: 2rem; }
+  }
+  @media (max-width: 700px) {
+    .intro { padding-block: 2rem; padding-left: 1rem; }
+    .intro-summary { font-size: 1.2rem; }
+    .intro-description { font-size: 1rem; }
+    .intro-actions { gap: 1rem; }
+    .section { padding-block: 2.5rem; }
+    .section-heading { align-items: start; flex-direction: column; gap: 0.75rem; }
+    .section-heading > p { max-width: none; }
+    .workflow-grid, .community-grid, .kit-layout { grid-template-columns: 1fr; }
+    .stage-link { display: grid; grid-template-columns: 2rem 1fr; column-gap: 0.75rem; padding: 1rem; }
+    .stage-number { grid-row: span 3; margin-bottom: 0; padding-top: 0.15rem; }
+    .stage-link p { margin-bottom: 0.25rem; }
+    .stage-action { padding-top: 0.5rem; }
+    .kit-intro h2 { max-width: none; }
+    .kit-grid { column-gap: 1.25rem; }
+  }
+  @media (max-width: 380px) { .kit-grid { grid-template-columns: 1fr; } }
+</style>
