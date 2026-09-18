@@ -3,7 +3,8 @@ import { Icon } from 'astro-icon/components';
 import { processSteps, repoUrl } from '../data/process.js';
 
 const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', description = 'Community guidance and resources for planning, delivering, and reviewing SharePoint page modernisation.' } = Astro.props;
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
 const headerLinks = [
   { label: 'Getting started', href: '/identify/' },
   { label: 'Resources', href: '/resources/' },
@@ -45,7 +46,7 @@ const headerLinks = [
           {headerLinks.map((link) => (
             <a
               href={link.href}
-              class={`rounded-md px-4 py-2 no-underline transition-colors hover:bg-[#b11f4b]/10 hover:text-[#8f183a] hover:no-underline ${currentPath === link.href || (link.href.startsWith('#') && currentPath === '/') ? 'bg-[#b11f4b]/10 text-[#8f183a]' : 'text-stone-700'}`}
+              class={`rounded-md px-4 py-2 no-underline transition-colors hover:bg-[#b11f4b]/10 hover:text-[#8f183a] hover:no-underline ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'bg-[#b11f4b]/10 text-[#8f183a]' : 'text-stone-700'}`}
             >
               {link.label}
             </a>

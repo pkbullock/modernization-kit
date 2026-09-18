@@ -1,0 +1,21 @@
+---
+title: Review
+description: Capture feedback, assign reviewers, and track approval before publishing Page Modernisation work.
+summary: Capture feedback, assign reviewers, and track approval before publishing Page Modernisation work.
+slug: review
+author: Project maintainers
+ms.date: 2026-09-18
+ms.topic: overview
+layout: ../layouts/StageLayout.astro
+---
+
+## Focus for this stage
+
+* Ask page owners to verify content, links, metadata, and the target layout.
+* Check accessibility, mobile presentation, and any custom components.
+* Log issues, assign follow-up work, and capture an explicit approval decision.
+
+## Before moving on
+
+Resolve blocking issues and record approval for each page before scheduling its
+publication.
