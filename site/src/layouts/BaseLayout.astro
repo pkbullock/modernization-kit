@@ -1,0 +1,204 @@
+---
+import { processSteps, repoUrl } from '../data/process.js';
+
+const { title = 'SharePoint Modernisation', description = 'SharePoint modernization kit content hub.' } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4fbfa;
+        --surface: rgba(255, 255, 255, 0.84);
+        --surface-strong: #ffffff;
+        --surface-muted: #dff2ed;
+        --text: #112521;
+        --text-soft: #44635c;
+        --brand: #0f766e;
+        --brand-strong: #0c5b55;
+        --border: rgba(15, 118, 110, 0.18);
+        --shadow: 0 24px 60px rgba(17, 37, 33, 0.08);
+        --hero: linear-gradient(135deg, #0f766e 0%, #0b4f4a 100%);
+        --grid: rgba(15, 118, 110, 0.08);
+      }
+
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+        --bg: #081311;
+        --surface: rgba(14, 31, 28, 0.92);
+        --surface-strong: #102520;
+        --surface-muted: #12302a;
+        --text: #edf7f4;
+        --text-soft: #9cc5bb;
+        --brand: #61d6c6;
+        --brand-strong: #8febdf;
+        --border: rgba(97, 214, 198, 0.18);
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+        --hero: linear-gradient(135deg, #0d3d39 0%, #081f1d 100%);
+        --grid: rgba(97, 214, 198, 0.1);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          linear-gradient(var(--grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+          var(--bg);
+        background-size: 96px 96px, 96px 96px, auto;
+        color: var(--text);
+      }
+      a { color: inherit; }
+      .shell { min-height: 100vh; }
+      .container { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(14px);
+        background: color-mix(in srgb, var(--surface-strong) 84%, transparent);
+        border-bottom: 1px solid var(--border);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.9rem;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.25rem;
+      }
+      .brand-mark {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 0.9rem;
+        display: grid;
+        place-items: center;
+        color: white;
+        background: radial-gradient(circle at 30% 30%, #67e8f9, #0f766e 60%, #0b4f4a 100%);
+        box-shadow: var(--shadow);
+      }
+      .brand-accent { color: var(--brand); }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .nav-link,
+      .theme-toggle {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        color: var(--text-soft);
+        font-weight: 600;
+        background: transparent;
+      }
+      .nav-link[aria-current='page'] {
+        background: var(--surface-muted);
+        color: var(--brand-strong);
+        border-color: var(--border);
+      }
+      .nav-link:hover,
+      .theme-toggle:hover {
+        border-color: var(--border);
+        color: var(--text);
+      }
+      .theme-toggle {
+        cursor: pointer;
+        font: inherit;
+      }
+      main { padding: 2rem 0 4rem; }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 0 4rem;
+        color: var(--text-soft);
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .footer-link { color: var(--brand); font-weight: 700; }
+      @media (max-width: 960px) {
+        .header-inner { align-items: flex-start; flex-direction: column; }
+        nav { justify-content: flex-start; }
+      }
+      @media (max-width: 640px) {
+        .container { width: min(100% - 1rem, 1120px); }
+        .nav-link, .theme-toggle { padding: 0.7rem 0.85rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="container header-inner">
+          <a class="brand" href="/">
+            <span class="brand-mark">S</span>
+            <span>SharePoint <span class="brand-accent">Modernisation</span></span>
+          </a>
+          <nav aria-label="Primary">
+            {processSteps.map((step) => (
+              <a
+                class="nav-link"
+                href={`/${step.slug}/`}
+                aria-current={currentPath === `/${step.slug}/` ? 'page' : undefined}
+              >
+                {step.title}
+              </a>
+            ))}
+            <a class="nav-link" href={repoUrl} target="_blank" rel="noreferrer">GitHub</a>
+            <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+              <span data-theme-label>Dark mode</span>
+            </button>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        <div class="container footer-inner">
+          <span>Placeholder site for the SharePoint modernization kit.</span>
+          <a class="footer-link" href={repoUrl} target="_blank" rel="noreferrer">View the repository</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const root = document.documentElement;
+      const storageKey = 'modernization-kit-theme';
+      const label = document.querySelector('[data-theme-label]');
+      const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        if (label) {
+          label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+        }
+      };
+      const storedTheme = localStorage.getItem(storageKey);
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      applyTheme(storedTheme ?? preferredTheme);
+      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+        const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem(storageKey, nextTheme);
+        applyTheme(nextTheme);
+      });
+    </script>
+  </body>
+</html>

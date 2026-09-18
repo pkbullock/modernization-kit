@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { processSteps } from '../data/process.js';
+
+export function getStaticPaths() {
+  return processSteps.map((step) => ({
+    params: { slug: step.slug },
+    props: { step }
+  }));
+}
+
+const { step } = Astro.props;
+---
+<BaseLayout title={`${step.title} | SharePoint Modernisation`} description={step.summary}>
+  <section class="container placeholder">
+    <div class="panel">
+      <p class="eyebrow">{step.eyebrow}</p>
+      <h1>{step.title}</h1>
+      <p class="summary">{step.summary}</p>
+      <p>
+        This placeholder page is ready for future SharePoint modernization guidance, tools, examples, and
+        references related to the <strong>{step.title.toLowerCase()}</strong> stage.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="/">Back to home</a>
+        <a class="button button-secondary" href="/plan/">View another stage</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .placeholder {
+      display: grid;
+      place-items: center;
+      min-height: calc(100vh - 15rem);
+    }
+    .panel {
+      width: min(100%, 48rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.75rem;
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+    }
+    .eyebrow {
+      margin: 0 0 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--brand);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      line-height: 1;
+    }
+    .summary,
+    .panel p {
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .button {
+      border-radius: 1rem;
+      padding: 0.95rem 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid var(--border);
+    }
+    .button-primary {
+      background: var(--brand);
+      color: white;
+      border-color: transparent;
+    }
+    .button-secondary {
+      color: var(--text);
+    }
+    @media (max-width: 640px) {
+      .panel { padding: 2rem; }
+    }
+  </style>
+</BaseLayout>

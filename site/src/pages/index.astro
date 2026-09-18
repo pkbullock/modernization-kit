@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { processSteps, repoUrl } from '../data/process.js';
+---
+<BaseLayout>
+  <section class="hero container">
+    <div class="hero-copy surface-panel">
+      <p class="eyebrow">SHAREPOINT MODERNIZATION KIT</p>
+      <h1>SharePoint Modernisation</h1>
+      <p class="lead">
+        Bring guidance, scripts, SPFx assets, mappings, and community references into one Astro-based home.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="/identify/">Start the process</a>
+        <a class="button button-secondary" href={repoUrl} target="_blank" rel="noreferrer">Open GitHub repo</a>
+      </div>
+    </div>
+    <aside class="hero-card surface-panel" aria-label="Process summary">
+      <span class="hero-number">5</span>
+      <div>
+        <strong>process stages</strong>
+        <p>Identify, plan, modernise, review, and publish content with linked placeholder pages.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="feature-band">
+    <div class="container feature-grid">
+      <div>
+        <p class="eyebrow">PLACEHOLDER CONTENT</p>
+        <h2>Build out the kit over time</h2>
+        <p>
+          This starter site mirrors the intended modernization lifecycle and leaves room for future documentation,
+          tools, and community resources.
+        </p>
+      </div>
+      <a class="feature-link" href="/plan/">Review the planning stage</a>
+    </div>
+  </section>
+
+  <section class="container cards">
+    <div class="section-heading">
+      <p class="eyebrow">PROCESS</p>
+      <h2>Modernization workflow</h2>
+      <p>Each stage has a dedicated placeholder page ready for future content.</p>
+    </div>
+    <div class="card-grid">
+      {processSteps.map((step) => (
+        <article class="card surface-panel">
+          <p class="eyebrow">{step.eyebrow}</p>
+          <h3>{step.title}</h3>
+          <p>{step.summary}</p>
+          <a href={`/${step.slug}/`}>Open placeholder page →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .surface-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.75fr) minmax(280px, 0.75fr);
+      gap: 1.5rem;
+      align-items: stretch;
+      margin-top: 0.5rem;
+    }
+    .hero-copy {
+      padding: 3rem;
+      min-height: 25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-copy h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      line-height: 0.95;
+      margin: 0;
+      max-width: 11ch;
+    }
+    .lead {
+      font-size: clamp(1.125rem, 2vw, 1.55rem);
+      line-height: 1.5;
+      color: var(--text-soft);
+      max-width: 34rem;
+      margin: 1.5rem 0 0;
+    }
+    .eyebrow {
+      margin: 0 0 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--brand);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .button {
+      border-radius: 1rem;
+      padding: 0.95rem 1.35rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid var(--border);
+    }
+    .button-primary {
+      background: var(--brand);
+      color: white;
+      border-color: transparent;
+    }
+    .button-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+    .hero-card {
+      padding: 2rem;
+      align-self: center;
+      display: grid;
+      gap: 1rem;
+    }
+    .hero-number {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--brand);
+      line-height: 1;
+    }
+    .hero-card p,
+    .card p,
+    .section-heading p,
+    .feature-grid p {
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    .feature-band {
+      margin: 2rem 0;
+      background: var(--hero);
+      color: white;
+      border-block: 1px solid var(--border);
+    }
+    .feature-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 2.25rem 0;
+    }
+    .feature-grid .eyebrow,
+    .feature-grid p,
+    .feature-link {
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .feature-grid h2 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.25rem); }
+    .feature-link { font-weight: 800; }
+    .cards { margin-top: 3rem; }
+    .section-heading { max-width: 42rem; margin-bottom: 1.5rem; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      padding: 1.75rem;
+    }
+    .card h3 { margin: 0; font-size: 1.5rem; }
+    .card a { color: var(--brand); font-weight: 800; text-decoration: none; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .feature-grid { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 720px) {
+      .hero-copy { padding: 2rem; min-height: auto; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</BaseLayout>
