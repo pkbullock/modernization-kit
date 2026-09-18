@@ -15,6 +15,10 @@ layout: ../layouts/StageLayout.astro
 * Plan target layouts and mapping requirements for the selected pages.
 * Define review criteria, rollout communications, and a recovery approach.
 
+## Stage pages
+
+* [Plan placeholder page](/plan/placeholder/)
+
 ## Before moving on
 
 Confirm the pilot scope, target experience, and approval process before any

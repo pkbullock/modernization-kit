@@ -15,6 +15,10 @@ layout: ../layouts/StageLayout.astro
 * Run an agreed pilot with explicit write operations and structured conversion logs.
 * Record unsupported content and conversion issues for review.
 
+## Stage pages
+
+* [Modernise placeholder page](/modernise/placeholder/)
+
 ## Before moving on
 
 Hand over converted draft pages and their conversion records for review.

@@ -15,6 +15,10 @@ layout: ../layouts/StageLayout.astro
 * Check accessibility, mobile presentation, and any custom components.
 * Log issues, assign follow-up work, and capture an explicit approval decision.
 
+## Stage pages
+
+* [Review placeholder page](/review/placeholder/)
+
 ## Before moving on
 
 Resolve blocking issues and record approval for each page before scheduling its

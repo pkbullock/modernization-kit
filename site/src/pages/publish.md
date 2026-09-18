@@ -15,6 +15,10 @@ layout: ../layouts/StageLayout.astro
 * Have an authorised owner publish the approved pages and verify the live experience.
 * Update tracking records, communicate the change, and monitor feedback.
 
+## Stage pages
+
+* [Publish placeholder page](/publish/placeholder/)
+
 ## Before moving on
 
 Confirm the published pages with site owners and retain the rollout records and

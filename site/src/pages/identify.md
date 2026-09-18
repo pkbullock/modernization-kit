@@ -15,6 +15,11 @@ layout: ../layouts/StageLayout.astro
 * Review page usage and business value to identify candidates for modernisation.
 * Identify custom layouts, web parts, and dependencies that need investigation.
 
+## Stage pages
+
+* [Identify placeholder page](/identify/placeholder/)
+
+
 ## Before moving on
 
 Agree an initial page inventory with site owners, including candidates to retain,
