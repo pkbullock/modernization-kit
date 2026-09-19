@@ -20,12 +20,19 @@ const headingId = `${heading.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-
   <h2 id={headingId}>{heading}</h2>
   <ul class="resource-card-list">
     {items.map((item) => (
-      <li key={item.href}>
+      <li>
         <article class="resource-card">
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           <p class="resource-card-author"><strong>Author:</strong> {item.author}</p>
-          <a href={item.href} target="_blank" rel="noopener noreferrer">View {item.title} <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+          <a
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${item.title} (opens in a new tab)`}
+          >
+            View {item.title} <span class="sr-only">(opens in a new tab)</span> <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" />
+          </a>
         </article>
       </li>
     ))}
@@ -41,4 +48,15 @@ const headingId = `${heading.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-
   .resource-card-author { color: var(--cp-text); }
   .resource-card a { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; text-decoration: none; }
   .resource-card a:hover { text-decoration: underline; }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
