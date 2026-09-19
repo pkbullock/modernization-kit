@@ -122,9 +122,21 @@ header { background: var(--cp-surface); }
 #theme-toggle:checked + .theme-toggle-track .theme-toggle-icon.sun { opacity: 0.6; }
 #theme-toggle:checked + .theme-toggle-track .theme-toggle-icon.moon { opacity: 1; }
 footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-soft); padding-block: 2.5rem; }
-.footer-inner { display: flex; justify-content: space-between; gap: 2rem; font-size: 0.875rem; }
+.footer-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; font-size: 0.875rem; }
+.footer-meta { max-width: 62ch; }
 .footer-inner p { margin: 0.5rem 0 0; color: var(--cp-text-muted); }
-.footer-inner nav { display: grid; gap: 0.5rem; }
+.footer-disclaimer {
+  margin-top: 0.75rem;
+  color: var(--cp-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.footer-disclaimer em { font-style: italic; }
+.footer-community { display: grid; gap: 1.25rem; align-content: start; }
+.footer-community nav { display: grid; gap: 0.5rem; }
 .footer-inner a { display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none; }
 .footer-inner a svg { width: 1rem; height: 1rem; }
 
@@ -146,5 +158,5 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
   .site-header-inner { flex-wrap: wrap; }
   .brand-link { flex: 1 1 auto; }
   .header-actions { flex: 1 1 100%; width: auto; justify-content: space-between; gap: 1rem; }
-  .footer-inner { flex-direction: column; }
+  .footer-inner { grid-template-columns: 1fr; }
 }

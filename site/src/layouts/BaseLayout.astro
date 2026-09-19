@@ -81,11 +81,19 @@ const headerLinks = [
     <main id="main-content" tabindex="-1"><slot /></main>
     <footer>
       <div class="container footer-inner">
-        <div><strong>Sharing is caring.</strong><p>A community-led SharePoint modernisation project.</p></div>
-        <nav aria-label="Community links">
-          <a href="https://pnp.github.io/">Microsoft 365 &amp; Power Platform Community <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
-          <a href={repoUrl}>Contribute on GitHub <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
-        </nav>
+        <p class="footer-disclaimer">
+          THESE SAMPLES AND GUIDANCE ARE PROVIDED <em>AS IS</em> WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT. THIS PROJECT IS LICENSED UNDER THE MIT LICENSE.
+        </p>
+        <div class="footer-community">
+          <div class="footer-meta">
+            <strong>Sharing is caring.</strong>
+            <p>A community-led SharePoint modernisation project.</p>
+          </div>
+          <nav aria-label="Community links">
+            <a href="https://pnp.github.io/">Microsoft 365 &amp; Power Platform Community <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+            <a href={repoUrl}>Contribute on GitHub <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+          </nav>
+        </div>
       </div>
     </footer>
     <script>
