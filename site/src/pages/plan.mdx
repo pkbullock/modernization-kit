@@ -9,15 +9,103 @@ ms.topic: overview
 layout: ../layouts/StageLayout.astro
 ---
 
-## Focus for this stage
+import ScriptSamplesCards from '../components/ScriptSamplesCards.astro';
+import resources from '../data/resourceCards.json';
+
+## Guidance for the PLAN stage of the workflow
+
+After running an assessment and collecting the scope of the page transformation, agree an initial page inventory with site owners, including candidates to retain,
+modernise, or retire.
 
 * Agree scope, delivery roles, and a representative pilot with site owners.
 * Plan target layouts and mapping requirements for the selected pages.
 * Define review criteria, rollout communications, and a recovery approach.
 
-## Stage pages
+## Site Planning
 
-* [Plan placeholder page](./placeholder/)
+Before any page transformation can occur, there will need to be target modern sites setup to be the new home for the converted content. Microsoft have a range of resources for [Build an Intelligent Intranet | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/intelligent-intranet-overview) and [Plan an intelligent SharePoint intranet](https://learn.microsoft.com/en-us/sharepoint/plan-intranet) that can be a good pre-read into what elements of a SharePoint project to consider.
+
+### Creating new sites
+
+Modern sites cna take a few forms:
+
+- __Microsoft Teams__ - there is an underlying SharePoint site that can be used to store the new content
+- __Microsoft 365 Group Teams Sites__ - creating a group will also create an underlying site that can be used to store the page content
+- __Modern Sites (Not connected to Microsoft 365 Groups)__ - these are pure SharePoint sites that does not have the additional wrapper functionality around them. These can be connected later if you change your mind.
+- __Communication Sites__ typical template for Intranet sites and commonly used for page based content.
+
+When creating these sites, typically classic sites have subsites to help logically group content, the equivelant in modern SharePoint is hub sites and there are quite a few options to consider on how you will structure and map the classic sites to the new locations. Microsoft have a good resource here, that talks about design of hub site structures [Planning your SharePoint hub sites | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites), if you are considering a multi-site intranet then there is a script sample to create these sites up in bulk.
+
+### Security setup
+
+With modern sites there is a default model for permissions:
+
+- Site Owners - content or site owners will have full control over the site
+- Site Members - editors and can see draft content on the site, typicla content owners will have this level of permission
+- Site Visitors - read only view of the site, can only see published content on the site.
+
+Consider how the persona's using the site will access the relevant features for their role. Typically, sites can be far more granular in permissions overtime, and context to why permissions were set is not something that can be determined with a script and represents an opportunity to clean up and simply. 
+
+### Branding
+
+_coming soon_
+
+### Modern Navigation
+
+_coming soon_
+
+
+## Understanding the conversion process
+
+_coming soon_
+
+
+### Modern Page designed
+
+_coming soon_
+
+
+### Mapping Files
+
+_coming soon_
+
+
+## Change Management
+
+Page modernisation is not only a technical change. People using teh existing site and site owners will need to understand what is changing, when it is changing, and what support is available to them. A simple change management plan will help coordinate responsibilities, communications, content reviews, and the transition to the new experience.
+
+### Define Responsibilities
+
+_coming soon - example RACI_
+
+### User Communications and Notifications
+
+_coming soon_
+
+### Content Review process
+
+_coming soon_
+
+### User Feedback and/or Support Channels
+
+Set up clear routes for users to raise issues and queries during the transition. This could include dedicated queues in a third-party service such as ServiceNow for support requests, alongside a community channel where people can ask questions, share solutions, and learn from others.
+
+### Plan for pilot or select group of end users for beta review
+
+
+
+### Plan Go Live Activities
+
+We discuss this later in the workflow in the PUBLISH section, there are considerations or a checklist to consider when considering a site ready for launch.
+
+
+## Supporting Scripts
+
+The following scripts can be used to help prepare the tenant for the page transformation project: 
+
+<ScriptSamplesCards title="Script Samples" items={resources.scriptSamplesPlanSetup} />
+
+
 
 ## Before moving on
 
