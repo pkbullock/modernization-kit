@@ -31,6 +31,14 @@
       "href": "https://pnp.github.io/script-samples/"
     }
   ],
+  "scriptSamplesAssessment": [
+    {
+      "title": "Assess classic pages for modernization",
+      "description": "Use PowerShell scripts to evaluate the readiness of classic pages for modernization.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/spo-assess-classic-pages-for-modernization/README.html"
+    }
+  ],
   "blogPosts": [
     {
       "title": "Community blog starting point",

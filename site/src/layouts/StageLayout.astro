@@ -31,11 +31,10 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
         <p class="eyebrow">STAGE {index + 1} OF {processSteps.length}</p>
         <h1>{title}</h1>
         <p class="summary">{summary}</p>
-        <div class="status-note"><strong>Guidance in development</strong><p>Detailed guidance and kit assets for this stage are being developed. Contributions and practical examples are welcome.</p></div>
         <div class="stage-content">
           <slot />
         </div>
-        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations">SharePoint Page Modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
+        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/en-us/sharepoint/dev/transform/assess-sharepoint-modernization">SharePoint Page Modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
         <nav class="stage-pagination" aria-label="Previous and next stages">
           <a href={previous ? withBasePath(`/${previous.slug}/`) : withBasePath('/')}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
           <a class="next" href={next ? withBasePath(`/${next.slug}/`) : withBasePath('/#kit')}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>

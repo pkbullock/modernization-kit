@@ -9,11 +9,30 @@ ms.topic: overview
 layout: ../layouts/StageLayout.astro
 ---
 
+import ScriptSamplesCards from '../components/ScriptSamplesCards.astro';
+import resources from '../data/resourceCards.json';
+
 ## Focus for this stage
 
-* Record the classic sites and pages in scope, including their owners.
+This stage will focus on understanding the existing SharePoint landscape before any
+modernisation work begins. In order for you to understand the scale of the effort required, an assessment
+of the existing estate of SharePoint sites, and pages is needed to understand what classic components will be an uplift to the modern experience.
+
+There are options for you to run an assessment:
+
+- PnP Assessment - the main tool that Microsoft recommend to run the assessment scan on your organisational tenant. See Microsoft Learn at [Assess Classic Pages | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages)
+
+<ScriptSamplesCards title="Script Samples" items={resources.scriptSamplesAssessment} />
+
+## Run an analysis on the collected data
+
+Once you have collected the assessment data, you can use this to plan the effort required to uplift content to the mdoern experience.
+
+* Review the classic sites and pages and determine if they are in scope for the modernization.
 * Review page usage and business value to identify candidates for modernisation.
 * Identify custom layouts, web parts, and dependencies that need investigation.
+* Identify page owners that you can co-ordinate the change with, it is recommended to keep them in the loop at the beginning so that you can support them throught the change process.
+
 
 ## Stage pages
 
