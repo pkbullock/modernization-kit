@@ -20,7 +20,7 @@ const headingId = `${heading.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-
   <h2 id={headingId}>{heading}</h2>
   <ul class="resource-card-list">
     {items.map((item) => (
-      <li key={item.href}>
+      <li>
         <article class="resource-card">
           <h3>{item.title}</h3>
           <p>{item.description}</p>
