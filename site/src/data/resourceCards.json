@@ -37,6 +37,18 @@
       "description": "Use PowerShell scripts to evaluate the readiness of classic pages for modernization.",
       "author": "Microsoft 365 Patterns and Practices",
       "href": "https://pnp.github.io/script-samples/spo-assess-classic-pages-for-modernization/README.html"
+    },
+    {
+      "title": "Identify page complexity and customizations",
+      "description": "Review scripts that help classify pages by layout patterns, web part usage, and dependency risk before modernization.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/"
+    },
+    {
+      "title": "Review modernization readiness by site and page",
+      "description": "Use inventory scripts to compare pages and sites against governance, business value, and technical complexity criteria.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/"
     }
   ],
   "blogPosts": [
