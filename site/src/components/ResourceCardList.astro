@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface ResourceCardItem {
+  title: string;
+  description: string;
+  author: string;
+  href: string;
+}
+
+interface Props {
+  heading: string;
+  items: ResourceCardItem[];
+}
+
+const { heading, items = [] }: Props = Astro.props;
+const headingId = `${heading.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}-resources`;
+---
+<section class="resource-card-section" aria-labelledby={headingId}>
+  <h2 id={headingId}>{heading}</h2>
+  <ul class="resource-card-list">
+    {items.map((item) => (
+      <li>
+        <article class="resource-card">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <p class="resource-card-author"><strong>Author:</strong> {item.author}</p>
+          <a href={item.href} target="_blank" rel="noopener noreferrer">View resource <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
+        </article>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .resource-card-section { margin-top: 2.5rem; }
+  .resource-card-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .resource-card { height: 100%; padding: 1.25rem; border: 1px solid var(--cp-border); border-radius: 8px; background: var(--cp-panel-strong); }
+  .resource-card h3 { margin-bottom: 0.75rem; }
+  .resource-card p { margin-bottom: 0.75rem; color: var(--cp-text-muted); }
+  .resource-card-author { color: var(--cp-text); }
+  .resource-card a { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; text-decoration: none; }
+  .resource-card a:hover { text-decoration: underline; }
+</style>
