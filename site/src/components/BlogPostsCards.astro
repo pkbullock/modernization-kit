@@ -1,5 +1,7 @@
 ---
 import ResourceCardList from './ResourceCardList.astro';
 import resources from '../data/resourceCards.json';
+
+const { title = 'Blog Posts', items = resources.blogPosts } = Astro.props;
 ---
-<ResourceCardList heading="Blog Posts" items={resources.blogPosts} />
+<ResourceCardList title={title} items={items} />

@@ -11,6 +11,24 @@
       "description": "Use a PowerShell sample to inventory pages and web parts so you can assess classic page modernization scope.",
       "author": "Microsoft 365 Patterns and Practices",
       "href": "https://pnp.github.io/script-samples/spo-find-all-pages-and-webparts/README.html"
+    },
+    {
+      "title": "Modernize SharePoint pages with site scripts",
+      "description": "Review examples for auditing and managing page content before and after modernization initiatives.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/"
+    },
+    {
+      "title": "Analyze page inventory and usage",
+      "description": "Collect page metadata and usage signals so your modernization plan focuses on the highest-value pages first.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/"
+    },
+    {
+      "title": "Review classic page transformation patterns",
+      "description": "Use repeatable patterns to identify page layouts, web parts, and customizations that need redesign.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/"
     }
   ],
   "blogPosts": [
@@ -25,6 +43,24 @@
       "description": "Review the SharePoint team announcement describing the retirement timeline for classic experiences.",
       "author": "SharePoint team",
       "href": "https://techcommunity.microsoft.com/blog/spblog/upcoming-changes-to-classic-experiences-in-sharepoint-online/4549091"
+    },
+    {
+      "title": "Planning a SharePoint page modernization program",
+      "description": "A practical look at discovery, scope, page sequencing, and stakeholder alignment for transformation work.",
+      "author": "Paul Bullock",
+      "href": "https://pkbullock.com"
+    },
+    {
+      "title": "Assess workload readiness before conversion",
+      "description": "Understand how to evaluate page complexity, customizations, and governance needs before migrating to modern pages.",
+      "author": "Paul Bullock",
+      "href": "https://pkbullock.com"
+    },
+    {
+      "title": "Modern page design guidance",
+      "description": "Learn the principles behind modern SharePoint page layouts, content structure, and user experience quality.",
+      "author": "Microsoft Learn",
+      "href": "https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations"
     }
   ]
 }
