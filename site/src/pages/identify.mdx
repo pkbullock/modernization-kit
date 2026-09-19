@@ -1,9 +1,9 @@
 ---
 title: Identify
 description: Inventory sites, pages, and usage signals before a Page Modernisation project begins.
-summary: Inventory sites, pages, and usage signals before a Page Modernisation project begins.
+summary: Guidance for assessment, inventory sites, pages, and usage signals to help identify the scope of the modernization project.
 slug: identify
-author: Project maintainers
+author: Paul Bullock
 ms.date: 2026-09-18
 ms.topic: overview
 layout: ../layouts/StageLayout.astro
@@ -14,33 +14,27 @@ import resources from '../data/resourceCards.json';
 
 ## Focus for this stage
 
-This stage will focus on understanding the existing SharePoint landscape before any
-modernisation work begins. In order for you to understand the scale of the effort required, an assessment
-of the existing estate of SharePoint sites, and pages is needed to understand what classic components will be an uplift to the modern experience.
+This stage will provide guidance to focus on an understanding the existing SharePoint landscape before any modernisation work begins. In order for you to understand the scale of the effort required, an assessment of the existing estate of SharePoint sites, and pages is needed to understand what classic components will be an uplift to the modern experience.
 
 There are options for you to run an assessment:
 
 - PnP Assessment - the main tool that Microsoft recommend to run the assessment scan on your organisational tenant. See Microsoft Learn at [Assess Classic Pages | Microsoft Learn](https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages)
-
+- Community Scripts Samples that provide supporting data for your assessment.
 
 <ScriptSamplesCards title="Script Samples" items={resources.scriptSamplesAssessment} />
 
 ## Run an analysis on the collected data
 
-Once you have collected the assessment data, you can use this to plan the effort required to uplift content to the mdoern experience.
+Once you have collected the assessment data, you can use this to plan the effort required to uplift content to the modern experience, use the data to consider the follow: 
 
-* Review the classic sites and pages and determine if they are in scope for the modernization.
-* Review page usage and business value to identify candidates for modernisation.
-* Identify custom layouts, web parts, and dependencies that need investigation.
-* Identify page owners that you can co-ordinate the change with, it is recommended to keep them in the loop at the beginning so that you can support them throught the change process.
+* __Site Scope__ - review the classic sites and pages and determine if they are in scope for the modernization.
+* __Page Scope__ - review page usage and business value to identify candidates for modernisation.
+* __Customisations__ - identify custom layouts, web parts, 3rd party tools and dependencies that need investigation especially if you have heavily customised them.
+* __Content Owners__ - Identify page owners that you can co-ordinate the change with, it is recommended to keep them in the loop at the beginning so that you can support them throught the change process.
+* __Admins__. - work with the SharePoint and site administrators to engage with in the early stages of the project, they will be needed to run scripts, setup the assessment and create sites later on in the project.
 
-
-## Stage pages
-
-* [Identify placeholder page](./placeholder/)
-
+> Note: If you have used 3rd party Intranets that use classic features, you may need to engage with them to work through bring their componets to the modern experience. The community scripts and tools are not designed to convert 3rd party products.
 
 ## Before moving on
 
-Agree an initial page inventory with site owners, including candidates to retain,
-modernise, or retire.
+Ensure that you have collected all the site data you need to ensure you can generate a plan for the conversion effort for the project.
