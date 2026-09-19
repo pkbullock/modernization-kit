@@ -7,42 +7,54 @@
       "href": "https://pnp.github.io/script-samples/"
     },
     {
-      "title": "Find pages and web parts in SharePoint Online",
-      "description": "Use a PowerShell sample to inventory pages and web parts so you can assess classic page modernization scope.",
+      "title": "Audit ASPX page types",
+      "description": "Use this script to identify ASPX page types and assess which pages are candidates for modernization work.",
       "author": "Microsoft 365 Patterns and Practices",
-      "href": "https://pnp.github.io/script-samples/spo-find-all-pages-and-webparts/README.html"
+      "href": "https://pnp.github.io/script-samples/spo-aspx-page-type-audit/README.html?tabs=pnpps"
     },
     {
-      "title": "Modernize SharePoint pages with site scripts",
-      "description": "Review examples for auditing and managing page content before and after modernization initiatives.",
+      "title": "List all site collections and subsites",
+      "description": "Use this script to inventory all site collections and subsites so you can scope modernization work across the tenant.",
       "author": "Microsoft 365 Patterns and Practices",
-      "href": "https://pnp.github.io/script-samples/"
+      "href": "https://pnp.github.io/script-samples/get-all-site-collections-subwebs/README.html?tabs=pnpps"
     },
     {
-      "title": "Analyze page inventory and usage",
-      "description": "Collect page metadata and usage signals so your modernization plan focuses on the highest-value pages first.",
+      "title": "Review modernization readiness by site and page",
+      "description": "Use inventory scripts to compare pages and sites against governance, business value, and technical complexity criteria.",
       "author": "Microsoft 365 Patterns and Practices",
       "href": "https://pnp.github.io/script-samples/"
+    }, 
+    {
+      "title": "Create multi-hub sites",
+      "description": "Use this script to create a hub-based site structure that supports scoped modernization planning and rollout.",
+      "author": "Paul Bullock",
+      "href": "https://pnp.github.io/script-samples/spo-create-multi-hub-sites/README.html?tabs=pnpps"
     },
     {
-      "title": "Review classic page transformation patterns",
-      "description": "Use repeatable patterns to identify page layouts, web parts, and customizations that need redesign.",
-      "author": "Microsoft 365 Patterns and Practices",
-      "href": "https://pnp.github.io/script-samples/"
+      "title": "Create SharePoint groups in bulk from CSV",
+      "description": "Use this script to provision SharePoint groups in bulk and support the governance model for your modernization rollout.",
+      "author": "Kunj Sangani and Ganesh Sanap",
+      "href": "https://pnp.github.io/script-samples/spo-create-sharepoint-groups-bulk-csv/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Hub site governance report",
+      "description": "Use this script to review hub site configuration and governance settings before you roll out the modernization plan.",
+      "author": "Josiah Opiyo",
+      "href": "https://pnp.github.io/script-samples/spo-hub-site-governance-report/README.html?tabs=pnpps"
     }
   ],
   "scriptSamplesAssessment": [
     {
-      "title": "Assess classic pages for modernization",
-      "description": "Use PowerShell scripts to evaluate the readiness of classic pages for modernization.",
+      "title": "Audit ASPX page types",
+      "description": "Use this script to identify ASPX page types and assess which pages are candidates for modernization work.",
       "author": "Microsoft 365 Patterns and Practices",
-      "href": "https://pnp.github.io/script-samples/spo-assess-classic-pages-for-modernization/README.html"
+      "href": "https://pnp.github.io/script-samples/spo-aspx-page-type-audit/README.html?tabs=pnpps"
     },
     {
-      "title": "Identify page complexity and customizations",
-      "description": "Review scripts that help classify pages by layout patterns, web part usage, and dependency risk before modernization.",
+      "title": "List all site collections and subsites",
+      "description": "Use this script to inventory all site collections and subsites so you can scope modernization work across the tenant.",
       "author": "Microsoft 365 Patterns and Practices",
-      "href": "https://pnp.github.io/script-samples/"
+      "href": "https://pnp.github.io/script-samples/get-all-site-collections-subwebs/README.html?tabs=pnpps"
     },
     {
       "title": "Review modernization readiness by site and page",
@@ -51,13 +63,27 @@
       "href": "https://pnp.github.io/script-samples/"
     }
   ],
-  "blogPosts": [
+  "scriptSamplesPlanSetup": [
     {
-      "title": "Community blog starting point",
-      "description": "Explore practical modernization notes, updates, and experiences shared by Paul Bullock.",
+      "title": "Create multi-hub sites",
+      "description": "Use this script to create a hub-based site structure that supports scoped modernization planning and rollout.",
       "author": "Paul Bullock",
-      "href": "https://pkbullock.com"
+      "href": "https://pnp.github.io/script-samples/spo-create-multi-hub-sites/README.html?tabs=pnpps"
     },
+    {
+      "title": "Create SharePoint groups in bulk from CSV",
+      "description": "Use this script to provision SharePoint groups in bulk and support the governance model for your modernization rollout.",
+      "author": "Kunj Sangani and Ganesh Sanap",
+      "href": "https://pnp.github.io/script-samples/spo-create-sharepoint-groups-bulk-csv/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Hub site governance report",
+      "description": "Use this script to review hub site configuration and governance settings before you roll out the modernization plan.",
+      "author": "Josiah Opiyo",
+      "href": "https://pnp.github.io/script-samples/spo-hub-site-governance-report/README.html?tabs=pnpps"
+    }
+  ],
+  "blogPosts": [
     {
       "title": "Upcoming changes to classic experiences",
       "description": "Review the SharePoint team announcement describing the retirement timeline for classic experiences.",
@@ -65,22 +91,60 @@
       "href": "https://techcommunity.microsoft.com/blog/spblog/upcoming-changes-to-classic-experiences-in-sharepoint-online/4549091"
     },
     {
-      "title": "Planning a SharePoint page modernization program",
-      "description": "A practical look at discovery, scope, page sequencing, and stakeholder alignment for transformation work.",
+      "title": "Can I convert a publishing page to the modern experience?",
+      "description": "Read Paul Bullock's article on the constraints, options, and practical guidance for converting publishing pages to modern SharePoint experiences.",
       "author": "Paul Bullock",
-      "href": "https://pkbullock.com"
+      "href": "https://pkbullock.com/blog/2020/can-i-convert-a-publishing-page-to-the-modern-experience/"
     },
     {
-      "title": "Assess workload readiness before conversion",
-      "description": "Understand how to evaluate page complexity, customizations, and governance needs before migrating to modern pages.",
+      "title": "Getting started with modernizing your intranet",
+      "description": "Read Paul Bullock's practical guidance for planning and starting an intranet modernization program in SharePoint.",
       "author": "Paul Bullock",
-      "href": "https://pkbullock.com"
+      "href": "https://pkbullock.com/blog/2019/getting-started-with-modernizing-your-intranet/"
     },
     {
-      "title": "Modern page design guidance",
-      "description": "Learn the principles behind modern SharePoint page layouts, content structure, and user experience quality.",
+      "title": "Exploring taxonomy mapping in PnP Page Transformation",
+      "description": "Read Paul Bullock's article on how taxonomy mapping works during PnP Page Transformation and how it impacts SharePoint page modernization.",
+      "author": "Paul Bullock",
+      "href": "https://pkbullock.com/blog/2020/exploring-taxonomy-mapping-in-pnp-page-transformation/"
+    },
+    {
+      "title": "Auditing classic SharePoint Online pages before retirement",
+      "description": "Review this PnP blog article for guidance on auditing classic SharePoint Online pages before the retirement of classic experiences.",
+      "author": "Josiah Opiyo",
+      "href": "https://pnp.github.io/blog/post/auditing-classic-spo-pages-before-retirement/"
+    },
+    {
+      "title": "The last mile of SharePoint classic",
+      "description": "Read this PnP article on the final steps teams should take to manage and retire classic SharePoint experiences effectively.",
+      "author": "Josiah Opiyo",
+      "href": "https://pnp.github.io/blog/post/the-last-mile-of-sharepoint-classic/"
+    }
+  ],
+  "microsoftDocumentation": [
+    {
+      "title": "Planning hub sites in SharePoint",
+      "description": "Review Microsoft Learn guidance for designing a hub site structure, governance model, and information architecture for SharePoint.",
       "author": "Microsoft Learn",
-      "href": "https://learn.microsoft.com/sharepoint/dev/transform/modernize-user-interface-customizations"
+      "href": "https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites"
+    },
+    {
+      "title": "Classic user-created pages deprecation",
+      "description": "Review the Microsoft Learn guidance on the retirement of classic user-created pages and the steps needed to prepare for modern SharePoint experiences.",
+      "author": "Microsoft Learn",
+      "href": "https://learn.microsoft.com/en-us/sharepoint/classic-user-created-page-deprecation"
+    },
+    {
+      "title": "Build an intelligent intranet",
+      "description": "Microsoft Learn provides a useful pre-read on the building blocks, outcomes, and design considerations for an intelligent SharePoint intranet.",
+      "author": "Microsoft Learn",
+      "href": "https://learn.microsoft.com/en-us/sharepoint/intelligent-intranet-overview"
+    },
+    {
+      "title": "Plan an intelligent SharePoint intranet",
+      "description": "Use this Microsoft Learn guidance to understand the project considerations, planning decisions, and elements to evaluate before starting a SharePoint intranet initiative.",
+      "author": "Microsoft Learn",
+      "href": "https://learn.microsoft.com/en-us/sharepoint/plan-intranet"
     }
   ]
 }
