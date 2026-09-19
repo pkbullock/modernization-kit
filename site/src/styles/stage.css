@@ -1,25 +1,26 @@
 .stage-page { padding-block: 1.75rem 4rem; }
-.breadcrumb { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.8rem; color: var(--cp-text-muted); margin-bottom: 2.5rem; }
+.breadcrumb { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.9rem; color: var(--cp-text-muted); margin-bottom: 2.5rem; }
 .breadcrumb a { text-decoration: none; }
 .reading-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 4rem; }
 aside { border-right: 1px solid var(--cp-border); padding-right: 1.5rem; }
-aside .eyebrow { font-size: 0.7rem; }
+aside .eyebrow { font-size: 0.8rem; }
 aside ol { list-style: none; padding: 0; margin: 0 0 1.5rem; }
-aside nav a { display: flex; gap: 0.85rem; padding: 0.75rem; text-decoration: none; color: var(--cp-text-muted); border-left: 2px solid transparent; font-size: 0.9rem; }
+aside nav a { display: flex; gap: 0.85rem; padding: 0.75rem; text-decoration: none; color: var(--cp-text-muted); border-left: 2px solid transparent; font-size: 1rem; }
 aside nav a[aria-current='page'] { background: var(--cp-accent-soft); color: var(--cp-accent); border-left-color: var(--cp-accent); font-weight: 600; }
 aside nav a:hover { background: var(--cp-surface-soft); }
-aside nav a span { font-size: 0.8rem; }
-.contribute { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; text-decoration: none; }
+aside nav a span { font-size: 0.9rem; }
+.contribute { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.9rem; text-decoration: none; }
 .contribute svg { width: 1rem; height: 1rem; }
 article { max-width: 760px; min-width: 0; }
 .summary { color: var(--cp-text-muted); font-size: 1.2rem; max-width: 650px; }
 .status-note { padding: 1rem 1.25rem; border-left: 3px solid var(--cp-accent); background: var(--cp-accent-soft); margin-block: 2rem; font-size: 0.9rem; }
 .status-note p { color: var(--cp-text-muted); margin: 0.5rem 0 0; }
 .stage-content :global(h2) { font-size: 1.5rem; margin-top: 2rem; }
-.stage-content :global(ul) { padding-left: 1.25rem; color: var(--cp-text-muted); }
+.stage-content :global(ul) { list-style: disc; padding-left: 1.25rem; color: var(--cp-text-muted); }
+.stage-content :global(ol) { list-style: decimal; padding-left: 1.4rem; color: var(--cp-text-muted); }
 .stage-content :global(li) { padding-left: 0.35rem; margin-bottom: 0.8rem; }
 .stage-content :global(li::marker) { color: var(--cp-accent); }
-.stage-content :global(p) { color: var(--cp-text-muted); }
+.stage-content :global(p) { color: var(--cp-text-muted); margin-block: 0 1rem; }
 .reference { margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid var(--cp-border); font-size: 0.9rem; }
 .reference a { display: inline-flex; align-items: center; gap: 0.35rem; }
 .reference a svg { width: 1rem; height: 1rem; }
