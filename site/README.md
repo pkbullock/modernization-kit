@@ -49,9 +49,9 @@ The build validates compilation but does not replace browser checks or tenant-co
 * [BaseLayout.astro](src/layouts/BaseLayout.astro) owns shared navigation, theme tokens, typography, and the footer.
 * [index.astro](src/pages/index.astro) contains the overview and resource links.
 * [process.js](src/data/process.js) defines stage summaries, activities, outcomes, and the repository URL.
-* [Stage template](src/pages/%5Bslug%5D.astro) generates the five workflow pages.
+* The workflow stage content pages in `src/pages/*.mdx` use Astro MDX so they can host components when needed.
 
-The current pages use local stage data. Markdown ingestion from `../docs/` remains future work.
+The current pages use local stage data. Additional content ingestion from `../docs/` remains future work.
 
 Community resource images are served from the [PnP community site](https://pnp.github.io/) and require network access. Light and dark themes follow the system preference until changed; a valid `scoutTheme=light` or `scoutTheme=dark` URL parameter overrides the stored preference on page load.
 
