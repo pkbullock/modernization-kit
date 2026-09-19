@@ -154,13 +154,60 @@
   color: var(--cp-text-muted);
 }
 .community-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-.community-resource { border: 1px solid var(--cp-border); border-radius: 4px; overflow: hidden; text-decoration: none; color: var(--cp-text); }
-.community-resource:hover { text-decoration: none; border-color: var(--cp-border-strong); }
-.community-resource:hover h3 { color: var(--cp-link); text-decoration: underline; }
-.community-resource img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: contain; background: var(--cp-surface-soft); }
-.community-resource > div { padding: 1.25rem; }
-.community-resource h3 { font-size: 1.1rem; }
-.community-resource p { font-size: 0.875rem; color: var(--cp-text-muted); margin-bottom: 0; }
+.community-resource {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--cp-border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--cp-text);
+  background: var(--cp-panel-strong);
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+.community-resource:hover,
+.community-resource:focus-visible {
+  text-decoration: none;
+  border-color: var(--cp-border-strong);
+  box-shadow: 0 0 0 1px rgba(197, 31, 63, 0.12), 0 18px 30px rgba(27, 29, 42, 0.06);
+}
+.community-resource:hover h3,
+.community-resource:focus-visible h3 {
+  color: var(--cp-link);
+  text-decoration: underline;
+}
+.community-resource img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--cp-surface-soft);
+  border-bottom: 1px solid var(--cp-border);
+}
+.community-resource > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+.community-resource h3 {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: clamp(1.35rem, 1.5vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+.community-resource p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--cp-text-muted);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .intro { animation: reveal 350ms ease-out both; }
