@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
 
 const { frontmatter } = Astro.props;
@@ -10,11 +9,8 @@ const { frontmatter } = Astro.props;
     <h1 id="resources-title">{frontmatter.title}</h1>
     <p class="summary">{frontmatter.summary}</p>
 
-    <div class="placeholder-panel">
-      <Icon name="heroicons:archive-box" aria-hidden="true" />
-      <div class="resource-markdown">
-        <slot />
-      </div>
+    <div class="resource-markdown">
+      <slot />
     </div>
   </section>
 </BaseLayout>
