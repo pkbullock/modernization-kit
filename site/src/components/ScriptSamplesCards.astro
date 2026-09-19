@@ -1,0 +1,7 @@
+---
+import ResourceCardList from './ResourceCardList.astro';
+import resources from '../data/resourceCards.json';
+
+const { title = 'Script Samples', items = resources.scriptSamples } = Astro.props;
+---
+<ResourceCardList title={title} items={items} />

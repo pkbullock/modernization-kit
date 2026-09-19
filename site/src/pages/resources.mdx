@@ -9,9 +9,16 @@ ms.topic: overview
 layout: ../layouts/ResourcesLayout.astro
 ---
 
-## Resource library coming soon
+import BlogPostsCards from '../components/BlogPostsCards.astro';
+import ScriptSamplesCards from '../components/ScriptSamplesCards.astro';
+import resources from '../data/resourceCards.json';
 
-This page will collect practical assets for discovery, planning, page
-transformation, review, and publication workflows.
+Use these curated resources to find practical automation and guidance for modernization projects.
 
+<ScriptSamplesCards title="Script Samples" items={resources.scriptSamples} />
+
+<BlogPostsCards title="Blog Posts" items={resources.blogPosts} />
+
+<div style="padding-top: 1rem;">
 [Contribute resources](https://github.com/pkbullock/modernization-kit/tree/main/docs)
+</div>

@@ -1,0 +1,187 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface ResourceCardItem {
+  title: string;
+  description: string;
+  author: string;
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  heading?: string;
+  items: ResourceCardItem[];
+}
+
+const { title, heading, items = [] }: Props = Astro.props;
+const sectionTitle = title ?? heading ?? 'Resources';
+const headingId = `${sectionTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}-resources`;
+---
+<section class="resource-card-section" aria-labelledby={headingId}>
+  <div class="resource-card-header">
+    <h2 id={headingId}>{sectionTitle}</h2>
+    <span class="resource-card-rule" aria-hidden="true"></span>
+  </div>
+  <ul class="resource-card-list">
+    {items.map((item) => (
+      <li>
+        <article class="resource-card">
+          <div class="resource-card-body">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+          <div class="resource-card-footer">
+            <p class="resource-card-author"><strong>Author:</strong> {item.author}</p>
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View sample (opens in a new tab)`}
+            >
+              View sample <span class="sr-only">(opens in a new tab)</span> <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" />
+            </a>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .resource-card-section { margin-top: 2.5rem; }
+  .resource-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .resource-card-header::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--cp-accent);
+    box-shadow: 0 0 0 1px rgba(197, 31, 63, 0.18);
+    transform: translateY(0.15rem);
+  }
+  .resource-card-header h2 {
+    margin: 0;
+    color: var(--cp-accent);
+    font-size: clamp(1.8rem, 2vw, 3rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    font-weight: 800;
+    text-transform: none;
+  }
+  .resource-card-rule {
+    flex: 1;
+    display: block;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--cp-accent) 0%, var(--cp-accent) 30%, var(--cp-border-strong) 100%);
+    box-shadow: 0 0 0 1px rgba(197, 31, 63, 0.18);
+    opacity: 1;
+  }
+  .resource-card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .resource-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.5rem 1.25rem 1.25rem;
+    border: 1px solid var(--cp-border);
+    border-radius: 8px;
+    background: var(--cp-panel-strong);
+  }
+  .resource-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-height: 0;
+    flex: 1;
+  }
+  .resource-card h3 {
+    margin: 0;
+    color: var(--cp-text);
+    font-size: clamp(1.5rem, 1.4vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .resource-card p {
+    margin: 0;
+    color: var(--cp-text-muted);
+  }
+  .resource-card-body p {
+    font-size: 1rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .resource-card-footer {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    justify-content: flex-end;
+  }
+  .resource-card-author {
+    color: var(--cp-text);
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  .resource-card-author strong {
+    font-weight: 800;
+  }
+  .resource-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: var(--cp-accent);
+    text-decoration: none;
+    margin-top: auto;
+  }
+  .resource-card a:hover { text-decoration: underline; }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 980px) {
+    .resource-card-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 640px) {
+    .resource-card-list { grid-template-columns: 1fr; }
+    .resource-card-header { gap: 0.75rem; }
+  }
+</style>
