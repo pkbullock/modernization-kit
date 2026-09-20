@@ -5,6 +5,12 @@ export const setupMermaidDiagrams = ({
   window,
   loadMermaid = defaultLoadMermaid
 }) => {
+  const controlIcons = {
+    zoomOut: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
+    zoomIn: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5v10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
+    reset: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.5 7.5A5.5 5.5 0 1 1 5 11.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /><path d="M4.5 5.5v4h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /></svg>',
+    close: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>'
+  };
   const mermaidLanguages = new Set(['mermaid', 'marmaid']);
   let mermaidModulePromise = null;
   let activeMermaidTheme = null;
@@ -36,11 +42,11 @@ export const setupMermaidDiagrams = ({
     pre.querySelector('code')?.textContent ?? pre.textContent ?? ''
   ).trim();
 
-  const createZoomButton = (label, title, onClick) => {
+  const createControlButton = ({ icon, title, onClick, className = '' }) => {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'mermaid-control';
-    button.textContent = label;
+    button.className = ['mermaid-control', className].filter(Boolean).join(' ');
+    button.innerHTML = icon;
     button.title = title;
     button.setAttribute('aria-label', title);
     button.addEventListener('click', onClick);
@@ -74,7 +80,12 @@ export const setupMermaidDiagrams = ({
 
     const toolbar = document.createElement('div');
     toolbar.className = 'mermaid-lightbox-toolbar';
-    const closeButton = createZoomButton('Close', 'Close full diagram view', () => dialog.close());
+    const closeButton = createControlButton({
+      icon: controlIcons.close,
+      title: 'Close full diagram view',
+      onClick: () => dialog.close(),
+      className: 'mermaid-control--icon'
+    });
     toolbar.append(closeButton);
 
     const diagram = document.createElement('div');
@@ -109,28 +120,46 @@ export const setupMermaidDiagrams = ({
 
     const toolbar = document.createElement('div');
     toolbar.className = 'mermaid-toolbar';
-    const zoomLabel = document.createElement('span');
-    zoomLabel.className = 'mermaid-zoom-label';
-    zoomLabel.textContent = '100%';
-    const updateZoomLabel = () => {
-      zoomLabel.textContent = `${Math.round(Number(container.dataset.zoom ?? 1) * 100)}%`;
-    };
     const changeScale = (amount) => {
       setDiagramScale(container, Number(container.dataset.zoom ?? 1) + amount);
-      updateZoomLabel();
     };
 
     toolbar.append(
-      createZoomButton('-', 'Zoom out diagram', () => changeScale(-0.25)),
-      zoomLabel,
-      createZoomButton('+', 'Zoom in diagram', () => changeScale(0.25)),
-      createZoomButton('Reset', 'Reset diagram zoom', () => {
-        setDiagramScale(container, 1);
-        updateZoomLabel();
+      createControlButton({
+        icon: controlIcons.zoomOut,
+        title: 'Zoom out diagram',
+        onClick: () => changeScale(-0.25),
+        className: 'mermaid-control--icon'
       }),
-      createZoomButton('Full view', 'Open diagram in full view', () => openDiagramLightbox(container))
+      createControlButton({
+        icon: controlIcons.zoomIn,
+        title: 'Zoom in diagram',
+        onClick: () => changeScale(0.25),
+        className: 'mermaid-control--icon'
+      }),
+      createControlButton({
+        icon: controlIcons.reset,
+        title: 'Reset diagram zoom',
+        onClick: () => {
+          setDiagramScale(container, 1);
+        },
+        className: 'mermaid-control--icon'
+      })
     );
-    shell.insertBefore(toolbar, container);
+    shell.append(toolbar);
+    container.tabIndex = 0;
+    container.setAttribute('role', 'button');
+    container.setAttribute('aria-label', 'Open full Mermaid diagram view');
+    container.title = 'Open full Mermaid diagram view';
+    container.addEventListener('click', () => openDiagramLightbox(container));
+    container.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      openDiagramLightbox(container);
+    });
     container.dataset.controlsReady = 'true';
     setDiagramScale(container, 1);
   };
