@@ -66,6 +66,7 @@ assert.match(renderedContainer?.innerHTML ?? '', /<svg/, 'Expected the runtime M
 assert.equal(toolbarButtons.length, 4, 'Expected Mermaid diagrams to render icon-based Mermaid controls, including full view.');
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-zoom-label'), null, 'Expected Mermaid controls to remove the zoom percentage label.');
 assert.equal(renderedContainer?.getAttribute('role'), null, 'Expected Mermaid diagrams to keep their native semantics.');
+assert.equal(renderedContainer?.getAttribute('tabindex'), '0', 'Expected Mermaid diagrams to be keyboard-focusable for full-view access.');
 
 runtimeDom.window.HTMLDialogElement.prototype.showModal = function showModal() {
   this.open = true;
@@ -77,11 +78,17 @@ runtimeDom.window.HTMLDialogElement.prototype.close = function close() {
 
 toolbarButtons[1].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 assert.equal(renderedContainer?.dataset.zoom, '1.25', 'Expected the zoom-in control to increase the Mermaid zoom level.');
+assert.equal(runtimeDom.window.document.querySelector('.mermaid-lightbox'), null, 'Expected zooming controls not to open the Mermaid lightbox.');
 toolbarButtons[2].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 assert.equal(renderedContainer?.dataset.zoom, '1', 'Expected the reset control to restore the Mermaid zoom level.');
+assert.equal(runtimeDom.window.document.querySelector('.mermaid-lightbox'), null, 'Expected resetting zoom not to open the Mermaid lightbox.');
 toolbarButtons[3].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 let lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
 assert.ok(lightbox?.open, 'Expected the full-view control to open the Mermaid lightbox.');
+lightbox?.close();
+renderedContainer?.dispatchEvent(new runtimeDom.window.KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
+assert.ok(lightbox?.open, 'Expected keyboard activation on the Mermaid diagram to open the full-view lightbox.');
 lightbox?.close();
 
 renderedContainer?.dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));

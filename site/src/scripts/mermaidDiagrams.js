@@ -50,7 +50,10 @@ export const setupMermaidDiagrams = ({
     button.innerHTML = icon;
     button.title = title;
     button.setAttribute('aria-label', title);
-    button.addEventListener('click', onClick);
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      onClick(event);
+    });
     return button;
   };
 
@@ -154,7 +157,17 @@ export const setupMermaidDiagrams = ({
       })
     );
     shell.append(toolbar);
+    container.tabIndex = 0;
+    container.setAttribute('aria-label', 'Mermaid diagram. Press Enter or Space to open full view.');
     container.addEventListener('click', () => openDiagramLightbox(container));
+    container.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      openDiagramLightbox(container);
+    });
     container.dataset.controlsReady = 'true';
     setDiagramScale(container, 1);
   };
