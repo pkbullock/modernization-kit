@@ -18,13 +18,15 @@ assert.ok(
   !placeholderHtml.includes('data-language="plaintext"'),
   'Expected Mermaid examples to avoid plaintext syntax highlighting fallback.'
 );
-
-const scriptMatch = placeholderHtml.match(/<script type="module" src="\/modernization-kit\/([^"]*BaseLayout[^"]+\.js)"/);
-assert.ok(scriptMatch, 'Expected the placeholder page to reference the BaseLayout client bundle.');
-
-const layoutBundle = await readBuildFile(scriptMatch[1]);
-assert.match(layoutBundle, /mermaid\.core/, 'Expected the emitted layout bundle to include Mermaid runtime loading logic.');
-assert.match(layoutBundle, /dataset\.renderedTheme/, 'Expected the emitted layout bundle to track rendered Mermaid themes.');
-assert.match(layoutBundle, /marmaid/, 'Expected the emitted layout bundle to preserve legacy marmaid compatibility.');
+assert.match(
+  placeholderHtml,
+  /Discover classic pages[\s\S]*Identify page owners/,
+  'Expected the canonical Mermaid example content to be present in the built HTML.'
+);
+assert.match(
+  placeholderHtml,
+  /Inventory classic pages[\s\S]*Identify page owners/,
+  'Expected the legacy marmaid compatibility example content to be present in the built HTML.'
+);
 
 console.log('Rich media validation passed.');

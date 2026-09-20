@@ -59,10 +59,10 @@ Community resource images are served from the [PnP community site](https://pnp.g
 
 MDX pages can now embed public-folder videos and Mermaid diagrams.
 
-Place video files under `site/public/` and import the helper component in an `.mdx` page:
+Place video files under `site/public/` and import the helper component in a nested `.mdx` page under `site/src/pages/<section>/...`:
 
 ```mdx
-import PublicVideo from '../components/PublicVideo.astro';
+import PublicVideo from '../../components/PublicVideo.astro';
 
 <PublicVideo
   src="/videos/modernization-demo.mp4"
