@@ -1,0 +1,36 @@
+name: Feedback
+description: Share feedback on a specific area of the modernization kit.
+title: "[Feedback]: "
+labels:
+  - feedback
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feedback summary
+      description: Describe your feedback.
+      placeholder: Tell us what worked well or what could be improved.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details
+      description: Add any context, examples, or suggestions.
+      placeholder: Include details that help us understand your feedback.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Component or area
+      description: Select the area this feedback is about.
+      options:
+        - Documentation
+        - Site
+        - Scripts
+        - Mappings
+        - SPFx
+        - Other
+    validations:
+      required: true
