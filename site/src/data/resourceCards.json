@@ -63,7 +63,7 @@
       "href": "https://pnp.github.io/script-samples/"
     }
   ],
-  "scriptSamplesPlanSetup": [
+  "scriptSamplesPlanSiteSetup": [
     {
       "title": "Create multi-hub sites",
       "description": "Use this script to create a hub-based site structure that supports scoped modernization planning and rollout.",
