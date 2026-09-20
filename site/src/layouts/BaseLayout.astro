@@ -211,14 +211,21 @@ const headerLinks = [
           });
       };
 
+      const mermaidWindow = window as Window & {
+        __modernizationKitMermaidListenersRegistered?: boolean;
+      };
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', scheduleMermaidRender, { once: true });
       } else {
         scheduleMermaidRender();
       }
 
-      document.addEventListener('astro:page-load', scheduleMermaidRender);
-      document.addEventListener('modernization-kit-theme-change', scheduleMermaidRender);
+      if (!mermaidWindow.__modernizationKitMermaidListenersRegistered) {
+        document.addEventListener('astro:page-load', scheduleMermaidRender);
+        document.addEventListener('modernization-kit-theme-change', scheduleMermaidRender);
+        mermaidWindow.__modernizationKitMermaidListenersRegistered = true;
+      }
     </script>
   </body>
 </html>
