@@ -134,7 +134,7 @@ export const setupMermaidDiagrams = ({
       });
   };
 
-  const mermaidWindow = window;
+  const mermaidDocument = document;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', scheduleMermaidRender, { once: true });
@@ -142,10 +142,10 @@ export const setupMermaidDiagrams = ({
     scheduleMermaidRender();
   }
 
-  if (!mermaidWindow.__modernizationKitMermaidListenersRegistered) {
+  if (!mermaidDocument.__modernizationKitMermaidListenersRegistered) {
     document.addEventListener('astro:page-load', scheduleMermaidRender);
     document.addEventListener('modernization-kit-theme-change', scheduleMermaidRender);
-    mermaidWindow.__modernizationKitMermaidListenersRegistered = true;
+    mermaidDocument.__modernizationKitMermaidListenersRegistered = true;
   }
 
   return {
