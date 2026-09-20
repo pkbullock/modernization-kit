@@ -36,6 +36,105 @@ export const setupMermaidDiagrams = ({
     pre.querySelector('code')?.textContent ?? pre.textContent ?? ''
   ).trim();
 
+  const createZoomButton = (label, title, onClick) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'mermaid-control';
+    button.textContent = label;
+    button.title = title;
+    button.setAttribute('aria-label', title);
+    button.addEventListener('click', onClick);
+    return button;
+  };
+
+  const setDiagramScale = (container, scale) => {
+    const svg = container.querySelector('svg');
+
+    if (!svg) {
+      return;
+    }
+
+    const nextScale = Math.min(2.5, Math.max(0.5, scale));
+    container.dataset.zoom = String(nextScale);
+    svg.style.transform = `scale(${nextScale})`;
+    svg.style.transformOrigin = 'center top';
+    svg.style.marginBlock = nextScale === 1 ? '' : `${(nextScale - 1) * 1.5}rem`;
+  };
+
+  const openDiagramLightbox = (container) => {
+    const svg = container.querySelector('svg');
+
+    if (!svg) {
+      return;
+    }
+
+    const dialog = document.createElement('dialog');
+    dialog.className = 'mermaid-lightbox';
+    dialog.setAttribute('aria-label', 'Full Mermaid diagram view');
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'mermaid-lightbox-toolbar';
+    const closeButton = createZoomButton('Close', 'Close full diagram view', () => dialog.close());
+    toolbar.append(closeButton);
+
+    const diagram = document.createElement('div');
+    diagram.className = 'mermaid-lightbox-diagram';
+    const lightboxSvg = svg.cloneNode(true);
+    lightboxSvg.style.transform = 'none';
+    lightboxSvg.style.margin = '0';
+    diagram.append(lightboxSvg);
+
+    const closeOnBackdrop = (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    };
+
+    dialog.append(toolbar, diagram);
+    dialog.addEventListener('click', closeOnBackdrop);
+    dialog.addEventListener('close', () => dialog.remove(), { once: true });
+    document.body.append(dialog);
+    dialog.showModal();
+  };
+
+  const enhanceMermaidContainer = (container) => {
+    if (container.dataset.controlsReady === 'true' || !container.querySelector('svg')) {
+      return;
+    }
+
+    const shell = document.createElement('div');
+    shell.className = 'mermaid-shell';
+    container.replaceWith(shell);
+    shell.append(container);
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'mermaid-toolbar';
+    const zoomLabel = document.createElement('span');
+    zoomLabel.className = 'mermaid-zoom-label';
+    zoomLabel.textContent = '100%';
+    const updateZoomLabel = () => {
+      zoomLabel.textContent = `${Math.round(Number(container.dataset.zoom ?? 1) * 100)}%`;
+    };
+    const changeScale = (amount) => {
+      setDiagramScale(container, Number(container.dataset.zoom ?? 1) + amount);
+      updateZoomLabel();
+    };
+
+    toolbar.append(
+      createZoomButton('-', 'Zoom out diagram', () => changeScale(-0.25)),
+      zoomLabel,
+      createZoomButton('+', 'Zoom in diagram', () => changeScale(0.25)),
+      createZoomButton('Reset', 'Reset diagram zoom', () => {
+        setDiagramScale(container, 1);
+        updateZoomLabel();
+      }),
+      createZoomButton('Full view', 'Open diagram in full view', () => openDiagramLightbox(container))
+    );
+    shell.insertBefore(toolbar, container);
+    container.dataset.controlsReady = 'true';
+    setDiagramScale(container, 1);
+  };
+
   const ensureMermaidContainers = (theme) => {
     const containers = [];
 
@@ -111,6 +210,7 @@ export const setupMermaidDiagrams = ({
     containers.forEach((container) => {
       container.dataset.renderedTheme = theme;
       delete container.dataset.renderError;
+      enhanceMermaidContainer(container);
     });
   };
 
