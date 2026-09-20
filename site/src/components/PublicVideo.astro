@@ -1,0 +1,54 @@
+---
+import { withBasePath } from '../utils/withBasePath';
+
+interface Props {
+  src: string;
+  poster?: string;
+  title?: string;
+  caption?: string;
+  controls?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  playsinline?: boolean;
+  preload?: 'none' | 'metadata' | 'auto';
+}
+
+const {
+  src,
+  poster,
+  title,
+  caption,
+  controls = true,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  playsinline = true,
+  preload = 'metadata'
+} = Astro.props;
+
+const resolveAssetPath = (path: string): string => (
+  /^https?:\/\//i.test(path) || path.startsWith('//') ? path : withBasePath(path)
+);
+
+const resolvedSrc = resolveAssetPath(src);
+const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
+---
+
+<figure class="rich-media-figure">
+  <video
+    class="rich-media-video"
+    src={resolvedSrc}
+    poster={resolvedPoster}
+    title={title}
+    controls={controls}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    playsinline={playsinline}
+    preload={preload}
+  >
+    Your browser does not support the video tag.
+  </video>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

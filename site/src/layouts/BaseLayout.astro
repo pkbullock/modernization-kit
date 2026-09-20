@@ -115,8 +115,93 @@ const headerLinks = [
           document.documentElement.dataset.theme = theme;
           toggle.setAttribute('aria-checked', String(toggle.checked));
           try { localStorage.setItem('modernization-kit-theme', theme); } catch {}
+          document.dispatchEvent(new CustomEvent('modernization-kit-theme-change', { detail: { theme } }));
         });
       }
+    </script>
+    <script>
+      const mermaidLanguages = new Set(['mermaid', 'marmaid']);
+
+      const getMermaidTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
+
+      const isMermaidCodeBlock = (pre: HTMLPreElement) => {
+        const language = pre.dataset.language?.toLowerCase();
+
+        if (language && mermaidLanguages.has(language)) {
+          return true;
+        }
+
+        const code = pre.querySelector('code');
+        return Boolean(code?.className.match(/\blanguage-(mermaid|marmaid)\b/i));
+      };
+
+      const getDiagramSource = (pre: HTMLPreElement) => {
+        const code = pre.querySelector('code');
+        return (code?.textContent ?? pre.textContent ?? '').trim();
+      };
+
+      const ensureMermaidContainers = () => {
+        const containers: HTMLElement[] = [];
+
+        document.querySelectorAll<HTMLPreElement>('pre').forEach((pre) => {
+          if (!isMermaidCodeBlock(pre)) {
+            return;
+          }
+
+          const diagramSource = getDiagramSource(pre);
+
+          if (!diagramSource) {
+            return;
+          }
+
+          const container = document.createElement('div');
+          container.className = 'mermaid';
+          container.dataset.source = diagramSource;
+          container.textContent = diagramSource;
+          pre.replaceWith(container);
+          containers.push(container);
+        });
+
+        document.querySelectorAll<HTMLElement>('.mermaid[data-source]').forEach((container) => {
+          container.textContent = container.dataset.source ?? '';
+          containers.push(container);
+        });
+
+        return containers;
+      };
+
+      const renderMermaidDiagrams = async () => {
+        const containers = ensureMermaidContainers().filter((container, index, items) => items.indexOf(container) === index);
+
+        if (!containers.length) {
+          return;
+        }
+
+        const { default: mermaid } = await import('mermaid');
+
+        mermaid.initialize({
+          startOnLoad: false,
+          securityLevel: 'strict',
+          theme: getMermaidTheme()
+        });
+
+        await mermaid.run({ nodes: containers });
+      };
+
+      const scheduleMermaidRender = () => {
+        void renderMermaidDiagrams().catch((error) => {
+          console.error('Failed to render Mermaid diagrams.', error);
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleMermaidRender, { once: true });
+      } else {
+        scheduleMermaidRender();
+      }
+
+      document.addEventListener('astro:page-load', scheduleMermaidRender);
+      document.addEventListener('modernization-kit-theme-change', scheduleMermaidRender);
     </script>
   </body>
 </html>
