@@ -6,10 +6,14 @@ import { withBasePath } from '../utils/withBasePath';
 const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', description = 'Community guidance and resources for planning, delivering, and reviewing SharePoint page modernisation.' } = Astro.props;
 const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
 const currentPath = normalizePath(Astro.url.pathname);
+const isActiveLink = (link: { href: string; isExternal?: boolean }) =>
+  !link.isExternal && (currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/'));
+const feedbackUrl = `${repoUrl}/issues/new?template=feedback.yml`;
 const headerLinks = [
   { label: 'Getting started', href: withBasePath('/identify/') },
   { label: 'Resources', href: withBasePath('/resources/') },
-  { label: 'Contributing', href: repoUrl }
+  { label: 'Feedback', href: feedbackUrl, isExternal: true, openInNewTab: true },
+  { label: 'Contributing', href: repoUrl, isExternal: true }
 ];
 ---
 <!doctype html>
@@ -45,14 +49,22 @@ const headerLinks = [
         </a>
 
         <nav class="site-nav" aria-label="Primary navigation">
-          {headerLinks.map((link) => (
-            <a
-              href={link.href}
-              class={`site-nav-link ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'is-active' : ''}`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {headerLinks.map((link) => {
+            const isActive = isActiveLink(link);
+
+            return (
+              <a
+                href={link.href}
+                target={link.openInNewTab ? '_blank' : undefined}
+                rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                class={`site-nav-link ${isActive ? 'is-active' : ''}`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {link.label}
+                {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
+              </a>
+            );
+          })}
         </nav>
 
         <div class="header-actions">
@@ -73,9 +85,22 @@ const headerLinks = [
 
     <div class="mobile-nav-shell">
       <nav class="mobile-nav" aria-label="Primary mobile navigation">
-        {headerLinks.map((link) => (
-          <a href={link.href} class="site-nav-link">{link.label}</a>
-        ))}
+        {headerLinks.map((link) => {
+          const isActive = isActiveLink(link);
+
+          return (
+            <a
+              href={link.href}
+              target={link.openInNewTab ? '_blank' : undefined}
+              rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+              class={`site-nav-link ${isActive ? 'is-active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+              {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
+            </a>
+          );
+        })}
       </nav>
     </div>
     <main id="main-content" tabindex="-1"><slot /></main>
