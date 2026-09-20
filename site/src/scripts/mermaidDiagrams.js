@@ -107,6 +107,7 @@ export const setupMermaidDiagrams = ({
     container.classList.toggle('mermaid--interactive', enabled);
 
     if (!enabled) {
+      container.removeAttribute('role');
       container.removeAttribute('tabindex');
       container.removeAttribute('aria-label');
       container.onclick = null;
@@ -114,6 +115,7 @@ export const setupMermaidDiagrams = ({
       return;
     }
 
+    container.setAttribute('role', 'button');
     container.tabIndex = 0;
     container.setAttribute('aria-label', 'Mermaid diagram. Press Enter or Space to open full view.');
     container.onclick = () => openDiagramLightbox(container);

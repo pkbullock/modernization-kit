@@ -65,7 +65,7 @@ assert.equal(renderedContainer?.dataset.renderedTheme, 'default', 'Expected the 
 assert.match(renderedContainer?.innerHTML ?? '', /<svg/, 'Expected the runtime Mermaid renderer to populate SVG output.');
 assert.equal(toolbarButtons.length, 4, 'Expected Mermaid diagrams to render icon-based Mermaid controls, including full view.');
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-zoom-label'), null, 'Expected Mermaid controls to remove the zoom percentage label.');
-assert.equal(renderedContainer?.getAttribute('role'), null, 'Expected Mermaid diagrams to keep their native semantics.');
+assert.equal(renderedContainer?.getAttribute('role'), 'button', 'Expected rendered Mermaid diagrams to expose button semantics for keyboard activation.');
 assert.equal(renderedContainer?.getAttribute('tabindex'), '0', 'Expected Mermaid diagrams to be keyboard-focusable for full-view access.');
 assert.equal(renderedContainer?.classList.contains('mermaid--interactive'), true, 'Expected rendered Mermaid diagrams to opt into interactive styling only after SVG render succeeds.');
 
@@ -126,6 +126,7 @@ try {
 
 const failedContainer = failureDom.window.document.querySelector('.mermaid');
 assert.equal(failedContainer?.dataset.renderError, 'true', 'Expected Mermaid failures to leave a visible fallback state.');
+assert.equal(failedContainer?.getAttribute('role'), null, 'Expected Mermaid failure fallback not to expose button semantics.');
 assert.equal(failedContainer?.getAttribute('tabindex'), null, 'Expected Mermaid failure fallback not to remain keyboard-focusable.');
 assert.match(
   failedContainer?.textContent ?? '',
@@ -166,6 +167,7 @@ try {
 const rerenderFailureContainer = rerenderFailureDom.window.document.querySelector('.mermaid');
 assert.equal(rerenderFailureContainer?.dataset.renderError, 'true', 'Expected rerender failures to mark Mermaid diagrams with the fallback error state.');
 assert.equal(rerenderFailureContainer?.classList.contains('mermaid--interactive'), false, 'Expected rerender failures to remove Mermaid interactivity.');
+assert.equal(rerenderFailureContainer?.getAttribute('role'), null, 'Expected rerender failures to remove Mermaid button semantics.');
 assert.equal(rerenderFailureContainer?.getAttribute('tabindex'), null, 'Expected rerender failures to remove Mermaid keyboard activation.');
 assert.equal(rerenderFailureDom.window.document.querySelector('.mermaid-toolbar')?.hidden, true, 'Expected rerender failures to hide Mermaid controls when no SVG is available.');
 
