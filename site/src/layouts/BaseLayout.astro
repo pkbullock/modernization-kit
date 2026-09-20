@@ -12,7 +12,7 @@ const feedbackUrl = `${repoUrl}/issues/new?template=feedback.yml`;
 const headerLinks = [
   { label: 'Getting started', href: withBasePath('/identify/') },
   { label: 'Resources', href: withBasePath('/resources/') },
-  { label: 'Feedback', href: feedbackUrl, isExternal: true },
+  { label: 'Feedback', href: feedbackUrl, isExternal: true, openInNewTab: true },
   { label: 'Contributing', href: repoUrl, isExternal: true }
 ];
 ---
@@ -52,13 +52,13 @@ const headerLinks = [
           {headerLinks.map((link) => (
             <a
               href={link.href}
-              target={link.isExternal ? '_blank' : undefined}
-              rel={link.isExternal ? 'noopener noreferrer' : undefined}
+              target={link.openInNewTab ? '_blank' : undefined}
+              rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
               class={`site-nav-link ${isActiveLink(link) ? 'is-active' : ''}`}
               aria-current={isActiveLink(link) ? 'page' : undefined}
             >
               {link.label}
-              {link.isExternal && <span class="sr-only"> (opens in new tab)</span>}
+              {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
             </a>
           ))}
         </nav>
@@ -84,13 +84,13 @@ const headerLinks = [
         {headerLinks.map((link) => (
           <a
             href={link.href}
-            target={link.isExternal ? '_blank' : undefined}
-            rel={link.isExternal ? 'noopener noreferrer' : undefined}
+            target={link.openInNewTab ? '_blank' : undefined}
+            rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
             class={`site-nav-link ${isActiveLink(link) ? 'is-active' : ''}`}
             aria-current={isActiveLink(link) ? 'page' : undefined}
           >
             {link.label}
-            {link.isExternal && <span class="sr-only"> (opens in new tab)</span>}
+            {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
           </a>
         ))}
       </nav>
