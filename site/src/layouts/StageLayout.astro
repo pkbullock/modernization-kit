@@ -35,8 +35,9 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
                     {item.title}
                   </a>
                   {isCurrentStep && item.sections?.length ? (
-                    <nav class="stage-subnav-shell" aria-label={`${item.title} subsection navigation`}>
-                      <ol class="stage-subnav">
+                    <div class="stage-subnav-shell">
+                      <p id={`stage-subnav-${item.slug}`} class="sr-only">{item.title} subsection navigation</p>
+                      <ol class="stage-subnav" aria-labelledby={`stage-subnav-${item.slug}`}>
                         {item.sections.map((section) => (
                           <li>
                             <a
@@ -48,7 +49,7 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
                           </li>
                         ))}
                       </ol>
-                    </nav>
+                    </div>
                   ) : null}
                 </li>
               );

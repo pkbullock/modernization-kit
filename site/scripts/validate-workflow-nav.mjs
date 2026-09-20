@@ -19,12 +19,22 @@ const withBasePath = (path) => {
   return normalizedPath === '/' ? `${basePath}/` : `${basePath}${normalizedPath}`;
 };
 const escapeForRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const hasActiveLink = (markup, href, ariaCurrent) => new RegExp(
-  `<a[^>]*href="${escapeForRegExp(href)}"(?=[^>]*class="[^"]*is-active[^"]*")${ariaCurrent ? `(?=[^>]*aria-current="${ariaCurrent}")` : ''}[^>]*>`
-).test(markup);
-const hasCurrentLink = (markup, href) => new RegExp(
-  `<a[^>]*href="${escapeForRegExp(href)}"(?=[^>]*aria-current="page")[^>]*>`
-).test(markup);
+const findAnchorTag = (markup, href) => markup.match(new RegExp(
+  `<a\\b[^>]*href="${escapeForRegExp(href)}"[^>]*>`,
+  'i'
+))?.[0];
+const hasActiveLink = (markup, href, ariaCurrent) => {
+  const anchorTag = findAnchorTag(markup, href);
+
+  return Boolean(anchorTag
+    && /class="[^"]*\bis-active\b[^"]*"/.test(anchorTag)
+    && (!ariaCurrent || new RegExp(`aria-current="${ariaCurrent}"`).test(anchorTag)));
+};
+const hasCurrentLink = (markup, href) => {
+  const anchorTag = findAnchorTag(markup, href);
+
+  return Boolean(anchorTag && /aria-current="page"/.test(anchorTag));
+};
 
 const planHref = withBasePath('/plan/');
 const planPlaceholderHref = withBasePath('/plan/placeholder/');
@@ -32,7 +42,7 @@ const planPlaceholderHref = withBasePath('/plan/placeholder/');
 const planPage = await readBuiltPage('plan/index.html');
 const planPlaceholderPage = await readBuiltPage('plan/placeholder/index.html');
 
-if (!planPage.includes('class="stage-subnav-shell"') || !planPage.includes('aria-label="Plan subsection navigation"')) {
+if (!planPage.includes('class="stage-subnav-shell"') || !planPage.includes('Plan subsection navigation')) {
   fail('Expected the Plan stage page to render a labelled subsection navigation block.');
 }
 
