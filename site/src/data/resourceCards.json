@@ -83,6 +83,38 @@
       "href": "https://pnp.github.io/script-samples/spo-hub-site-governance-report/README.html?tabs=pnpps"
     }
   ],
+  "scriptSamplesPlanSecuritySetup": [
+    {
+      "title": "Create SharePoint Groups in Bulk using CSV file",
+      "description": "Use this script to create multiple SharePoint groups from a CSV file and support consistent security setup across sites.",
+      "author": "Kunj Sangani and Ganesh Sanap",
+      "href": "https://pnp.github.io/script-samples/spo-create-sharepoint-groups-bulk-csv/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Get membership report of site(s) within tenant",
+      "description": "Use this script to export site, group, owner, member, and visitor membership details for security review.",
+      "author": "Reshmee Auckloo",
+      "href": "https://pnp.github.io/script-samples/spo-get-sites-membership-report/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Add Bulk Users to SharePoint Site Groups",
+      "description": "Use this script to add users from a CSV file to SharePoint site groups in bulk.",
+      "author": "Chandani Prajapati and Ganesh Sanap",
+      "href": "https://pnp.github.io/script-samples/spo-add-bulk-users-to-groups/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Get permission group report of a site",
+      "description": "Use this script to report SharePoint group permissions for a site and its lists, including unique permissions.",
+      "author": "Adam Wójcik",
+      "href": "https://pnp.github.io/script-samples/spo-group-permission-report/README.html?tabs=cli-m365-ps"
+    },
+    {
+      "title": "Get SharePoint Site Collection and their Subwebs Permissions And Export It To CSV",
+      "description": "Use this script to audit site collection and subweb permissions and export the results to CSV.",
+      "author": "Chandani Prajapati",
+      "href": "https://pnp.github.io/script-samples/spo-export-sitecollection-permission-with-subwebs/README.html?tabs=pnpps"
+    }
+  ],
   "blogPosts": [
     {
       "title": "Upcoming changes to classic experiences",
