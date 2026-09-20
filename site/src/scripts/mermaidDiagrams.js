@@ -9,6 +9,7 @@ export const setupMermaidDiagrams = ({
     zoomOut: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
     zoomIn: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5v10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
     reset: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.5 7.5A5.5 5.5 0 1 1 5 11.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /><path d="M4.5 5.5v4h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /></svg>',
+    fullView: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M7 3.75H3.75V7M13 3.75h3.25V7M7 16.25H3.75V13M13 16.25h3.25V13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /></svg>',
     close: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>'
   };
   const mermaidLanguages = new Set(['mermaid', 'marmaid']);
@@ -144,22 +145,16 @@ export const setupMermaidDiagrams = ({
           setDiagramScale(container, 1);
         },
         className: 'mermaid-control--icon'
+      }),
+      createControlButton({
+        icon: controlIcons.fullView,
+        title: 'Open diagram in full view',
+        onClick: () => openDiagramLightbox(container),
+        className: 'mermaid-control--icon'
       })
     );
     shell.append(toolbar);
-    container.tabIndex = 0;
-    container.setAttribute('role', 'button');
-    container.setAttribute('aria-label', 'Open full Mermaid diagram view');
-    container.title = 'Open full Mermaid diagram view';
     container.addEventListener('click', () => openDiagramLightbox(container));
-    container.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') {
-        return;
-      }
-
-      event.preventDefault();
-      openDiagramLightbox(container);
-    });
     container.dataset.controlsReady = 'true';
     setDiagramScale(container, 1);
   };

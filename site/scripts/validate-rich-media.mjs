@@ -63,9 +63,9 @@ const toolbarButtons = [...runtimeDom.window.document.querySelectorAll('.mermaid
 assert.ok(renderedContainer, 'Expected Mermaid preformatted content to be replaced with a Mermaid container at runtime.');
 assert.equal(renderedContainer?.dataset.renderedTheme, 'default', 'Expected the initial Mermaid render to record the active light theme.');
 assert.match(renderedContainer?.innerHTML ?? '', /<svg/, 'Expected the runtime Mermaid renderer to populate SVG output.');
-assert.equal(toolbarButtons.length, 3, 'Expected Mermaid diagrams to render three icon-based zoom controls.');
+assert.equal(toolbarButtons.length, 4, 'Expected Mermaid diagrams to render icon-based Mermaid controls, including full view.');
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-zoom-label'), null, 'Expected Mermaid controls to remove the zoom percentage label.');
-assert.equal(renderedContainer?.getAttribute('role'), 'button', 'Expected Mermaid diagrams to advertise the full-view interaction.');
+assert.equal(renderedContainer?.getAttribute('role'), null, 'Expected Mermaid diagrams to keep their native semantics.');
 
 runtimeDom.window.HTMLDialogElement.prototype.showModal = function showModal() {
   this.open = true;
@@ -79,9 +79,13 @@ toolbarButtons[1].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubb
 assert.equal(renderedContainer?.dataset.zoom, '1.25', 'Expected the zoom-in control to increase the Mermaid zoom level.');
 toolbarButtons[2].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 assert.equal(renderedContainer?.dataset.zoom, '1', 'Expected the reset control to restore the Mermaid zoom level.');
+toolbarButtons[3].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
+let lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
+assert.ok(lightbox?.open, 'Expected the full-view control to open the Mermaid lightbox.');
+lightbox?.close();
 
 renderedContainer?.dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
-const lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
+lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
 assert.ok(lightbox?.open, 'Expected clicking a Mermaid diagram to open the full-view lightbox.');
 assert.ok(lightbox?.querySelector('.mermaid-lightbox-diagram svg'), 'Expected the full-view lightbox to contain the rendered Mermaid SVG.');
 
