@@ -34,6 +34,15 @@ const resolveAssetPath = (path: string): string => (
 
 const resolvedSrc = resolveAssetPath(src);
 const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
+const accessibleLabel = title
+  ?? caption
+  ?? src
+    .split('/')
+    .filter(Boolean)
+    .pop()
+    ?.replace(/\.[^.]+$/, '')
+    .replace(/[-_]+/g, ' ')
+  ?? 'Embedded video';
 const captionId = caption
   ? `public-video-caption-${createHash('sha1')
       .update([src, poster, title, caption].filter(Boolean).join('|'))
@@ -50,6 +59,7 @@ const videoAccessibilityAttributes = captionId ? { 'aria-describedby': captionId
       src={resolvedSrc}
       poster={resolvedPoster}
       title={title}
+      aria-label={accessibleLabel}
       {...videoAccessibilityAttributes}
       controls={controls}
       autoplay={autoplay}
@@ -68,6 +78,7 @@ const videoAccessibilityAttributes = captionId ? { 'aria-describedby': captionId
     src={resolvedSrc}
     poster={resolvedPoster}
     title={title}
+    aria-label={accessibleLabel}
     controls={controls}
     autoplay={autoplay}
     loop={loop}

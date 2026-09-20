@@ -205,12 +205,29 @@ const headerLinks = [
             securityLevel: 'strict',
             theme
           });
-          activeMermaidTheme = theme;
         }
 
-        await mermaid.run({ nodes: containers });
+        try {
+          await mermaid.run({ nodes: containers });
+          activeMermaidTheme = theme;
+        } catch (error) {
+          activeMermaidTheme = null;
+          containers.forEach((container) => {
+            const source = container.dataset.source;
+
+            if (!source) {
+              return;
+            }
+
+            container.dataset.renderError = 'true';
+            container.textContent = `Mermaid diagram could not be rendered.\n\n${source}`;
+          });
+          throw error;
+        }
+
         containers.forEach((container) => {
           container.dataset.renderedTheme = theme;
+          delete container.dataset.renderError;
         });
       };
 

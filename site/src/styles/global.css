@@ -144,6 +144,7 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
 .rich-media-figure figcaption { margin-top: 0.75rem; color: var(--cp-text-muted); font-size: 0.95rem; }
 .mermaid { margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--cp-border); border-radius: 0.75rem; background: var(--cp-bg-elevated); overflow-x: auto; }
 .mermaid svg { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+.mermaid[data-render-error='true'] { white-space: pre-wrap; font-family: var(--font-mono); color: var(--cp-text-muted); }
 
 @media (min-width: 1024px) {
   .site-nav { display: flex; }
