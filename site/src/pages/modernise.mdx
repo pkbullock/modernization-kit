@@ -15,6 +15,16 @@ layout: ../layouts/StageLayout.astro
 * Run an agreed pilot with explicit write operations and structured conversion logs.
 * Record unsupported content and conversion issues for review.
 
+```mermaid
+flowchart LR
+	identify[Identify classic page] --> assess[Assess content]
+	assess --> map[Apply page mapping]
+	map --> convert[Convert to modern page]
+	convert --> review[Review converted page]
+	review --> publish[Publish approved page]
+```
+
+
 ## Stage pages
 
 * [Modernise placeholder page](./placeholder/)

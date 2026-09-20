@@ -1,0 +1,100 @@
+---
+import { createHash } from 'node:crypto';
+import { withBasePath } from '../utils/withBasePath';
+
+interface Props {
+  src: string;
+  poster?: string;
+  title?: string;
+  caption?: string;
+  controls?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  playsinline?: boolean;
+  preload?: 'none' | 'metadata' | 'auto';
+}
+
+const {
+  src,
+  poster,
+  title,
+  caption,
+  controls = true,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  playsinline = true,
+  preload = 'metadata'
+} = Astro.props;
+
+const HTTP_URL_PATTERN = /^https?:\/\//i;
+const URL_SCHEME_PATTERN = /^[a-z][a-z\d+.-]*:/i;
+
+const resolveAssetPath = (path: string): string => {
+  if (HTTP_URL_PATTERN.test(path) || path.startsWith('//')) {
+    return path;
+  }
+
+  if (URL_SCHEME_PATTERN.test(path)) {
+    throw new Error(`Unsupported video asset URL scheme for "${path}". Use a local path or an http(s) URL.`);
+  }
+
+  return withBasePath(path);
+};
+
+const resolvedSrc = resolveAssetPath(src);
+const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
+const accessibleLabel = title
+  ?? caption
+  ?? src
+    .split('/')
+    .filter(Boolean)
+    .pop()
+    ?.replace(/\.[^.]+$/, '')
+    .replace(/[-_]+/g, ' ')
+  ?? 'Embedded video';
+const captionId = caption
+  ? `public-video-caption-${createHash('sha1')
+      .update([src, poster, title, caption].filter(Boolean).join('|'))
+      .digest('hex')
+      .slice(0, 10)}`
+  : undefined;
+const videoAccessibilityAttributes = captionId ? { 'aria-describedby': captionId } : {};
+---
+
+{caption ? (
+  <figure class="rich-media-figure">
+    <video
+      class="rich-media-video"
+      src={resolvedSrc}
+      poster={resolvedPoster}
+      aria-label={accessibleLabel}
+      {...videoAccessibilityAttributes}
+      controls={controls}
+      autoplay={autoplay}
+      loop={loop}
+      muted={muted}
+      playsinline={playsinline}
+      preload={preload}
+    >
+      Your browser does not support the video tag.
+    </video>
+    <figcaption id={captionId}>{caption}</figcaption>
+  </figure>
+) : (
+  <video
+    class="rich-media-video"
+    src={resolvedSrc}
+    poster={resolvedPoster}
+    aria-label={accessibleLabel}
+    controls={controls}
+    autoplay={autoplay}
+    loop={loop}
+    muted={muted}
+    playsinline={playsinline}
+    preload={preload}
+  >
+    Your browser does not support the video tag.
+  </video>
+)}

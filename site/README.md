@@ -55,6 +55,34 @@ The current pages use local stage data. Additional content ingestion from `../do
 
 Community resource images are served from the [PnP community site](https://pnp.github.io/) and require network access. Light and dark themes follow the system preference until changed; a valid `scoutTheme=light` or `scoutTheme=dark` URL parameter overrides the stored preference on page load.
 
+## MDX rich media
+
+MDX pages can now embed public-folder videos and Mermaid diagrams.
+
+Place video files under `site/public/` and import the helper component in a nested `.mdx` page under `site/src/pages/<section>/...`:
+
+```mdx
+import PublicVideo from '../../components/PublicVideo.astro';
+
+<PublicVideo
+  src="/videos/modernization-demo.mp4"
+  title="Modernization demo"
+  caption="Walkthrough of the modernization workflow."
+/>
+```
+
+The component applies the configured GitHub Pages base path, so `/videos/...` resolves correctly after deployment.
+
+Mermaid diagrams should be authored directly in fenced `mermaid` code blocks. The site also normalises legacy `marmaid` fences as a compatibility fallback, but new content should use `mermaid`:
+
+```mermaid
+flowchart TD
+  Discover --> Plan
+  Plan --> Modernise
+  Modernise --> Review
+  Review --> Publish
+```
+
 ## Deployment
 
 This repository includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml` that builds the Astro site from `site/` and deploys the generated `dist/` output to GitHub Pages by using the official GitHub Pages artifact upload and deployment actions.
