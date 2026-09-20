@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import { unified } from '@astrojs/markdown-remark';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -27,9 +26,7 @@ export default defineConfig({
   base: '/modernization-kit',
   integrations: [mdx(), icon()],
   markdown: {
-    processor: unified({
-      remarkPlugins: [normalizeMarmaidCodeFences]
-    })
+    remarkPlugins: [normalizeMarmaidCodeFences]
   },
   vite: {
     plugins: [tailwindcss()]

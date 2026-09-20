@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 
 const resolveAssetPath = (path: string): string => (
-  /^https?:\/\//i.test(path) || path.startsWith('//') ? path : withBasePath(path)
+  /^https?:\/\//i.test(path) ? path : withBasePath(path)
 );
 
 const resolvedSrc = resolveAssetPath(src);

@@ -172,11 +172,17 @@ const headerLinks = [
         });
 
         document.querySelectorAll<HTMLElement>('.mermaid[data-source]').forEach((container) => {
+          const source = container.dataset.source;
+
+          if (!source) {
+            return;
+          }
+
           if (container.dataset.renderedTheme === theme) {
             return;
           }
 
-          container.textContent = container.dataset.source ?? '';
+          container.textContent = source;
           containers.push(container);
         });
 
