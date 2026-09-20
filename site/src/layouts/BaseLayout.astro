@@ -125,7 +125,13 @@ const headerLinks = [
       let activeMermaidTheme: 'dark' | 'default' | null = null;
 
       const getMermaidTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
-      const getMermaid = async () => (await (mermaidModulePromise ??= import('mermaid'))).default;
+      const getMermaid = async () => {
+        mermaidModulePromise ??= import('mermaid').catch((error) => {
+          mermaidModulePromise = null;
+          throw error;
+        });
+        return (await mermaidModulePromise).default;
+      };
 
       const isMermaidCodeBlock = (pre: HTMLPreElement) => {
         const language = pre.dataset.language?.toLowerCase();
