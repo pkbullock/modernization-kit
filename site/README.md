@@ -73,7 +73,7 @@ import PublicVideo from '../components/PublicVideo.astro';
 
 The component applies the configured GitHub Pages base path, so `/videos/...` resolves correctly after deployment.
 
-Mermaid diagrams can be authored directly in fenced code blocks. Both `mermaid` and the issue's `marmaid` spelling are accepted:
+Mermaid diagrams should be authored directly in fenced `mermaid` code blocks. The site also normalises legacy `marmaid` fences as a compatibility fallback, but new content should use `mermaid`:
 
 ```mermaid
 flowchart TD

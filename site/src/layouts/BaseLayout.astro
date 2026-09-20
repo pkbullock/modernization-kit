@@ -220,6 +220,8 @@ const headerLinks = [
             }
 
             container.dataset.renderError = 'true';
+            container.setAttribute('role', 'alert');
+            container.setAttribute('aria-live', 'polite');
             container.textContent = `Mermaid diagram could not be rendered.\n\n${source}`;
           });
           throw error;
@@ -228,6 +230,8 @@ const headerLinks = [
         containers.forEach((container) => {
           container.dataset.renderedTheme = theme;
           delete container.dataset.renderError;
+          container.removeAttribute('role');
+          container.removeAttribute('aria-live');
         });
       };
 
