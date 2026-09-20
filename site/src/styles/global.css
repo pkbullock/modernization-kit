@@ -135,8 +135,10 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
   letter-spacing: 0.02em;
 }
 .footer-disclaimer em { font-style: italic; }
-.footer-community { display: grid; gap: 1.25rem; align-content: start; }
-.footer-community nav { display: grid; gap: 0.5rem; }
+.footer-community { display: grid; gap: 1.25rem; align-content: start; text-align: right; }
+.footer-community .footer-meta { text-align: right; }
+.footer-community nav { display: grid; gap: 0.5rem; justify-items: end; }
+.footer-community nav a { justify-self: end; max-width: 100%; text-align: right; }
 .footer-inner a { display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none; }
 .footer-inner a svg { width: 1rem; height: 1rem; }
 .rich-media-figure { margin: 1.5rem 0; }
