@@ -22,6 +22,8 @@ article { max-width: 760px; min-width: 0; }
 .stage-content :global(li) { padding-left: 0.35rem; margin-bottom: 0.8rem; }
 .stage-content :global(li::marker) { color: var(--cp-accent); }
 .stage-content :global(p) { color: var(--cp-text-muted); margin-block: 0 1rem; }
+.stage-content :global(blockquote) { margin: 1.5rem 0; padding: 0.85rem 1.1rem; border-left: 4px solid var(--cp-accent); background: var(--cp-accent-soft); color: var(--cp-text-muted); }
+.stage-content :global(blockquote > :last-child) { margin-bottom: 0; }
 .reference { margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid var(--cp-border); font-size: 0.9rem; }
 .reference a { display: inline-flex; align-items: center; gap: 0.35rem; }
 .reference a svg { width: 1rem; height: 1rem; }
