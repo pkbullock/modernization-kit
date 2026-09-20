@@ -36,36 +36,44 @@ const hasCurrentLink = (markup, href) => {
 
   return anchorTags.some((anchorTag) => /aria-current="page"/.test(anchorTag));
 };
-const stepWithSections = processSteps.find((step) => step.sections?.length);
+const stepsWithSections = processSteps.filter((step) => step.sections?.length);
 
-if (!stepWithSections) {
+if (!stepsWithSections.length) {
   throw new Error('Workflow navigation validation requires at least one configured stage subsection.');
 }
 
-const [firstSection] = stepWithSections.sections;
-const stageHref = withBasePath(`/${stepWithSections.slug}/`);
-const sectionHref = withBasePath(`/${stepWithSections.slug}/${firstSection.slug}/`);
-const stagePage = await readBuiltPage(`${stepWithSections.slug}/index.html`);
-const sectionPage = await readBuiltPage(`${stepWithSections.slug}/${firstSection.slug}/index.html`);
+for (const step of stepsWithSections) {
+  const stageHref = withBasePath(`/${step.slug}/`);
+  const stagePage = await readBuiltPage(`${step.slug}/index.html`);
 
-if (!stagePage.includes('class="stage-subnav"') || !stagePage.includes(`${stepWithSections.title} subsection navigation`)) {
-  fail(`Expected the ${stepWithSections.title} stage page to render a labelled subsection navigation block.`);
-}
+  if (!stagePage.includes('class="stage-subnav"') || !stagePage.includes(`${step.title} subsection navigation`)) {
+    fail(`Expected the ${step.title} stage page to render a labelled subsection navigation block.`);
+  }
 
-if (!hasActiveLink(stagePage, stageHref, 'page')) {
-  fail(`Expected the ${stepWithSections.title} stage page to keep the main stage link highlighted.`);
-}
+  if (!hasActiveLink(stagePage, stageHref, 'page')) {
+    fail(`Expected the ${step.title} stage page to keep the main stage link highlighted.`);
+  }
 
-if (!stagePage.includes(`href="${sectionHref}"`)) {
-  fail(`Expected the ${stepWithSections.title} stage page to render the centrally configured subsection link.`);
-}
+  for (const section of step.sections) {
+    const sectionHref = withBasePath(`/${step.slug}/${section.slug}/`);
+    const sectionPage = await readBuiltPage(`${step.slug}/${section.slug}/index.html`);
 
-if (!hasActiveLink(sectionPage, stageHref)) {
-  fail(`Expected the ${stepWithSections.title} subsection page to keep the main stage link highlighted.`);
-}
+    if (!stagePage.includes(`href="${sectionHref}"`)) {
+      fail(`Expected the ${step.title} stage page to render the centrally configured subsection link for ${section.title}.`);
+    }
 
-if (!hasCurrentLink(sectionPage, sectionHref)) {
-  fail(`Expected the active ${stepWithSections.title} subsection link to be marked with aria-current on nested routes.`);
+    if (!hasActiveLink(sectionPage, stageHref)) {
+      fail(`Expected the ${step.title} subsection page to keep the main stage link highlighted.`);
+    }
+
+    if (!hasActiveLink(sectionPage, sectionHref, 'page')) {
+      fail(`Expected the active ${step.title} subsection link to be visually highlighted.`);
+    }
+
+    if (!hasCurrentLink(sectionPage, sectionHref)) {
+      fail(`Expected the active ${step.title} subsection link to be marked with aria-current on nested routes.`);
+    }
+  }
 }
 
 if (process.exitCode) {

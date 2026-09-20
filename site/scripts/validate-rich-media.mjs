@@ -8,7 +8,7 @@ const readBuildFile = async (relativePath) => {
   return readFile(fileUrl, 'utf8');
 };
 
-const placeholderHtml = await readBuildFile('identify/placeholder/index.html');
+const placeholderHtml = await readBuildFile('identify/discovery-checklist/index.html');
 
 const mermaidMatches = placeholderHtml.match(/data-language="mermaid"/g) ?? [];
 assert.ok(

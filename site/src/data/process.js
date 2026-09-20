@@ -7,7 +7,7 @@ export const processSteps = [
     tasks: ['Record the classic sites and pages in scope, including their owners.', 'Review page usage and business value to identify candidates for modernisation.', 'Identify custom layouts, web parts, and dependencies that need investigation.'],
     outcome: 'Agree an initial page inventory with site owners, including candidates to retain, modernise, or retire.',
     sections: [
-      { slug: 'placeholder', title: 'Identify placeholder' }
+      { slug: 'discovery-checklist', title: 'Discovery checklist' }
     ]
   },
   {
@@ -18,7 +18,7 @@ export const processSteps = [
     tasks: ['Agree scope, delivery roles, and a representative pilot with site owners.', 'Plan target layouts and mapping requirements for the selected pages.', 'Define review criteria, rollout communications, and a recovery approach.'],
     outcome: 'Confirm the pilot scope, target experience, and approval process before any conversion begins.',
     sections: [
-      { slug: 'placeholder', title: 'Plan placeholder' }
+      { slug: 'pilot-planning', title: 'Pilot planning' }
     ]
   },
   {
@@ -29,7 +29,7 @@ export const processSteps = [
     tasks: ['Validate mappings against representative source pages in a test environment.', 'Run an agreed pilot with explicit write operations and structured conversion logs.', 'Record unsupported content and conversion issues for review.'],
     outcome: 'Hand over converted draft pages and their conversion records for review. Conversion does not imply approval to publish.',
     sections: [
-      { slug: 'placeholder', title: 'Modernise placeholder' }
+      { slug: 'conversion-checklist', title: 'Conversion checklist' }
     ]
   },
   {
@@ -40,7 +40,7 @@ export const processSteps = [
     tasks: ['Ask page owners to verify content, links, metadata, and the target layout.', 'Check accessibility, mobile presentation, and any custom components.', 'Log issues, assign follow-up work, and capture an explicit approval decision.'],
     outcome: 'Resolve blocking issues and record approval for each page before scheduling its publication.',
     sections: [
-      { slug: 'placeholder', title: 'Review placeholder' }
+      { slug: 'review-checklist', title: 'Review checklist' }
     ]
   },
   {
@@ -51,7 +51,7 @@ export const processSteps = [
     tasks: ['Confirm recorded approvals, publishing permissions, and the agreed rollout window.', 'Have an authorised owner publish the approved pages and verify the live experience.', 'Update tracking records, communicate the change, and monitor feedback.'],
     outcome: 'Confirm the published pages with site owners and retain the rollout records and recovery information.',
     sections: [
-      { slug: 'placeholder', title: 'Publish placeholder' }
+      { slug: 'publication-checklist', title: 'Publication checklist' }
     ]
   }
 ];
