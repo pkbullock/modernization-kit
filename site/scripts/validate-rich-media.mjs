@@ -67,6 +67,7 @@ assert.equal(toolbarButtons.length, 4, 'Expected Mermaid diagrams to render icon
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-zoom-label'), null, 'Expected Mermaid controls to remove the zoom percentage label.');
 assert.equal(renderedContainer?.getAttribute('role'), null, 'Expected Mermaid diagrams to keep their native semantics.');
 assert.equal(renderedContainer?.getAttribute('tabindex'), '0', 'Expected Mermaid diagrams to be keyboard-focusable for full-view access.');
+assert.equal(renderedContainer?.classList.contains('mermaid--interactive'), true, 'Expected rendered Mermaid diagrams to opt into interactive styling only after SVG render succeeds.');
 
 runtimeDom.window.HTMLDialogElement.prototype.showModal = function showModal() {
   this.open = true;
@@ -125,10 +126,47 @@ try {
 
 const failedContainer = failureDom.window.document.querySelector('.mermaid');
 assert.equal(failedContainer?.dataset.renderError, 'true', 'Expected Mermaid failures to leave a visible fallback state.');
+assert.equal(failedContainer?.getAttribute('tabindex'), null, 'Expected Mermaid failure fallback not to remain keyboard-focusable.');
 assert.match(
   failedContainer?.textContent ?? '',
   /Mermaid diagram could not be rendered\./,
   'Expected the Mermaid failure fallback to show a user-visible error message.'
 );
+
+const rerenderFailureDom = createRuntimeDom(`<!doctype html><html data-theme="light"><body><pre data-language="mermaid"><code>flowchart LR\n  Review --> Publish</code></pre></body></html>`);
+let rerenderCount = 0;
+console.error = () => {};
+try {
+  setupMermaidDiagrams({
+    document: rerenderFailureDom.window.document,
+    window: rerenderFailureDom.window,
+    loadMermaid: async () => ({
+      initialize: () => {},
+      run: async ({ nodes }) => {
+        rerenderCount += 1;
+        if (rerenderCount > 1) {
+          throw new Error('Mermaid failed on rerender');
+        }
+
+        nodes.forEach((node) => {
+          node.innerHTML = '<svg aria-hidden="true"></svg>';
+        });
+      }
+    })
+  });
+  rerenderFailureDom.window.document.dispatchEvent(new rerenderFailureDom.window.Event('DOMContentLoaded'));
+  await flush();
+  rerenderFailureDom.window.document.documentElement.dataset.theme = 'dark';
+  rerenderFailureDom.window.document.dispatchEvent(new rerenderFailureDom.window.CustomEvent('modernization-kit-theme-change'));
+  await flush();
+} finally {
+  console.error = originalConsoleError;
+}
+
+const rerenderFailureContainer = rerenderFailureDom.window.document.querySelector('.mermaid');
+assert.equal(rerenderFailureContainer?.dataset.renderError, 'true', 'Expected rerender failures to mark Mermaid diagrams with the fallback error state.');
+assert.equal(rerenderFailureContainer?.classList.contains('mermaid--interactive'), false, 'Expected rerender failures to remove Mermaid interactivity.');
+assert.equal(rerenderFailureContainer?.getAttribute('tabindex'), null, 'Expected rerender failures to remove Mermaid keyboard activation.');
+assert.equal(rerenderFailureDom.window.document.querySelector('.mermaid-toolbar')?.hidden, true, 'Expected rerender failures to hide Mermaid controls when no SVG is available.');
 
 console.log('Rich media validation passed.');

@@ -71,6 +71,35 @@ export const setupMermaidDiagrams = ({
     svg.style.marginBlock = nextScale === 1 ? '' : `${(nextScale - 1) * 1.5}rem`;
   };
 
+  const setContainerInteractivity = (container, enabled) => {
+    const toolbar = container.nextElementSibling?.classList.contains('mermaid-toolbar')
+      ? container.nextElementSibling
+      : null;
+
+    toolbar?.toggleAttribute('hidden', !enabled);
+    container.classList.toggle('mermaid--interactive', enabled);
+
+    if (!enabled) {
+      container.removeAttribute('tabindex');
+      container.removeAttribute('aria-label');
+      container.onclick = null;
+      container.onkeydown = null;
+      return;
+    }
+
+    container.tabIndex = 0;
+    container.setAttribute('aria-label', 'Mermaid diagram. Press Enter or Space to open full view.');
+    container.onclick = () => openDiagramLightbox(container);
+    container.onkeydown = (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      openDiagramLightbox(container);
+    };
+  };
+
   const openDiagramLightbox = (container) => {
     const svg = container.querySelector('svg');
 
@@ -157,17 +186,7 @@ export const setupMermaidDiagrams = ({
       })
     );
     shell.append(toolbar);
-    container.tabIndex = 0;
-    container.setAttribute('aria-label', 'Mermaid diagram. Press Enter or Space to open full view.');
-    container.addEventListener('click', () => openDiagramLightbox(container));
-    container.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') {
-        return;
-      }
-
-      event.preventDefault();
-      openDiagramLightbox(container);
-    });
+    setContainerInteractivity(container, true);
     container.dataset.controlsReady = 'true';
     setDiagramScale(container, 1);
   };
@@ -239,6 +258,7 @@ export const setupMermaidDiagrams = ({
         }
 
         container.dataset.renderError = 'true';
+        setContainerInteractivity(container, false);
         container.textContent = `Mermaid diagram could not be rendered.\n\n${source}`;
       });
       throw error;
@@ -248,6 +268,7 @@ export const setupMermaidDiagrams = ({
       container.dataset.renderedTheme = theme;
       delete container.dataset.renderError;
       enhanceMermaidContainer(container);
+      setContainerInteractivity(container, true);
     });
   };
 
