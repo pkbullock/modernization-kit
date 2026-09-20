@@ -63,7 +63,8 @@ export const getProcessStepBySlug = (slug) => processSteps.find((step) => step.s
 export const getProcessPathDetails = (pathname = '/') => {
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-  const pathWithoutBase = basePath && normalizedPath.startsWith(basePath)
+  const hasBasePath = basePath && (normalizedPath === basePath || normalizedPath.startsWith(`${basePath}/`));
+  const pathWithoutBase = hasBasePath
     ? normalizedPath.slice(basePath.length) || '/'
     : normalizedPath;
   const segments = pathWithoutBase.split('/').filter(Boolean);

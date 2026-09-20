@@ -35,18 +35,20 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
                     {item.title}
                   </a>
                   {isCurrentStep && item.sections?.length ? (
-                    <ol class="stage-subnav">
-                      {item.sections.map((section) => (
-                        <li>
-                          <a
-                            href={withBasePath(`/${item.slug}/${section.slug}/`)}
-                            aria-current={section.slug === sectionSlug ? 'page' : undefined}
-                          >
-                            {section.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ol>
+                    <nav class="stage-subnav-shell" aria-label={`${item.title} subsection navigation`}>
+                      <ol class="stage-subnav">
+                        {item.sections.map((section) => (
+                          <li>
+                            <a
+                              href={withBasePath(`/${item.slug}/${section.slug}/`)}
+                              aria-current={section.slug === sectionSlug ? 'page' : undefined}
+                            >
+                              {section.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </nav>
                   ) : null}
                 </li>
               );
