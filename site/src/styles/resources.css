@@ -3,8 +3,6 @@
 .resource-markdown { margin-top: 2rem; }
 .resource-markdown :global(h2) { font-size: 1.35rem; margin-bottom: 0.5rem; }
 .resource-markdown :global(p) { color: var(--cp-text-muted); margin-bottom: 1rem; }
-.resource-markdown :global(blockquote) { margin: 1.5rem 0; padding: 0.85rem 1.1rem; border-left: 4px solid var(--cp-accent); background: var(--cp-accent-soft); color: var(--cp-text-muted); }
-.resource-markdown :global(blockquote > :last-child) { margin-bottom: 0; }
 .resource-markdown :global(a) { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700; text-decoration: none; }
 .resource-markdown :global(a:hover) { text-decoration: underline; }
 
