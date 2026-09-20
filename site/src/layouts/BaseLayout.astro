@@ -121,8 +121,11 @@ const headerLinks = [
     </script>
     <script>
       const mermaidLanguages = new Set(['mermaid', 'marmaid']);
+      let mermaidModulePromise: Promise<typeof import('mermaid')> | null = null;
+      let activeMermaidTheme: 'dark' | 'default' | null = null;
 
       const getMermaidTheme = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
+      const getMermaid = async () => (await (mermaidModulePromise ??= import('mermaid'))).default;
 
       const isMermaidCodeBlock = (pre: HTMLPreElement) => {
         const language = pre.dataset.language?.toLowerCase();
@@ -140,7 +143,7 @@ const headerLinks = [
         return (code?.textContent ?? pre.textContent ?? '').trim();
       };
 
-      const ensureMermaidContainers = () => {
+      const ensureMermaidContainers = (theme: 'dark' | 'default') => {
         const containers: HTMLElement[] = [];
 
         document.querySelectorAll<HTMLPreElement>('pre').forEach((pre) => {
@@ -163,6 +166,10 @@ const headerLinks = [
         });
 
         document.querySelectorAll<HTMLElement>('.mermaid[data-source]').forEach((container) => {
+          if (container.dataset.renderedTheme === theme) {
+            return;
+          }
+
           container.textContent = container.dataset.source ?? '';
           containers.push(container);
         });
@@ -171,21 +178,28 @@ const headerLinks = [
       };
 
       const renderMermaidDiagrams = async () => {
-        const containers = ensureMermaidContainers().filter((container, index, items) => items.indexOf(container) === index);
+        const theme = getMermaidTheme();
+        const containers = ensureMermaidContainers(theme).filter((container, index, items) => items.indexOf(container) === index);
 
         if (!containers.length) {
           return;
         }
 
-        const { default: mermaid } = await import('mermaid');
+        const mermaid = await getMermaid();
 
-        mermaid.initialize({
-          startOnLoad: false,
-          securityLevel: 'strict',
-          theme: getMermaidTheme()
-        });
+        if (activeMermaidTheme !== theme) {
+          mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            theme
+          });
+          activeMermaidTheme = theme;
+        }
 
         await mermaid.run({ nodes: containers });
+        containers.forEach((container) => {
+          container.dataset.renderedTheme = theme;
+        });
       };
 
       let pendingMermaidRender = false;
