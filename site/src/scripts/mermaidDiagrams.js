@@ -84,6 +84,41 @@ export const setupMermaidDiagrams = ({
     return button;
   };
 
+  const isDiagramZoomed = (container) => Number(container.dataset.zoom ?? 1) !== 1;
+
+  const getDiagramAriaLabel = (container) => (
+    isDiagramZoomed(container)
+      ? 'Mermaid diagram zoomed. Drag to pan, or use the expand button for full view.'
+      : 'Mermaid diagram. Press Enter or Space to open full view.'
+  );
+
+  const centerDiagramVertically = (container) => {
+    container.scrollTop = Math.max(0, (container.scrollHeight - container.clientHeight) / 2);
+  };
+
+  const scheduleDiagramVerticalCenter = (container, svg) => {
+    let settled = false;
+
+    const recenterOnce = () => {
+      if (settled) {
+        return;
+      }
+
+      settled = true;
+      svg.removeEventListener('transitionend', handleTransitionEnd);
+      centerDiagramVertically(container);
+    };
+
+    const handleTransitionEnd = (event) => {
+      if (event.propertyName === 'transform') {
+        recenterOnce();
+      }
+    };
+
+    svg.addEventListener('transitionend', handleTransitionEnd);
+    window.setTimeout(recenterOnce, 200);
+  };
+
   const setDiagramScale = (container, scale) => {
     const svg = container.querySelector('svg');
 
@@ -94,8 +129,66 @@ export const setupMermaidDiagrams = ({
     const nextScale = Math.min(2.5, Math.max(0.5, scale));
     container.dataset.zoom = String(nextScale);
     svg.style.transform = `scale(${nextScale})`;
-    svg.style.transformOrigin = 'center top';
+    svg.style.transformOrigin = 'center center';
     svg.style.marginBlock = nextScale === 1 ? '' : `${(nextScale - 1) * 1.5}rem`;
+    container.classList.toggle('mermaid--zoomed', nextScale !== 1);
+
+    scheduleDiagramVerticalCenter(container, svg);
+
+    if (container.getAttribute('role') === 'button') {
+      container.setAttribute('aria-label', getDiagramAriaLabel(container));
+    }
+  };
+
+  const setupDiagramPanning = (container) => {
+    if (container.dataset.panReady === 'true') {
+      return;
+    }
+
+    container.dataset.panReady = 'true';
+
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startScrollLeft = 0;
+    let startScrollTop = 0;
+
+    container.addEventListener('pointerdown', (event) => {
+      if (!isDiagramZoomed(container) || event.button !== 0) {
+        return;
+      }
+
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startY = event.clientY;
+      startScrollLeft = container.scrollLeft;
+      startScrollTop = container.scrollTop;
+      container.classList.add('mermaid--dragging');
+      container.setPointerCapture(pointerId);
+      event.preventDefault();
+    });
+
+    container.addEventListener('pointermove', (event) => {
+      if (pointerId === null || event.pointerId !== pointerId) {
+        return;
+      }
+
+      container.scrollLeft = startScrollLeft - (event.clientX - startX);
+      container.scrollTop = startScrollTop - (event.clientY - startY);
+    });
+
+    const endDrag = (event) => {
+      if (pointerId === null || event.pointerId !== pointerId) {
+        return;
+      }
+
+      container.releasePointerCapture(pointerId);
+      pointerId = null;
+      container.classList.remove('mermaid--dragging');
+    };
+
+    container.addEventListener('pointerup', endDrag);
+    container.addEventListener('pointercancel', endDrag);
   };
 
   const setContainerInteractivity = (container, enabled) => {
@@ -117,8 +210,17 @@ export const setupMermaidDiagrams = ({
 
     container.setAttribute('role', 'button');
     container.tabIndex = 0;
-    container.setAttribute('aria-label', 'Mermaid diagram. Press Enter or Space to open full view.');
-    container.onclick = () => openDiagramLightbox(container);
+    container.setAttribute('aria-label', getDiagramAriaLabel(container));
+    container.onclick = () => {
+      // While zoomed, a diagram click drags/pans the view, so opening the
+      // lightbox on click would conflict with that gesture. The expand
+      // button still opens the lightbox regardless of zoom.
+      if (isDiagramZoomed(container)) {
+        return;
+      }
+
+      openDiagramLightbox(container);
+    };
     container.onkeydown = (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
@@ -155,6 +257,20 @@ export const setupMermaidDiagrams = ({
     const lightboxSvg = svg.cloneNode(true);
     lightboxSvg.style.transform = 'none';
     lightboxSvg.style.margin = '0';
+
+    // The cloned SVG normally carries width="100%", which relies on its parent
+    // for sizing. Inside the fit-content lightbox dialog this creates a
+    // circular dependency and collapses the SVG to near-zero size. Give it an
+    // explicit pixel size from its viewBox so the dialog can size around it.
+    const viewBoxParts = lightboxSvg.getAttribute('viewBox')?.split(/\s+/).map(Number);
+
+    if (viewBoxParts?.length === 4 && viewBoxParts.every(Number.isFinite)) {
+      lightboxSvg.removeAttribute('width');
+      lightboxSvg.removeAttribute('height');
+      lightboxSvg.style.width = `${viewBoxParts[2]}px`;
+      lightboxSvg.style.height = `${viewBoxParts[3]}px`;
+    }
+
     diagram.append(lightboxSvg);
 
     const closeOnBackdrop = (event) => {
@@ -216,6 +332,7 @@ export const setupMermaidDiagrams = ({
     );
     shell.append(toolbar);
     setContainerInteractivity(container, true);
+    setupDiagramPanning(container);
     container.dataset.controlsReady = 'true';
     setDiagramScale(container, 1);
   };

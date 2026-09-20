@@ -144,15 +144,17 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
 .rich-media-figure figcaption { margin-top: 0.75rem; color: var(--cp-text-muted); font-size: 0.95rem; }
 .mermaid-shell { position: relative; margin: 1.5rem 0; padding-bottom: 1.75rem; }
 .mermaid-toolbar, .mermaid-lightbox-toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 0.45rem; }
-.mermaid-toolbar { position: absolute; right: 1rem; bottom: 0; z-index: 1; transform: translateY(50%); margin: 0; padding: 0.35rem; border: 1px solid var(--cp-border); border-radius: 999px; background: var(--cp-bg); box-shadow: var(--cp-shadow); }
+.mermaid-toolbar { position: absolute; right: 1rem; bottom: 0; z-index: 1; transform: translateY(50%); margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .mermaid-lightbox-toolbar { margin-bottom: 0.75rem; }
 .mermaid-control { border: 1px solid var(--cp-border); border-radius: 0.35rem; background: var(--cp-bg-elevated); color: var(--cp-text); padding: 0.35rem 0.65rem; font: inherit; cursor: pointer; }
 .mermaid-control:hover, .mermaid-control:focus-visible { border-color: var(--cp-accent); color: var(--cp-accent); }
 .mermaid-control--icon { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; padding: 0; }
 .mermaid-control--icon svg { width: 1.2rem; height: 1.2rem; }
-.mermaid { padding: 1rem; border: 1px solid var(--cp-border); border-radius: 0.75rem; background: var(--cp-bg-elevated); overflow: auto; }
+.mermaid { padding: 1rem; border: 1px solid var(--cp-border); border-radius: 0.75rem; background: var(--cp-bg-elevated); overflow: auto; touch-action: none; }
 .mermaid--interactive { cursor: zoom-in; }
 .mermaid--interactive:focus-visible { outline: 2px solid var(--cp-accent); outline-offset: 0.2rem; }
+.mermaid--interactive.mermaid--zoomed { cursor: grab; }
+.mermaid--interactive.mermaid--zoomed.mermaid--dragging { cursor: grabbing; }
 .mermaid svg { display: block; max-width: 100%; height: auto; margin-inline: auto; transition: transform 150ms ease, margin 150ms ease; }
 .mermaid[data-render-error='true'] { white-space: pre-wrap; font-family: var(--font-mono); color: var(--cp-text-muted); }
 .mermaid-lightbox { width: fit-content; max-width: min(96vw, 1400px); max-height: min(92vh, 1000px); margin: auto; padding: 1rem; border: 1px solid var(--cp-border); border-radius: 0.75rem; background: var(--cp-bg-elevated); color: var(--cp-text); }

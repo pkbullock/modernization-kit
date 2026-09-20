@@ -79,9 +79,20 @@ runtimeDom.window.HTMLDialogElement.prototype.close = function close() {
 
 toolbarButtons[1].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 assert.equal(renderedContainer?.dataset.zoom, '1.25', 'Expected the zoom-in control to increase the Mermaid zoom level.');
+assert.equal(renderedContainer?.querySelector('svg')?.style.transformOrigin, 'center center', 'Expected zooming to keep the Mermaid diagram vertically centered.');
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-lightbox'), null, 'Expected zooming controls not to open the Mermaid lightbox.');
+assert.equal(renderedContainer?.classList.contains('mermaid--zoomed'), true, 'Expected a non-default zoom level to mark the Mermaid diagram as zoomed for pan styling.');
+
+renderedContainer?.dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
+assert.equal(runtimeDom.window.document.querySelector('.mermaid-lightbox'), null, 'Expected clicking a zoomed Mermaid diagram to pan instead of opening the full-view lightbox.');
+toolbarButtons[3].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
+let zoomedLightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
+assert.ok(zoomedLightbox?.open, 'Expected the expand button to open the full-view lightbox even while the diagram is zoomed.');
+zoomedLightbox?.close();
+
 toolbarButtons[2].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 assert.equal(renderedContainer?.dataset.zoom, '1', 'Expected the reset control to restore the Mermaid zoom level.');
+assert.equal(renderedContainer?.classList.contains('mermaid--zoomed'), false, 'Expected resetting zoom to clear the zoomed pan styling.');
 assert.equal(runtimeDom.window.document.querySelector('.mermaid-lightbox'), null, 'Expected resetting zoom not to open the Mermaid lightbox.');
 toolbarButtons[3].dispatchEvent(new runtimeDom.window.MouseEvent('click', { bubbles: true }));
 let lightbox = runtimeDom.window.document.querySelector('.mermaid-lightbox');
