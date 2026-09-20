@@ -1,11 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
 import BaseLayout from './BaseLayout.astro';
-import { processSteps, repoUrl } from '../data/process.js';
+import { getProcessPathDetails, getProcessStepBySlug, processSteps, repoUrl } from '../data/process.js';
 import { withBasePath } from '../utils/withBasePath';
 
 const { frontmatter } = Astro.props;
-const currentStep = processSteps.find((step) => step.slug === frontmatter.slug);
+const { stageSlug, sectionSlug } = getProcessPathDetails(Astro.url.pathname);
+const currentStep = getProcessStepBySlug(frontmatter.stage ?? stageSlug ?? frontmatter.slug);
 const index = currentStep ? processSteps.indexOf(currentStep) : 0;
 const previous = processSteps[index - 1];
 const next = processSteps[index + 1];
@@ -20,9 +21,36 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
         <p class="eyebrow">PAGE MODERNISATION WORKFLOW</p>
         <nav aria-label="Page Modernisation workflow stages">
           <ol>
-            {processSteps.map((item, position) => (
-              <li><a href={withBasePath(`/${item.slug}/`)} aria-current={item.slug === frontmatter.slug ? 'page' : undefined}><span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>{item.title}</a></li>
-            ))}
+            {processSteps.map((item, position) => {
+              const isCurrentStep = item.slug === currentStep?.slug;
+
+              return (
+                <li>
+                  <a
+                    href={withBasePath(`/${item.slug}/`)}
+                    class={isCurrentStep ? 'is-active' : undefined}
+                    aria-current={isCurrentStep && !sectionSlug ? 'page' : undefined}
+                  >
+                    <span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>
+                    {item.title}
+                  </a>
+                  {isCurrentStep && item.sections?.length ? (
+                    <ol class="stage-subnav">
+                      {item.sections.map((section) => (
+                        <li>
+                          <a
+                            href={withBasePath(`/${item.slug}/${section.slug}/`)}
+                            aria-current={section.slug === sectionSlug ? 'page' : undefined}
+                          >
+                            {section.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
+                </li>
+              );
+            })}
           </ol>
         </nav>
         <a class="contribute" href={`${repoUrl}/tree/main/docs`}>Contribute guidance <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a>
