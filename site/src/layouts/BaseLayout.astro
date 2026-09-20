@@ -10,8 +10,8 @@ const feedbackUrl = `${repoUrl}/issues/new?template=feedback.yml`;
 const headerLinks = [
   { label: 'Getting started', href: withBasePath('/identify/') },
   { label: 'Resources', href: withBasePath('/resources/') },
-  { label: 'Feedback (GitHub)', href: feedbackUrl },
-  { label: 'Contributing', href: repoUrl }
+  { label: 'Feedback', href: feedbackUrl, isExternal: true },
+  { label: 'Contributing', href: repoUrl, isExternal: true }
 ];
 ---
 <!doctype html>
@@ -50,9 +50,12 @@ const headerLinks = [
           {headerLinks.map((link) => (
             <a
               href={link.href}
+              target={link.isExternal ? '_blank' : undefined}
+              rel={link.isExternal ? 'noopener noreferrer' : undefined}
               class={`site-nav-link ${currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/') ? 'is-active' : ''}`}
             >
               {link.label}
+              {link.isExternal && <span class="sr-only"> (opens in new tab)</span>}
             </a>
           ))}
         </nav>
@@ -76,7 +79,10 @@ const headerLinks = [
     <div class="mobile-nav-shell">
       <nav class="mobile-nav" aria-label="Primary mobile navigation">
         {headerLinks.map((link) => (
-          <a href={link.href} class="site-nav-link">{link.label}</a>
+          <a href={link.href} target={link.isExternal ? '_blank' : undefined} rel={link.isExternal ? 'noopener noreferrer' : undefined} class="site-nav-link">
+            {link.label}
+            {link.isExternal && <span class="sr-only"> (opens in new tab)</span>}
+          </a>
         ))}
       </nav>
     </div>
