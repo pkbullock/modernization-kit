@@ -28,7 +28,7 @@ const headingId = `${sectionTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^
       <li>
         <article class="resource-card">
           <div class="resource-card-body">
-            <h3>{item.title}</h3>
+            <h3 title={item.title}>{item.title}</h3>
             <p>{item.description}</p>
           </div>
           <div class="resource-card-footer">
@@ -122,7 +122,7 @@ const headingId = `${sectionTitle.toLowerCase().replace(/\s+/g, '-').replace(/[^
   .resource-card h3 {
     margin: 0;
     color: var(--cp-text);
-    font-size: clamp(1.5rem, 1.4vw, 2.1rem);
+    font-size: clamp(1.25rem, 1.1vw, 1.6rem);
     line-height: 1.1;
     letter-spacing: -0.04em;
     font-weight: 800;
