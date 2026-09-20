@@ -110,6 +110,8 @@ header { background: var(--cp-surface); }
 .github-link svg { width: 1rem; height: 1rem; }
 .mobile-nav-shell { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
 .mobile-nav { width: min(1800px, 100%); margin-inline: auto; display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.75rem 1.25rem; color: var(--cp-text-muted); font-size: 1.05rem; font-weight: 600; }
+.mobile-nav .site-nav-link { color: var(--cp-text); }
+.mobile-nav .site-nav-link:hover, .mobile-nav .site-nav-link.is-active { color: var(--cp-accent-fg); }
 .theme-toggle { display: inline-flex; align-items: center; cursor: pointer; user-select: none; }
 .theme-toggle-track { position: relative; display: flex; align-items: center; justify-content: space-between; width: 4.5rem; height: 2.1rem; padding: 0.25rem 0.45rem; border-radius: 9999px; border: 1px solid var(--cp-border-strong); background: var(--cp-surface-soft); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08); transition: background 180ms ease; }
 .theme-toggle-thumb { position: absolute; left: 0.25rem; top: 50%; width: 1.6rem; height: 1.6rem; border-radius: 9999px; background: var(--cp-panel-strong); box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18); transform: translateY(-50%); transition: transform 180ms ease; }
