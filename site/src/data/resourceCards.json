@@ -117,6 +117,12 @@
   ],
   "blogPosts": [
     {
+      "title": "Microsoft 365 Assessment tool",
+      "description": "Use the Microsoft 365 Assessment tool to identify classic pages, including Blog pages, and assess their readiness for modernization.",
+      "author": "Microsoft and the community",
+      "href": "https://pnp.github.io/pnpassessment/index.html"
+    },
+    {
       "title": "Upcoming changes to classic experiences",
       "description": "Review the SharePoint team announcement describing the retirement timeline for classic experiences.",
       "author": "SharePoint team",
