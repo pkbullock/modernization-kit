@@ -166,6 +166,10 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
 .mermaid-lightbox-toolbar { position: sticky; top: 0; z-index: 1; }
 .mermaid-lightbox-diagram { display: flex; align-items: center; justify-content: center; overflow: auto; padding: 1rem; max-height: calc(92vh - 4.5rem); }
 .mermaid-lightbox-diagram svg { width: max-content; max-width: none; height: auto; }
+.stage-content blockquote,
+.resource-markdown blockquote { margin: 1.5rem 0; padding: 0.85rem 1.1rem; border-left: 4px solid var(--cp-danger); background: var(--cp-accent-soft); color: var(--cp-text-muted); }
+.stage-content blockquote > :last-child,
+.resource-markdown blockquote > :last-child { margin-bottom: 0; }
 
 @media (min-width: 1024px) {
   .site-nav { display: flex; }
