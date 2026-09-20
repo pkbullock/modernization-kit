@@ -49,18 +49,22 @@ const headerLinks = [
         </a>
 
         <nav class="site-nav" aria-label="Primary navigation">
-          {headerLinks.map((link) => (
-            <a
-              href={link.href}
-              target={link.openInNewTab ? '_blank' : undefined}
-              rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-              class={`site-nav-link ${isActiveLink(link) ? 'is-active' : ''}`}
-              aria-current={isActiveLink(link) ? 'page' : undefined}
-            >
-              {link.label}
-              {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
-            </a>
-          ))}
+          {headerLinks.map((link) => {
+            const isActive = isActiveLink(link);
+
+            return (
+              <a
+                href={link.href}
+                target={link.openInNewTab ? '_blank' : undefined}
+                rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                class={`site-nav-link ${isActive ? 'is-active' : ''}`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {link.label}
+                {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
+              </a>
+            );
+          })}
         </nav>
 
         <div class="header-actions">
@@ -81,18 +85,22 @@ const headerLinks = [
 
     <div class="mobile-nav-shell">
       <nav class="mobile-nav" aria-label="Primary mobile navigation">
-        {headerLinks.map((link) => (
-          <a
-            href={link.href}
-            target={link.openInNewTab ? '_blank' : undefined}
-            rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-            class={`site-nav-link ${isActiveLink(link) ? 'is-active' : ''}`}
-            aria-current={isActiveLink(link) ? 'page' : undefined}
-          >
-            {link.label}
-            {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
-          </a>
-        ))}
+        {headerLinks.map((link) => {
+          const isActive = isActiveLink(link);
+
+          return (
+            <a
+              href={link.href}
+              target={link.openInNewTab ? '_blank' : undefined}
+              rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+              class={`site-nav-link ${isActive ? 'is-active' : ''}`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+              {link.openInNewTab && <span class="sr-only"> (opens in new tab)</span>}
+            </a>
+          );
+        })}
       </nav>
     </div>
     <main id="main-content" tabindex="-1"><slot /></main>
