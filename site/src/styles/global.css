@@ -158,7 +158,7 @@ footer { border-top: 1px solid var(--cp-border); background: var(--cp-surface-so
 .mermaid-lightbox { width: fit-content; max-width: min(96vw, 1400px); max-height: min(92vh, 1000px); margin: auto; padding: 1rem; border: 1px solid var(--cp-border); border-radius: 0.75rem; background: var(--cp-bg-elevated); color: var(--cp-text); }
 .mermaid-lightbox::backdrop { background: rgb(0 0 0 / 75%); }
 .mermaid-lightbox-toolbar { position: sticky; top: 0; z-index: 1; }
-.mermaid-lightbox-diagram { display: flex; justify-content: center; overflow: auto; padding: 1rem; max-height: calc(92vh - 4.5rem); }
+.mermaid-lightbox-diagram { display: flex; align-items: center; justify-content: center; overflow: auto; padding: 1rem; max-height: calc(92vh - 4.5rem); }
 .mermaid-lightbox-diagram svg { width: max-content; max-width: none; height: auto; }
 
 @media (min-width: 1024px) {

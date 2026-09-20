@@ -5,12 +5,24 @@ export const setupMermaidDiagrams = ({
   window,
   loadMermaid = defaultLoadMermaid
 }) => {
+  const svgNamespace = 'http://www.w3.org/2000/svg';
   const controlIcons = {
-    zoomOut: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
-    zoomIn: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 10h10M10 5v10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>',
-    reset: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6.5 7.5A5.5 5.5 0 1 1 5 11.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /><path d="M4.5 5.5v4h4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /></svg>',
-    fullView: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M7 3.75H3.75V7M13 3.75h3.25V7M7 16.25H3.75V13M13 16.25h3.25V13" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" /></svg>',
-    close: '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" /></svg>'
+    zoomOut: [
+      { d: 'M5 10h10', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-width': '1.8' }
+    ],
+    zoomIn: [
+      { d: 'M5 10h10M10 5v10', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-width': '1.8' }
+    ],
+    reset: [
+      { d: 'M6.5 7.5A5.5 5.5 0 1 1 5 11.3', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.8' },
+      { d: 'M4.5 5.5v4h4', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.8' }
+    ],
+    fullView: [
+      { d: 'M7 3.75H3.75V7M13 3.75h3.25V7M7 16.25H3.75V13M13 16.25h3.25V13', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '1.8' }
+    ],
+    close: [
+      { d: 'M6 6l8 8M14 6l-8 8', fill: 'none', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-width': '1.8' }
+    ]
   };
   const mermaidLanguages = new Set(['mermaid', 'marmaid']);
   let mermaidModulePromise = null;
@@ -43,11 +55,26 @@ export const setupMermaidDiagrams = ({
     pre.querySelector('code')?.textContent ?? pre.textContent ?? ''
   ).trim();
 
+  const createControlIcon = (paths) => {
+    const svg = document.createElementNS(svgNamespace, 'svg');
+    svg.setAttribute('viewBox', '0 0 20 20');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+
+    paths.forEach((attributes) => {
+      const path = document.createElementNS(svgNamespace, 'path');
+      Object.entries(attributes).forEach(([name, value]) => path.setAttribute(name, value));
+      svg.append(path);
+    });
+
+    return svg;
+  };
+
   const createControlButton = ({ icon, title, onClick, className = '' }) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = ['mermaid-control', className].filter(Boolean).join(' ');
-    button.innerHTML = icon;
+    button.append(createControlIcon(icon));
     button.title = title;
     button.setAttribute('aria-label', title);
     button.addEventListener('click', (event) => {
