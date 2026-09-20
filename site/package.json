@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run test:workflow-nav",
     "preview": "astro preview",
     "test:rich-media": "node ./scripts/validate-rich-media.mjs",
     "test:workflow-nav": "node ./scripts/validate-workflow-nav.mjs"
