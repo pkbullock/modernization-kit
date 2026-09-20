@@ -7,7 +7,7 @@ const { title = 'Modernisation Kit | Microsoft 365 Patterns & Practices', descri
 const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
 const currentPath = normalizePath(Astro.url.pathname);
 const isActiveLink = (link: { href: string; isExternal?: boolean }) =>
-  !link.isExternal && (currentPath === normalizePath(link.href) || (link.href.startsWith('#') && currentPath === '/'));
+  !link.isExternal && currentPath === normalizePath(link.href);
 const feedbackUrl = `${repoUrl}/issues/new?template=feedback.yml`;
 const headerLinks = [
   { label: 'Getting started', href: withBasePath('/identify/') },
