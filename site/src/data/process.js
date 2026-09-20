@@ -60,9 +60,8 @@ export const repoUrl = 'https://github.com/pkbullock/modernization-kit';
 
 export const getProcessStepBySlug = (slug) => processSteps.find((step) => step.slug === slug);
 
-export const getProcessPathDetails = (pathname = '/') => {
+export const getProcessPathDetails = (pathname = '/', configuredBasePath = '/') => {
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
-  const configuredBasePath = import.meta.env?.BASE_URL || '/';
   const basePath = configuredBasePath === '/' ? '/' : configuredBasePath.replace(/\/$/, '');
   const hasNonRootBasePath = basePath !== '/' && (normalizedPath === basePath || normalizedPath.startsWith(`${basePath}/`));
   const pathWithoutBase = hasNonRootBasePath

@@ -48,7 +48,7 @@ const sectionHref = withBasePath(`/${stepWithSections.slug}/${firstSection.slug}
 const stagePage = await readBuiltPage(`${stepWithSections.slug}/index.html`);
 const sectionPage = await readBuiltPage(`${stepWithSections.slug}/${firstSection.slug}/index.html`);
 
-if (!stagePage.includes('class="stage-subnav-shell"') || !stagePage.includes(`${stepWithSections.title} subsection navigation`)) {
+if (!stagePage.includes('class="stage-subnav"') || !stagePage.includes(`${stepWithSections.title} subsection navigation`)) {
   fail(`Expected the ${stepWithSections.title} stage page to render a labelled subsection navigation block.`);
 }
 

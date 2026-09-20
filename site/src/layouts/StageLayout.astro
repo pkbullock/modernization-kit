@@ -5,7 +5,7 @@ import { getProcessPathDetails, getProcessStepBySlug, processSteps, repoUrl } fr
 import { withBasePath } from '../utils/withBasePath';
 
 const { frontmatter } = Astro.props;
-const { stageSlug, sectionSlug } = getProcessPathDetails(Astro.url.pathname);
+const { stageSlug, sectionSlug } = getProcessPathDetails(Astro.url.pathname, import.meta.env.BASE_URL);
 const currentStep = getProcessStepBySlug(frontmatter.stage ?? stageSlug ?? frontmatter.slug);
 const index = currentStep ? processSteps.indexOf(currentStep) : 0;
 const previous = processSteps[index - 1];
@@ -35,8 +35,8 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
                     {item.title}
                   </a>
                   {isCurrentStep && item.sections?.length ? (
-                    <div class="stage-subnav-shell">
-                      <p id={`stage-subnav-${item.slug}`} class="sr-only">{item.title} subsection navigation</p>
+                    <>
+                      <span id={`stage-subnav-${item.slug}`} class="sr-only">{item.title} subsection navigation</span>
                       <ol class="stage-subnav" aria-labelledby={`stage-subnav-${item.slug}`}>
                         {item.sections.map((section) => (
                           <li>
@@ -49,7 +49,7 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
                           </li>
                         ))}
                       </ol>
-                    </div>
+                    </>
                   ) : null}
                 </li>
               );
