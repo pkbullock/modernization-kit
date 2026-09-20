@@ -188,10 +188,27 @@ const headerLinks = [
         await mermaid.run({ nodes: containers });
       };
 
+      let pendingMermaidRender = false;
+      let activeMermaidRender: Promise<void> | null = null;
+
       const scheduleMermaidRender = () => {
-        void renderMermaidDiagrams().catch((error) => {
-          console.error('Failed to render Mermaid diagrams.', error);
-        });
+        if (activeMermaidRender) {
+          pendingMermaidRender = true;
+          return;
+        }
+
+        activeMermaidRender = renderMermaidDiagrams()
+          .catch((error) => {
+            console.error('Failed to render Mermaid diagrams.', error);
+          })
+          .finally(() => {
+            activeMermaidRender = null;
+
+            if (pendingMermaidRender) {
+              pendingMermaidRender = false;
+              scheduleMermaidRender();
+            }
+          });
       };
 
       if (document.readyState === 'loading') {

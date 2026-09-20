@@ -33,6 +33,7 @@ const resolveAssetPath = (path: string): string => (
 
 const resolvedSrc = resolveAssetPath(src);
 const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
+const captionId = caption ? `public-video-caption-${crypto.randomUUID()}` : undefined;
 ---
 
 <figure class="rich-media-figure">
@@ -41,6 +42,7 @@ const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
     src={resolvedSrc}
     poster={resolvedPoster}
     title={title}
+    aria-describedby={captionId}
     controls={controls}
     autoplay={autoplay}
     loop={loop}
@@ -50,5 +52,5 @@ const resolvedPoster = poster ? resolveAssetPath(poster) : undefined;
   >
     Your browser does not support the video tag.
   </video>
-  {caption && <figcaption>{caption}</figcaption>}
+  {caption && <figcaption id={captionId}>{caption}</figcaption>}
 </figure>

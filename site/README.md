@@ -75,13 +75,13 @@ The component applies the configured GitHub Pages base path, so `/videos/...` re
 
 Mermaid diagrams can be authored directly in fenced code blocks. Both `mermaid` and the issue's `marmaid` spelling are accepted:
 
-    ```mermaid
-    flowchart TD
-      Discover --> Plan
-      Plan --> Modernise
-      Modernise --> Review
-      Review --> Publish
-    ```
+```mermaid
+flowchart TD
+  Discover --> Plan
+  Plan --> Modernise
+  Modernise --> Review
+  Review --> Publish
+```
 
 ## Deployment
 
