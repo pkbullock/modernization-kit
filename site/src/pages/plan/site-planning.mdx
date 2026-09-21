@@ -1,0 +1,46 @@
+---
+title: Site planning
+description: Plan the modern SharePoint sites, hub structure, and target locations needed for a successful Page Modernisation project.
+summary: Plan the modern SharePoint sites, hub structure, and target locations needed for a successful Page Modernisation project.
+slug: plan
+author: Project maintainers
+ms.date: 2026-09-21
+ms.topic: how-to
+layout: ../../layouts/StageLayout.astro
+---
+
+import ScriptSamplesCards from '../../components/ScriptSamplesCards.astro';
+import resources from '../../data/resourceCards.json';
+
+## Plan the target site structure
+
+Before page transformation begins, identify the modern sites that will become the new home for converted content. Review the target experience with site owners and confirm how each source site and page will map to its destination.
+
+Microsoft resources such as [Build an Intelligent Intranet](https://learn.microsoft.com/en-us/sharepoint/intelligent-intranet-overview) and [Plan an intelligent SharePoint intranet](https://learn.microsoft.com/en-us/sharepoint/plan-intranet) provide useful preparation for the wider SharePoint project.
+
+## Choose the right modern site type
+
+Modern SharePoint content can be hosted in several site types:
+
+* **Microsoft Teams**: The team has an underlying SharePoint site that can host related content.
+* **Microsoft 365 group-connected team sites**: Creating a group also creates an underlying SharePoint site.
+* **Standalone team sites**: These are SharePoint sites that are not connected to a Microsoft 365 group and can be connected later if requirements change.
+* **Communication sites**: These are commonly used for intranet and broad audience content.
+
+Document the selected site type, its audience, ownership model, and expected lifecycle for each target location.
+
+## Plan hubs and navigation
+
+Classic environments often use subsites to group related content. In modern SharePoint, hub sites provide a flexible way to associate sites, share navigation, and apply common branding. Decide how the classic site hierarchy maps to hubs and associated sites before conversion work begins.
+
+Use [Planning your SharePoint hub sites](https://learn.microsoft.com/en-us/sharepoint/planning-hub-sites) to review the available design considerations. For larger intranets, consider a repeatable approach for creating and governing multiple sites.
+
+## Supporting scripts
+
+The following samples can help prepare the target site structure:
+
+<ScriptSamplesCards title="Script samples" items={resources.scriptSamplesPlanSiteSetup} />
+
+## Before moving on
+
+Confirm the target site type, ownership, hub relationships, navigation approach, and destination for each page in the pilot scope.

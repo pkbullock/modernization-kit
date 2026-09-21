@@ -1,0 +1,47 @@
+---
+title: Site security
+description: Define permissions, ownership, and access requirements for modern SharePoint sites in a Page Modernisation project.
+summary: Define permissions, ownership, and access requirements for modern SharePoint sites in a Page Modernisation project.
+slug: plan
+author: Project maintainers
+ms.date: 2026-09-21
+ms.topic: how-to
+layout: ../../layouts/StageLayout.astro
+---
+
+import ScriptSamplesCards from '../../components/ScriptSamplesCards.astro';
+import resources from '../../data/resourceCards.json';
+
+## Define the access model
+
+Modern SharePoint sites commonly use three default groups:
+
+* **Site Owners**: Manage the site and have full control over its content and settings.
+* **Site Members**: Edit content and can view draft pages. This is often the appropriate level for content owners.
+* **Site Visitors**: Have read-only access and can view published content.
+
+Use this model as a starting point, then confirm the access required by each audience and role in the target site.
+
+## Review permissions before conversion
+
+Record the people, groups, and service accounts that need access to each target site. Consider whether the permissions on the classic source site reflect the intended modern experience or whether the project is an opportunity to simplify and clarify access.
+
+For each pilot site, document:
+
+* Site owners and named delegates
+* Content authors and approvers
+* Visitor audiences and any restricted areas
+* Groups that require membership changes during rollout
+* Lists, libraries, or pages with unique permissions
+
+Permission context cannot always be inferred from page content or conversion scripts. Make security decisions explicit, validate them with site owners, and include them in the review and go-live approval.
+
+## Supporting scripts
+
+These samples can help review and prepare site membership and permissions:
+
+<ScriptSamplesCards title="Script samples" items={resources.scriptSamplesPlanSecuritySetup} />
+
+## Before moving on
+
+Confirm the owners, members, visitors, restricted content, and approval responsibilities for each target site before conversion or publication.
