@@ -79,11 +79,12 @@ a:hover { text-decoration: underline; }
 button, input { font: inherit; }
 :focus-visible { outline: 3px solid var(--cp-link); outline-offset: 5px; }
 .container { width: min(1160px, calc(100% - 4rem)); margin-inline: auto; }
-h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3, h4, h5, p { margin-top: 0; }
 h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; font-weight: 650; text-wrap: balance; }
 h1 { font-size: 3.5rem; margin-bottom: 1.25rem; }
 h2 { font-size: 2rem; margin-bottom: 1rem; }
-h3 { font-size: 1.25rem; }
+h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+h4, h5 { margin-bottom: 1rem; }
 .eyebrow { color: var(--cp-accent); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.75rem; }
 .muted { color: var(--cp-text-muted); }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 44px; padding: 0.7rem 1.2rem; border-radius: 4px; font-weight: 600; text-decoration: none; border: 1px solid var(--cp-border-strong); color: var(--cp-text); }
