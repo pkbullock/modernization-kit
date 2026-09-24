@@ -18,9 +18,9 @@ export const processSteps = [
     tasks: ['Agree scope, delivery roles, and a representative pilot with site owners.', 'Plan target layouts and mapping requirements for the selected pages.', 'Define review criteria, rollout communications, and a recovery approach.'],
     outcome: 'Confirm the pilot scope, target experience, and approval process before any conversion begins.',
     sections: [
-      { slug: 'pilot-planning', title: 'Pilot planning' },
-      { slug: 'site-planning', title: 'Site planning' },
-      { slug: 'site-security', title: 'Site security' }
+      { slug: 'pilot-planning', title: 'Pilot Planning' },
+      { slug: 'site-design', title: 'Site Design' },
+      { slug: 'site-security', title: 'Site Security' }
     ]
   },
   {
