@@ -1,0 +1,125 @@
+---
+import { Icon } from 'astro-icon/components';
+import { withBasePath } from '../utils/withBasePath';
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+const imageSrc = withBasePath(src);
+---
+
+<div class="fullscreen-image" data-image-lightbox>
+  <button class="image-trigger" type="button" aria-label={`Open ${alt} in full screen`}>
+    <img src={imageSrc} alt={alt} />
+  </button>
+  <dialog class="image-dialog" aria-label={alt}>
+    <div class="image-frame">
+      <img src={imageSrc} alt={alt} />
+      <button class="image-close" type="button" aria-label="Close full-screen image" title="Close full-screen image">
+        <Icon name="heroicons:x-mark" aria-hidden="true" />
+      </button>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-image-lightbox]').forEach((lightbox) => {
+    const trigger = lightbox.querySelector<HTMLButtonElement>('.image-trigger');
+    const dialog = lightbox.querySelector<HTMLDialogElement>('.image-dialog');
+    const close = lightbox.querySelector<HTMLButtonElement>('.image-close');
+
+    trigger?.addEventListener('click', () => dialog?.showModal());
+    close?.addEventListener('click', () => dialog?.close());
+    dialog?.addEventListener('cancel', () => dialog.close());
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dialog?.open) dialog.close();
+    });
+    dialog?.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>
+
+<style>
+  .image-trigger {
+    display: block;
+    max-width: 100%;
+    padding: 0;
+    background: transparent;
+    cursor: zoom-in;
+  }
+
+  .image-trigger img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .image-trigger:focus-visible,
+  .image-close:focus-visible {
+    outline: 3px solid var(--cp-accent);
+    outline-offset: 3px;
+  }
+
+  .image-dialog:not([open]) {
+    display: none;
+  }
+
+  .image-dialog {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    place-items: center;
+    margin: 0;
+    padding: 1rem;
+    overflow: hidden;
+    border: 0;
+    background: #111827;
+  }
+
+  .image-dialog::backdrop {
+    background: #111827;
+  }
+
+  .image-dialog img {
+    display: block;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 5rem);
+    object-fit: contain;
+  }
+
+  .image-frame {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .image-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #ffffff80;
+    border-radius: 50%;
+    background: #111827cc;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .image-close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+</style>
