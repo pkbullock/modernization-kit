@@ -31,7 +31,9 @@ export const processSteps = [
     tasks: ['Validate mappings against representative source pages in a test environment.', 'Run an agreed pilot with explicit write operations and structured conversion logs.', 'Record unsupported content and conversion issues for review.'],
     outcome: 'Hand over converted draft pages and their conversion records for review. Conversion does not imply approval to publish.',
     sections: [
-      { slug: 'conversion-checklist', title: 'Conversion checklist' }
+      { slug: 'conversion-checklist', title: 'Conversion checklist' },
+      { slug: 'scenarios-with-pnp-powershell', title: 'Modernisation scenarios' },
+      { slug: 'reference-modernisation-pnp-powershell-cmdlets', title: 'Reference Modernisation Cmdlets (PnP Powershell)' }
     ]
   },
   {
