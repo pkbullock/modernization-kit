@@ -33,7 +33,8 @@ export const processSteps = [
     sections: [
       { slug: 'conversion-checklist', title: 'Conversion checklist' },
       { slug: 'scenarios-with-pnp-powershell', title: 'Modernization scenarios' },
-      { slug: 'reference-modernization-pnp-powershell-cmdlets', title: 'Reference Modernization Cmdlets (PnP Powershell)' }
+      { slug: 'reference-modernization-pnp-powershell-cmdlets', title: 'Reference Modernization Cmdlets (PnP Powershell)' },
+      { slug: 'deprecated-modernization-scenario', title: 'Deprecated Modernization Scenarios' }
     ]
   },
   {

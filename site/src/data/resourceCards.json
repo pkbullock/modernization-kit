@@ -41,6 +41,36 @@
       "description": "Use this script to review hub site configuration and governance settings before you roll out the modernization plan.",
       "author": "Josiah Opiyo",
       "href": "https://pnp.github.io/script-samples/spo-hub-site-governance-report/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Deploy, install, and update SPFx on hub site associated sites",
+      "description": "Use this script to manage SPFx solutions across hub site associated sites.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/spo-deploy-install-update-spfx-hubsite-associatedsites/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Bulk import data",
+      "description": "Use this script to bulk import data from multiple files to multiple lists",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/spo-bulk-import-data/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Add site design permissions",
+      "description": "Use this script to create and apply site designs",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/spo-add-sitedesign-permissions/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Bulk Convert Classic Publishing Pages to Modern Pages",
+      "description": "Use this script to modernize publishing pages in bulk.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/modernize-bulk-publishing-pages/README.html?tabs=pnpps"
+    },
+    {
+      "title": "Modernize Blog Pages",
+      "description": "Use this script to modernize blog pages.",
+      "author": "Microsoft 365 Patterns and Practices",
+      "href": "https://pnp.github.io/script-samples/modernize-blog-pages/README.html?tabs=pnpps"
     }
   ],
   "scriptSamplesAssessment": [
