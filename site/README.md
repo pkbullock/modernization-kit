@@ -5,7 +5,7 @@ description: Astro site for hosting and publishing project content
 
 ## Purpose
 
-This Astro site hosts the Modernisation Kit for the Microsoft 365 Patterns and Practices community. It includes an overview, five modernisation stage pages, kit folder links, and community resources.
+This Astro site hosts the Modernization Kit for the Microsoft 365 Patterns and Practices community. It includes an overview, five Modernization stage pages, kit folder links, and community resources.
 
 The kit is in development. The site labels unfinished guidance and assets accordingly; it does not perform SharePoint tenant operations.
 

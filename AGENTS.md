@@ -39,7 +39,7 @@ Within the `kit/` folder, prefer an organization similar to the following when n
 * `kit/scripts/` for PnP PowerShell and supporting automation
 * `kit/spfx/` for SharePoint Framework solutions, web parts, application customizers, and Copilot components
 * `kit/mappings/` for XML page layout mapping files
-* `kit/tools/` for custom tools built to support modernisation
+* `kit/tools/` for custom tools built to support Modernization
 
 Preserve an existing folder convention when one has already been established. Do not reorganize unrelated files as part of a focused change.
 

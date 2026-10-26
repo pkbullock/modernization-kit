@@ -10,16 +10,16 @@ const currentStep = getProcessStepBySlug(frontmatter.stage ?? frontmatter.slug ?
 const index = currentStep ? processSteps.indexOf(currentStep) : 0;
 const previous = processSteps[index - 1];
 const next = processSteps[index + 1];
-const title = frontmatter.title ?? currentStep?.title ?? 'Page Modernisation';
+const title = frontmatter.title ?? currentStep?.title ?? 'Page Modernization';
 const summary = frontmatter.summary ?? currentStep?.summary ?? '';
 ---
-<BaseLayout title={`${title} | Modernisation Kit`} description={summary}>
+<BaseLayout title={`${title} | Modernization Kit`} description={summary}>
   <div class="container stage-page">
-    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBasePath('/')}>Modernisation Kit</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBasePath('/')}>Modernization Kit</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
     <div class="reading-layout">
       <aside>
-        <p class="eyebrow">PAGE MODERNISATION WORKFLOW</p>
-        <nav aria-label="Page Modernisation workflow stages">
+        <p class="eyebrow">PAGE Modernization WORKFLOW</p>
+        <nav aria-label="Page Modernization workflow stages">
           <ol>
             {processSteps.map((item, position) => {
               const isCurrentStep = item.slug === currentStep?.slug;
@@ -66,7 +66,7 @@ const summary = frontmatter.summary ?? currentStep?.summary ?? '';
         <div class="stage-content">
           <slot />
         </div>
-        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/en-us/sharepoint/dev/transform/assess-sharepoint-modernization">SharePoint Page Modernisation guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
+        <div class="reference"><p class="eyebrow">FURTHER READING</p><a href="https://learn.microsoft.com/en-us/sharepoint/dev/transform/assess-sharepoint-modernization">SharePoint Page Modernization guidance on Microsoft Learn <Icon name="heroicons:arrow-top-right-on-square" aria-hidden="true" /></a></div>
         <nav class="stage-pagination" aria-label="Previous and next stages">
           <a href={previous ? withBasePath(`/${previous.slug}/`) : withBasePath('/')}><span>{previous ? 'Previous stage' : 'Back to'}</span><strong><Icon name="heroicons:arrow-left" aria-hidden="true" /> {previous?.title ?? 'Overview'}</strong></a>
           <a class="next" href={next ? withBasePath(`/${next.slug}/`) : withBasePath('/#kit')}><span>{next ? 'Next stage' : 'Explore'}</span><strong>{next?.title ?? 'The toolkit'} <Icon name="heroicons:arrow-right" aria-hidden="true" /></strong></a>

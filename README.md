@@ -1,6 +1,6 @@
 # PnP Modernization and Page Transformation Toolkit
 
-The purpose of the kit is to provide those considering a modernisation project, the tools, process and resources to run a conversion project.
+The purpose of the kit is to provide those considering a Modernization project, the tools, process and resources to run a conversion project.
 
 ---
 
@@ -20,7 +20,7 @@ The purpose of the kit is to provide those considering a modernisation project, 
 - Technical
 	- SharePoint List with Pages within a site
 	- Directory to rollout status to a master tenant list
-	- Create Modernisation Page Tracking List
+	- Create Modernization Page Tracking List
 	- Script for tenant tracking of usage of Classic Page Usage
 
 ## Plan
@@ -35,7 +35,7 @@ The purpose of the kit is to provide those considering a modernisation project, 
 		- Folder and Subsite Exclusion
 	
 - User Adoption
-	- Notification Banner for Site Modernisation
+	- Notification Banner for Site Modernization
 	- Site Template for Central Adoption 
 	- Communication Templates for staff notification
 	
@@ -72,9 +72,9 @@ The purpose of the kit is to provide those considering a modernisation project, 
 
 Existing Assets to Check for:
 
-- Script Samples Site at https://pnp.github.io/script-samples, that perform modernisation and Scripts for List Creation and Updates, Rollup Reporting, Finding of Classic Pages
+- Script Samples Site at https://pnp.github.io/script-samples, that perform Modernization and Scripts for List Creation and Updates, Rollup Reporting, Finding of Classic Pages
 - M365 Assessment Tool Script for Data Import
-- Community Blogs for Modernisation Process as references, starting with http://pkbullock.com
+- Community Blogs for Modernization Process as references, starting with http://pkbullock.com
 
 Plan for ancillary resources
 
