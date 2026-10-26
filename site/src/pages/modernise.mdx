@@ -9,20 +9,32 @@ ms.topic: overview
 layout: ../layouts/StageLayout.astro
 ---
 
+import FullscreenImage from '../components/FullscreenImage.astro';
+
 ## Focus for this stage
 
 * Validate mappings against representative source pages in a test environment.
 * Run an agreed pilot with explicit write operations and structured conversion logs.
 * Record unsupported content and conversion issues for review.
 
-## What ConvertTo-PnPPage can do
+## Overview of the process for modernisation with the PnP PowerShell cmdlet
+
+The image provides an outline of the process for modernisation with the PnP PowerShell cmdlet, to give you an indication of what is involved, and what technical options are available.
+
+<FullscreenImage src="/images/ConvertTo-Page-Journey-v2.png" alt="Modernisation Journey Overview" />
+
+> Note: If you are unfamiliar with the module [PnP PowerShell](https://pnp.github.io/powershell/), review the documentation and installation instructions before proceeding.
+
+## What ConvertTo-PnPPage does and what features it provides
 
 The [ConvertTo-PnPPage cmdlet](https://pnp.github.io/powershell/cmdlets/ConvertTo-PnPPage.html)
 turns a classic SharePoint page into a modern SharePoint page. It provides
 options to control where the new page is created, what information is carried
 across, and how the result is prepared for review.
 
-### Convert different classic page types
+### From the source: Convert different classic page types
+
+The following classic page types can be converted:
 
 * Convert wiki pages and web part pages to modern pages
 * Convert publishing pages by using a page layout mapping file
@@ -30,9 +42,11 @@ across, and how the result is prepared for review.
 * Find source pages in Site Pages, another library, a library folder, or the
 	root of a site collection
 
-### Choose where the modern page is created
+### In the target: Choose where the modern page is created
 
-* Create the modern page in the source site or in another SharePoint site
+When converting a classic page to a modern page, you have several options to carry across content, metadata, and layout configurations.
+
+* Create the modern page in the source site or in another SharePoint site typically in the Site Pages library.
 * Move content between sites, tenants, or supported on-premises and SharePoint
 	Online environments by using separate source and target connections
 * Choose the target page name and folder
@@ -40,7 +54,9 @@ across, and how the result is prepared for review.
 * Replace a classic home page with a standard modern home page
 * Overwrite an existing target page when that action is intentional
 
-### Preserve useful page information
+The following sections go into more detail about the specific capabilities:
+
+#### Preserve useful page information
 
 * Copy page metadata to the modern page
 * Keep the original author, editor, created date, and modified date when the
@@ -50,7 +66,7 @@ across, and how the result is prepared for review.
 	different access model
 * Map users and taxonomy terms when content moves between environments
 
-### Control how content is transformed
+#### Control how content is transformed
 
 * Use custom mappings to decide how classic web parts become modern web parts
 * Use publishing page layout mappings to control the modern layout
@@ -63,14 +79,7 @@ across, and how the result is prepared for review.
 * Remove empty sections and columns from the finished page
 * Control how images found inside tables and lists are represented
 
-### Prepare the page for review and publishing
-
-* Leave the converted page unpublished so it can be reviewed first
-* Publish the page and optionally promote it as news
-* Disable comments on the new page
-* Add a page acceptance banner when the required SPFx component is installed
-
-### Record what happened
+#### Record what happened
 
 * Write conversion logs to a file, SharePoint, or the console
 * Include verbose details for troubleshooting
@@ -81,6 +90,15 @@ across, and how the result is prepared for review.
 > Conversion creates or updates a modern page. Test representative pages first,
 > review custom mappings, and leave pages unpublished until their content,
 > links, permissions, and layout have been approved.
+
+
+### In the target: Prepare the page for review and publishing
+
+* Leave the converted page unpublished so it can be reviewed first
+* Publish the page and optionally promote it as news
+* Disable comments on the new page
+* Add a page acceptance banner when the required SPFx component is installed
+
 
 ```mermaid
 flowchart LR
