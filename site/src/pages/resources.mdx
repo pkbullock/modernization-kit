@@ -12,6 +12,7 @@ layout: ../layouts/ResourcesLayout.astro
 import BlogPostsCards from '../components/BlogPostsCards.astro';
 import ScriptSamplesCards from '../components/ScriptSamplesCards.astro';
 import MicrosoftDocsCards from '../components/MicrosoftDocsCards.astro';
+import RepoCards from '../components/RepoCards.astro';
 import resources from '../data/resourceCards.json';
 
 <ScriptSamplesCards title="Script Samples" items={resources.scriptSamples} />
@@ -19,3 +20,5 @@ import resources from '../data/resourceCards.json';
 <BlogPostsCards title="Blog Posts" items={resources.blogPosts} />
 
 <MicrosoftDocsCards title="Microsoft Documentation Links" items={resources.microsoftDocumentation} />
+
+<RepoCards title="GitHub Repositories" items={resources.githubRepositories} />

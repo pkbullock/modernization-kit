@@ -184,5 +184,13 @@
       "author": "Microsoft Learn",
       "href": "https://learn.microsoft.com/en-us/sharepoint/plan-intranet"
     }
+  ],
+  "githubRepositories": [
+    {
+      "title": "Microsoft 365 Assessment tool",
+      "description": "The Microsoft 365 Assessment tool is an open source community tool that provides customers with data to help them with various retirement and adoption scenarios.",
+      "author": "Microsoft 365 Community",
+      "href": "https://github.com/pnp/pnpassessment"
+    }
   ]
 }
